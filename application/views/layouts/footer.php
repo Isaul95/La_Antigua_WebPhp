@@ -113,6 +113,12 @@ $('#btn_RegistroPago').DataTable( {
 
 <!--  SON LAS LIGAS K SE ESTAN AGREGARNDO PARA LOS MODULOS DEL CESVI    -->
 
+<!-- =============  platillos ============== -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Platillos.js"></script>
+<!-- =============  utensilios ============== -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Utensilios.js"></script>
+
+
 <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/archivos.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/registroPago.js"></script> -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/registroPago.js"></script>

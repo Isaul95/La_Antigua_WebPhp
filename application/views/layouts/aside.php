@@ -131,6 +131,28 @@
 
                         </ul>
                     </li>
+
+<!-- ============================== BANKETES MODULOS ================================== -->
+
+<li class="treeview">
+    <a href="#">
+        <i class="fas fa-balance-scale"></i> <span>Banquetes</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+
+      <li><a href="<?php echo base_url();?>Banquetes/Platillos">
+         <i class="far fa-dot-circle"></i>  Platillos</a>
+     </li>
+
+      <li><a href="<?php echo base_url();?>Banquetes/Utensilios">
+        <i class="far fa-dot-circle"></i>  Utensilios</a></li>
+
+    </ul>
+</li>
+
 <?php endif;?>
 <?php if($user==3):?>
                     <li class="treeview">
