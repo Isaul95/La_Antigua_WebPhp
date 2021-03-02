@@ -144,3 +144,8 @@ $('#btn_RegistroPago').DataTable( {
 <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/DocumentacionAlumnos.js"></script>
 <!-- ========== Calificaciones de alumnos x parte del administrador =========  -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/CalificacionesAlumnosAdmin.js"></script>
+
+<!-- Mobiliario -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/mobiliariojs/Mobiliario.js"></script>
+<!-- Banquetes -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/banquetes/Banquetes.js"></script>

@@ -109,6 +109,33 @@
                           <li><a href="<?php echo base_url();?>Administrativos/Calificaciones">
                               <i class="far fa-dot-circle"></i> Calificaciones</a></li>
 
+                              <!-- ============================== Inicio Modificacion Nacho ======================================== -->
+                      <!-- Inicio Seccion de Mobiliario -->
+                          <li>
+                            <a href="<?php echo base_url();?>Administrativos/Mobiliario">
+                            <i class="far fa-dot-circle"></i> Mobiliario</a>
+                          </li>
+                      <!-- Fin Seccion de Mobiliario -->
+
+                      <!-- Inicio Seccion de Banquetes -->
+                          <li>
+                            <a href="<?php echo base_url();?>Administrativos/Banquetes">
+                            <i class="far fa-dot-circle"></i> Banquetes</a>
+                          </li>
+
+                      <!-- Fin Seccion de Banquetes -->
+
+                      <!-- Inicio Seccion de Renta -->
+                          <li>
+                            <a href="<?php echo base_url();?>Administrativos/Renta">
+                            <i class="far fa-dot-circle"></i> Renta</a>
+                          </li>
+
+                      <!-- Fin Seccion de Renta -->
+
+
+                <!-- ============================== Fin Modificacion Nacho ======================================== -->
+
                         </ul>
                     </li>
 <?php endif;?>
