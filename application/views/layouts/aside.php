@@ -214,6 +214,11 @@
                 </li>
 <?php endif;?>
 
+<li>
+    <a href="<?php echo base_url();?>Platillos/ControlPlatillos">
+        <i class="fas fa-drumstick-bite"></i> <span>Platillos</span>
+    </a>
+</li>
 
               <!-- <li class="treeview">
                   <a href="#">
