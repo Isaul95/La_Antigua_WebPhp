@@ -46,91 +46,74 @@ class ControlPlatillos extends CI_Controller {
   }
 
 
-    public function CrearPlatillo() {
-      if ($this->input->is_ajax_request()) {
-
-        //$this->form_validation->set_rules("id_platillo", "", "required", array ('required' => "El campo ID no puede ir vacio"));
-        $this->form_validation->set_rules('nombre_platillo', "", 'required|max_length[75]', array ('required' => "El campo nombre no puede ir vacio.", 'max_length' => "No debe ingresar más de 75 caracteres (letras, símbolos, números) en el campo nombre."));
-        $this->form_validation->set_rules('costo', "", 'required|callback_ValidarCosto', array ('required' => "El campo costo no puede ir vacio"));
-        $this->form_validation->set_rules('descripcion', "", 'required|max_length[500]', array('required' => "El campo descripción no puede ir vacio.", 'max_length' => "No debe ingresar más de 500 caracteres (letras, símbolos, números) en el campo descripcion."));
-
-        if ($this->form_validation->run() == FALSE) {
-          $Respuesta = array ('Resultado' => "Erroneo", 'Mensaje' => validation_errors());
+  public function CrearPlatillo() {
+    if ($this->input->is_ajax_request()) {
+      $this->form_validation->set_rules('nombre_platillo', "", 'required|max_length[75]', array ('required' => "El campo nombre no puede ir vacio.", 'max_length' => "No debe ingresar más de 75 caracteres (letras, símbolos, números) en el campo nombre."));
+      $this->form_validation->set_rules('costo', "", 'required|callback_ValidarCosto', array ('required' => "El campo costo no puede ir vacio"));
+      $this->form_validation->set_rules('descripcion', "", 'required|max_length[500]', array('required' => "El campo descripción no puede ir vacio.", 'max_length' => "No debe ingresar más de 500 caracteres (letras, símbolos, números) en el campo descripcion."));
+      if ($this->form_validation->run() == FALSE) {
+        $Respuesta = array ('Resultado' => "Erroneo", 'Mensaje' => validation_errors());
+      } else {
+        $config['upload_path'] = './assets/platillosImagenes/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('foto')) {
+          $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
         } else {
-
-          $config['upload_path'] = './assets/platillosImagenes/';
-          $config['allowed_types'] = 'gif|jpg|png';
-
-          $this->load->library('upload', $config);
-          if (!$this->upload->do_upload('foto')) {
-            $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
+          $AgregarDatos = $this->input->post();
+          $AgregarDatos['foto'] = $this->upload->data('file_name');
+          if ($this->ModeloPlatillos->CrearNuevoPlatillo($AgregarDatos)) {
+            $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Platillo agregado!");
           } else {
-
-            $AgregarDatos = $this->input->post();
-            $AgregarDatos['foto'] = $this->upload->data('file_name');
-            if ($this->ModeloPlatillos->CrearNuevoPlatillo($AgregarDatos)) {
-              $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Platillo agregado!");
-            } else {
-              $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudo agregar el platillo");
-            }
+            $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudo agregar el platillo");
           }
-        }
-          echo json_encode($Respuesta);
-        } else {
-          echo "No se permite este acceso directo";
         }
       }
-
-
-    public function ActualizarPlatillo() {
-      if ($this->input->is_ajax_request()) {
-        //$this->form_validation->set_rules('modificadoID', '', 'required', array('required' => 'El campo ID no puede ir vacio.'));
-        $this->form_validation->set_rules('nombre_platillo', "", 'required|max_length[75]', array ('required' => "El campo nombre no puede ir vacio.", 'max_length' => "No debe ingresar más de 75 caracteres (letras, símbolos, números) en el campo nombre."));
-        $this->form_validation->set_rules('costo', "", 'required|callback_ValidarCosto', array ('required' => "El campo costo no puede ir vacio"));
-        $this->form_validation->set_rules('descripcion', "", 'required|max_length[500]', array('required' => "El campo descripción no puede ir vacio.", 'max_length' => "No debe ingresar más de 500 caracteres (letras, símbolos, números) en el campo descripcion."));
-
-        if ($this->form_validation->run() == FALSE) {
-          $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => validation_errors());
-        } else {
-
-          $ActualID = $this->input->post('actualID');
-
-          //$ModificarDatos['id_platillo'] = $this->input->post('modificadoID');
-          $ModificarDatos['nombre_platillo'] = $this->input->post('nombre_platillo');
-          $ModificarDatos['costo'] = $this->input->post('costo');
-          $ModificarDatos['descripcion'] = $this->input->post('descripcion');
-
-          if (isset($_FILES['foto']['name'])) {
-
-            $config['upload_path'] = './assets/platillosImagenes/';
-            $config['allowed_types'] = 'gif|jpg|png';
-
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('foto')) {
-              $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
-            } else {
-
-              if ($EliminarFoto = $this->ModeloPlatillos->BuscarDatosPlatilloSeleccionado($ActualID)) {
-                unlink('./assets/platillosImagenes/' . $EliminarFoto->foto);
-                //$ModificarDatos['foto'] = $this->upload->data('file_name');
-                $data = array("upload_data" => $this->upload->data());
-                $imagenModificada = $data['upload_data']['file_name'];
-                $ModificarDatos['foto'] = $imagenModificada;
-              }
-            }
-          }
-
-          if ($this->ModeloPlatillos->ActualizarPlatilloSeleccionado($ActualID, $ModificarDatos)) {
-            $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Datos del platillo actualizados!");
-          } else {
-            $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudieron actualizar los datos");
-          }
-        }
         echo json_encode($Respuesta);
       } else {
         echo "No se permite este acceso directo";
       }
     }
+
+
+  public function ActualizarPlatillo() {
+    if ($this->input->is_ajax_request()) {
+      $this->form_validation->set_rules('nombre_platillo', "", 'required|max_length[75]', array ('required' => "El campo nombre no puede ir vacio.", 'max_length' => "No debe ingresar más de 75 caracteres (letras, símbolos, números) en el campo nombre."));
+      $this->form_validation->set_rules('costo', "", 'required|callback_ValidarCosto', array ('required' => "El campo costo no puede ir vacio"));
+      $this->form_validation->set_rules('descripcion', "", 'required|max_length[500]', array('required' => "El campo descripción no puede ir vacio.", 'max_length' => "No debe ingresar más de 500 caracteres (letras, símbolos, números) en el campo descripcion."));
+      if ($this->form_validation->run() == FALSE) {
+        $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => validation_errors());
+      } else {
+        $ActualID = $this->input->post('actualID');
+        $ModificarDatos['nombre_platillo'] = $this->input->post('nombre_platillo');
+        $ModificarDatos['costo'] = $this->input->post('costo');
+        $ModificarDatos['descripcion'] = $this->input->post('descripcion');
+        if (isset($_FILES['foto']['name'])) {
+          $config['upload_path'] = './assets/platillosImagenes/';
+          $config['allowed_types'] = 'gif|jpg|png';
+          $this->load->library('upload', $config);
+          if (!$this->upload->do_upload('foto')) {
+            $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
+          } else {
+            if ($EliminarFoto = $this->ModeloPlatillos->BuscarDatosPlatilloSeleccionado($ActualID)) {
+              unlink('./assets/platillosImagenes/' . $EliminarFoto->foto);
+              $data = array("upload_data" => $this->upload->data());
+              $imagenModificada = $data['upload_data']['file_name'];
+              $ModificarDatos['foto'] = $imagenModificada;
+            }
+          }
+        }
+        if ($this->ModeloPlatillos->ActualizarPlatilloSeleccionado($ActualID, $ModificarDatos)) {
+          $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Datos del platillo actualizados!");
+        } else {
+          $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudieron actualizar los datos");
+        }
+      }
+      echo json_encode($Respuesta);
+    } else {
+      echo "No se permite este acceso directo";
+    }
+  }
 
 
   public function EliminarPlatillo() {

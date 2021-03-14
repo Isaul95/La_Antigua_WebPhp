@@ -1,7 +1,7 @@
 const $AgregarImagen = document.querySelector('#AgregarImagen');
-        $MostrarImagenSeleccionada = document.querySelector('#MostrarImagenSeleccionada');
-        $ImagenModificada = document.querySelector('#ImagenModificada');
-        $MostrarImagenModificada = document.querySelector('#MostrarImagenModificada');
+      $MostrarImagenSeleccionada = document.querySelector('#MostrarImagenSeleccionada');
+      $ImagenModificada = document.querySelector('#ImagenModificada');
+      $MostrarImagenModificada = document.querySelector('#MostrarImagenModificada');
 
 
 $(document).ready(function() {
@@ -9,20 +9,20 @@ $(document).ready(function() {
 });
 
 
-  $('#ModalAgregarPlatillo').on('hide.bs.modal', function(e) {
-    $('#FormularioAgregarPlatillo')[0].reset();
-    $MostrarImagenSeleccionada.src = "";
-    $MostrarImagenSeleccionada.width = "0";
-    $MostrarImagenSeleccionada.height = "0";
-  });
+$('#ModalAgregarPlatillo').on('hide.bs.modal', function(e) {
+  $('#FormularioAgregarPlatillo')[0].reset();
+  $MostrarImagenSeleccionada.src = "";
+  $MostrarImagenSeleccionada.width = "0";
+  $MostrarImagenSeleccionada.height = "0";
+});
 
 
-  $('#ModalModificarPlatillo').on('hide.bs.modal', function(e) {
-    $('#FormularioEditarPlatillo')[0].reset();
-    $MostrarImagenModificada.src = "";
-    $MostrarImagenModificada.width = "0";
-    $MostrarImagenModificada.height = "0";
-  });
+$('#ModalModificarPlatillo').on('hide.bs.modal', function(e) {
+  $('#FormularioEditarPlatillo')[0].reset();
+  $MostrarImagenModificada.src = "";
+  $MostrarImagenModificada.width = "0";
+  $MostrarImagenModificada.height = "0";
+});
 
 
 function MostrarTablaPlatillos() {
@@ -75,43 +75,41 @@ function MostrarTablaPlatillos() {
 }
 
 
-  $(document).on('click', '#AgregarPlatillo', function(e) {
-    e.preventDefault();
+$(document).on('click', '#AgregarPlatillo', function(e) {
+  e.preventDefault();
 
-    //var agregarID = $('#AgregarID').val();
-    var agregarNombre = $('#AgregarNombre').val();
-    var agregarCosto = $('#AgregarCosto').val();
-    var agregarDescripcion = $('#AgregarDescripcion').val();
-    var agregarImagen = $('#AgregarImagen')[0].files[0];
+  var agregarNombre = $('#AgregarNombre').val();
+  var agregarCosto = $('#AgregarCosto').val();
+  var agregarDescripcion = $('#AgregarDescripcion').val();
+  var agregarImagen = $('#AgregarImagen')[0].files[0];
 
-    var agregarInformacion = new FormData();
-    //agregarInformacion.append('id_platillo', agregarID);
-    agregarInformacion.append('nombre_platillo', agregarNombre);
-    agregarInformacion.append('costo', agregarCosto);
-    agregarInformacion.append('descripcion', agregarDescripcion);
-    agregarInformacion.append('foto', agregarImagen);
+  var agregarInformacion = new FormData();
+  agregarInformacion.append('nombre_platillo', agregarNombre);
+  agregarInformacion.append('costo', agregarCosto);
+  agregarInformacion.append('descripcion', agregarDescripcion);
+  agregarInformacion.append('foto', agregarImagen);
 
-    $.ajax({
-      type: 'post',
-      url: base_url + 'Platillos/ControlPlatillos/CrearPlatillo',
-      data: agregarInformacion,
-      processData: false,
-      contentType: false,
-      dataType: 'json',
-      enctype: 'multipart/form-data',
-      success: function(respuesta) {
-        if (respuesta.Resultado == "Exitoso") {
-          toastr['success'](respuesta.Mensaje);
-          $('#ModalAgregarPlatillo').modal('hide');
-          $('#FormularioAgregarPlatillo')[0].reset();
-          $('#TablaPlatillos').DataTable().destroy();
-          MostrarTablaPlatillos();
-        } else {
-          toastr['error'](respuesta.Mensaje);
-        }
-      },
-    });
+  $.ajax({
+    type: 'post',
+    url: base_url + 'Platillos/ControlPlatillos/CrearPlatillo',
+    data: agregarInformacion,
+    processData: false,
+    contentType: false,
+    dataType: 'json',
+    enctype: 'multipart/form-data',
+    success: function(respuesta) {
+      if (respuesta.Resultado == "Exitoso") {
+        toastr['success'](respuesta.Mensaje);
+        $('#ModalAgregarPlatillo').modal('hide');
+        $('#FormularioAgregarPlatillo')[0].reset();
+        $('#TablaPlatillos').DataTable().destroy();
+        MostrarTablaPlatillos();
+      } else {
+        toastr['error'](respuesta.Mensaje);
+      }
+    },
   });
+});
 
 
 $(document).on('click', '#EditarPlatillo', function(e) {
@@ -127,68 +125,59 @@ $(document).on('click', '#EditarPlatillo', function(e) {
     },
     dataType: 'json',
     success: function(informacionPlatillo) {
-      if (informacionPlatillo.Resultado == "Exitoso") {
-        $('#ModalModificarPlatillo').modal('show');
-        $('#ID_Actual').val(informacionPlatillo.DatoPlatillo.id_platillo)
-        //$('#ID_Modificado').val(informacionPlatillo.DatoPlatillo.id_platillo)
-        $('#NombreModificado').val(informacionPlatillo.DatoPlatillo.nombre_platillo)
-        $('#CostoModificado').val(informacionPlatillo.DatoPlatillo.costo)
-        $('#DescripcionModificada').val(informacionPlatillo.DatoPlatillo.descripcion)
-        $('#MostrarImagenActual').html(`
-          <img class="rounded img-thumbnail" src="${base_url}/assets/platillosImagenes/${informacionPlatillo.DatoPlatillo.foto}" width="250" height="250">
-        `);
-      } else {
-        toastr['error'](informacionPlatillo.Mensaje);
-        $('#TablaPlatillos').DataTable().destroy();
-        MostrarTablaPlatillos();
-      }
+      $('#ModalModificarPlatillo').modal('show');
+      $('#ID_Actual').val(informacionPlatillo.DatoPlatillo.id_platillo)
+      $('#NombreModificado').val(informacionPlatillo.DatoPlatillo.nombre_platillo)
+      $('#CostoModificado').val(informacionPlatillo.DatoPlatillo.costo)
+      $('#DescripcionModificada').val(informacionPlatillo.DatoPlatillo.descripcion)
+      $('#MostrarImagenActual').html(`
+        <img class="rounded img-thumbnail" src="${base_url}/assets/platillosImagenes/${informacionPlatillo.DatoPlatillo.foto}" width="250" height="250">
+      `);
     },
   });
 });
 
 
-  $(document).on('click', '#ActualizarPlatillo', function(e) {
-    e.preventDefault();
+$(document).on('click', '#ActualizarPlatillo', function(e) {
+  e.preventDefault();
 
-    var actualID = $('#ID_Actual').val();
-    //var modificadoID = $('#ID_Modificado').val();
-    var nombreModificado = $('#NombreModificado').val();
-    var costoModificado = $('#CostoModificado').val();
-    var descripcionModificada = $('#DescripcionModificada').val();
+  var actualID = $('#ID_Actual').val();
+  var nombreModificado = $('#NombreModificado').val();
+  var costoModificado = $('#CostoModificado').val();
+  var descripcionModificada = $('#DescripcionModificada').val();
+  var imagenModificada = $('#ImagenModificada')[0].files[0];
 
-    var imagenModificada = $('#ImagenModificada')[0].files[0];
+  var modificarInformacion = new FormData();
+  modificarInformacion.append('actualID', actualID);
+  modificarInformacion.append('nombre_platillo', nombreModificado);
+  modificarInformacion.append('costo', costoModificado);
+  modificarInformacion.append('descripcion', descripcionModificada);
 
-    var modificarInformacion = new FormData();
-    modificarInformacion.append('actualID', actualID);
-    modificarInformacion.append('nombre_platillo', nombreModificado);
-    modificarInformacion.append('costo', costoModificado);
-    modificarInformacion.append('descripcion', descripcionModificada);
+  if ($('#ImagenModificada')[0].files.length > 0) {
+    modificarInformacion.append('foto', imagenModificada);
+  }
 
-    if ($('#ImagenModificada')[0].files.length > 0) {
-      modificarInformacion.append('foto', imagenModificada);
-    }
-
-    $.ajax({
-      type: 'post',
-      url: base_url + 'Platillos/ControlPlatillos/ActualizarPlatillo',
-      data: modificarInformacion,
-      processData: false,
-      contentType: false,
-      dataType: 'json',
-      enctype: 'multipart/form-data',
-      success: function(respuesta) {
-        if (respuesta.Resultado == "Exitoso") {
-          toastr['success'](respuesta.Mensaje);
-          $('#ModalModificarPlatillo').modal('hide');
-          $('#FormularioEditarPlatillo')[0].reset();
-          $('#TablaPlatillos').DataTable().destroy();
-          MostrarTablaPlatillos();
-        } else {
-          toastr['error'](respuesta.Mensaje);
-        }
-      },
-    });
+  $.ajax({
+    type: 'post',
+    url: base_url + 'Platillos/ControlPlatillos/ActualizarPlatillo',
+    data: modificarInformacion,
+    processData: false,
+    contentType: false,
+    dataType: 'json',
+    enctype: 'multipart/form-data',
+    success: function(respuesta) {
+      if (respuesta.Resultado == "Exitoso") {
+        toastr['success'](respuesta.Mensaje);
+        $('#ModalModificarPlatillo').modal('hide');
+        $('#FormularioEditarPlatillo')[0].reset();
+        $('#TablaPlatillos').DataTable().destroy();
+        MostrarTablaPlatillos();
+      } else {
+        toastr['error'](respuesta.Mensaje);
+      }
+    },
   });
+});
 
 
 $(document).on('click', '#BorrarPlatillo', function(e) {
@@ -223,15 +212,7 @@ $(document).on('click', '#BorrarPlatillo', function(e) {
             );
             $('#TablaPlatillos').DataTable().destroy();
             MostrarTablaPlatillos();
-          } /*else {
-            Swal.fire(
-              "¡Ha ocurrido un error!",
-              "El platillo no pudo ser eliminado",
-              'error'
-            );
-            $('#TablaPlatillos').DataTable().destroy();
-            MostrarTablaPlatillos();
-          }*/
+          }
         },
       });
     }
@@ -239,44 +220,36 @@ $(document).on('click', '#BorrarPlatillo', function(e) {
 });
 
 
-  $AgregarImagen.addEventListener('change', () => {
-    const archivos = $AgregarImagen.files;
-    // Si no hay archivos salimos de la función y quitamos la imagen
-    if (!archivos || !archivos.length) {
-      $MostrarImagenSeleccionada.src = "";
-      $MostrarImagenSeleccionada.width = "0";
-      $MostrarImagenSeleccionada.height = "0";
-      return;
-    }
-    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-    const primerArchivo = archivos[0];
-    // Lo convertimos a un objeto de tipo objectURL
-    const objectURL = URL.createObjectURL(primerArchivo);
-    // Y a la fuente de la imagen le ponemos el objectURL
-    $MostrarImagenSeleccionada.src = objectURL;
-    $MostrarImagenSeleccionada.width = "250";
-    $MostrarImagenSeleccionada.height = "250";
-  });
+$AgregarImagen.addEventListener('change', () => {
+  const archivos = $AgregarImagen.files;
+  if (!archivos || !archivos.length) {
+    $MostrarImagenSeleccionada.src = "";
+    $MostrarImagenSeleccionada.width = "0";
+    $MostrarImagenSeleccionada.height = "0";
+    return;
+  }
+  const primerArchivo = archivos[0];
+  const objectURL = URL.createObjectURL(primerArchivo);
+  $MostrarImagenSeleccionada.src = objectURL;
+  $MostrarImagenSeleccionada.width = "250";
+  $MostrarImagenSeleccionada.height = "250";
+});
 
 
-  $ImagenModificada.addEventListener('change', () => {
-    const archivos = $ImagenModificada.files;
-    // Si no hay archivos salimos de la función y quitamos la imagen
-    if (!archivos || !archivos.length) {
-      $MostrarImagenModificada.src = "";
-      $MostrarImagenModificada.width = "0";
-      $MostrarImagenModificada.height = "0";
-      return;
-    }
-    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-    const primerArchivo = archivos[0];
-    // Lo convertimos a un objeto de tipo objectURL
-    const objectURL = URL.createObjectURL(primerArchivo);
-    // Y a la fuente de la imagen le ponemos el objectURL
-    $MostrarImagenModificada.src = objectURL;
-    $MostrarImagenModificada.width = "250";
-    $MostrarImagenModificada.height = "250";
-  });
+$ImagenModificada.addEventListener('change', () => {
+  const archivos = $ImagenModificada.files;
+  if (!archivos || !archivos.length) {
+    $MostrarImagenModificada.src = "";
+    $MostrarImagenModificada.width = "0";
+    $MostrarImagenModificada.height = "0";
+    return;
+  }
+  const primerArchivo = archivos[0];
+  const objectURL = URL.createObjectURL(primerArchivo);
+  $MostrarImagenModificada.src = objectURL;
+  $MostrarImagenModificada.width = "250";
+  $MostrarImagenModificada.height = "250";
+});
 
 
 var idiomaEspañolTablaPlatillos = {

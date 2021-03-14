@@ -62,12 +62,6 @@
                         <div class="container">
                           <div class="row">
                             <div class="col-sm-6">
-                              <!--<div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-center">Clave del platillo</label>
-                                <div class="col-sm-9">
-                                  <input type="text" class="form-control text-center" id="AgregarID" placeholder="Clave del platillo">
-                                </div>
-                              </div>-->
                               <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-center">Platillo</label>
                                 <div class="col-sm-9">
@@ -132,13 +126,6 @@
                                 <label>Imagen actual</label>
                               </div>
                               <div id="MostrarImagenActual" style="text-align: center;"></div>
-                              <!--<div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-center">Clave del platillo</label>
-                                <div class="col-sm-9">
-                                  <input type="text" class="form-control text-center" id="ID_Modificado" placeholder="Clave del platillo">
-                                  <input type="hidden" id="ID_Actual">
-                                </div>
-                              </div>-->
                               <div class="form-group row">
                                 <input type="hidden" id="ID_Actual">
                               </div>

@@ -32,11 +32,7 @@ class ModeloPlatillos extends CI_Model {
 
 
   public function EliminarPlatilloSeleccionado($EliminarID) {
-    if ($this->db->delete('platillos', array('id_platillo' => $EliminarID))) {
-      return "Eliminado";
-    } else {
-      return "ErrorEliminacion";
-    }
+    return $this->db->delete('platillos', array('id_platillo' => $EliminarID));
   }
 
 }

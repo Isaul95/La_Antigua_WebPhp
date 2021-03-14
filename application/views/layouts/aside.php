@@ -220,6 +220,12 @@
     </a>
 </li>
 
+<li>
+    <a href="<?php echo base_url();?>Salones/ControlSalones">
+        <i class="fas fa-home"></i> <span>Salones</span>
+    </a>
+</li>
+
               <!-- <li class="treeview">
                   <a href="#">
                         <i class="fas fa-graduation-cap"></i><span>Cont. academico y escolar</span>
