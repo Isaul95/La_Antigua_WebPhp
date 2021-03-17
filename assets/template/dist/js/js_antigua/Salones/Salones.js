@@ -296,15 +296,26 @@ $(document).on("click", "#TablaFotosSalon", function(e){
           },*/
           {
             data: 'nombre_foto',
+            "className": "text-center",
             orderable: false,
             searchable: false,
             render: function(data, type, row, meta) {
-              var fotoSalon = `<img src="${base_url}/assets/salonesImagenes/${row.nombre_foto}" width="300" height="300"/>`;
+              var fotoSalon = `<img src="ControlSalones/salonesImagenes/${row.id_foto}" width="200" height="150"/>`;
               return fotoSalon;
             },
           },
+          // {
+          //   data: 'nombre_foto',
+          //   orderable: false,
+          //   searchable: false,
+          //   render: function(data, type, row, meta) {
+          //     var fotoSalon = `<img src="${base_url}/assets/salonesImagenes/${row.nombre_foto}" width="300" height="300"/>`;
+          //     return fotoSalon;
+          //   },
+          // },
           {
             orderable: false,
+            "className": "text-center",
             searchable: false,
             data: function(row, type, set) {
               return `
@@ -328,13 +339,16 @@ $(document).on("click", "#TablaFotosSalon", function(e){
 
 $(document).on("click", "#AgregarFotoSalon", function(e) {
   e.preventDefault();
+  debugger;
 
   var agregarFoto = $('#SeleccionarNuevaFoto')[0].files[0];
   var agregarID = $('#FotoID').val();
+  var archivo = $("#SeleccionarNuevaFoto")[0].files[0];
 
   var agregarInformacion = new FormData();
   agregarInformacion.append("nombre_foto", agregarFoto);
   agregarInformacion.append("id_salon", agregarID);
+  agregarInformacion.append("foto", archivo);
 
   $.ajax({
     type: "post",

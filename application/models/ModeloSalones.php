@@ -10,6 +10,19 @@ class ModeloSalones extends CI_Model {
   }
 
 
+
+
+  // Se recupera el baucher k se dio de alta para mostrarselo al ADMIN para corroborar k si sea
+    public function getBaucherId($id_foto){
+        $query = $this->db->query("select * FROM fotos_salones where id_foto=? ", array($id_foto));
+        return $query->row_array();
+    }
+
+
+
+
+
+
   public function BuscarDatosSalonSeleccionado($BuscarID) {
     $this->db->select('*');
     $this->db->from('salones');

@@ -277,8 +277,8 @@
                           <table class="table table-striped table-bordered table-hover table-condensed dt-responsive nowrap" id="TablaFotos" style="background: white!important;" cellspacing="0" width="100%">
                             <thead class="text-center bg-primary">
                               <tr>
-                                <th class="text-center" width="70%">Foto</th>
-                                <th class="text-center" width="30%">Acciones</th>
+                                <th class="text-center" width="50%">Foto</th>
+                                <th class="text-center" width="15%">Acciones</th>
                               </tr>
                             </thead>
                           </table>
