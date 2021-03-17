@@ -111,41 +111,12 @@ $('#btn_RegistroPago').DataTable( {
 
 
 
-<!--  SON LAS LIGAS K SE ESTAN AGREGARNDO PARA LOS MODULOS DEL CESVI    -->
+<!--  SON LAS LIGAS K SE ESTAN AGREGARNDO PARA LOS MODULOS DE LA ANTIGUA    -->
 
-<!-- =============  platillos ============== -->
+<!-- =============  platillos ISAUL ============== -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Platillos.js"></script>
-<!-- =============  utensilios ============== -->
+<!-- =============  utensilios  ISAUL ============== -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Utensilios.js"></script>
 
-
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/archivos.js"></script>
-<!-- <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/registroPago.js"></script> -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/registroPago.js"></script>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Finanzas/formatoregistroDePagos.js"></script>
-
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Alumnos/darAltaBaucherPago.js"></script>
-
-<!-- <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrador_AsignarPermisosRoles/Permisos.js"></script> -->
-
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Finanzas/habilitarAlumnos.js"></script>
-<!-------------------- Administrativos ------------------------>
-<!-------------------- Periodo escolar ------------------------>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/PeriodoEscolar.js"></script>
-<!-------------------- Licenciatura ------------------------>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/Carreras.js"></script>
-<!-------------------- Profesores ------------------------>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/Profesores.js"></script>
-<!-------------------- Alumnos ------------------------>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/Alumnos.js"></script>
-<!-------------------- Materias ------------------------>
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/Materias.js"></script>
-<!-- ========== Documentos de Alumnos (constancias, boleta, horarios etc,)=========  -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/DocumentacionAlumnos.js"></script>
-<!-- ========== Calificaciones de alumnos x parte del administrador =========  -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/CalificacionesAlumnosAdmin.js"></script>
-
-<!-- Mobiliario -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/mobiliariojs/Mobiliario.js"></script>
-<!-- Banquetes -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/banquetes/Banquetes.js"></script>
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Salones/Salones.js"></script>
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Platillos/Platillos.js"></script>
