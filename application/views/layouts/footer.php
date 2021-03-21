@@ -37,6 +37,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
+<script src="<?php echo base_url();?>assets/template/js/fullcalendar.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/js/es.js"></script>
+<script src="<?php echo base_url();?>assets/template/clockpicker-js/bootstrap-clockpicker.js"></script>
+
 
 <script>
 
@@ -120,3 +124,5 @@ $('#btn_RegistroPago').DataTable( {
 
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Salones/Salones.js"></script>
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Platillos/Platillos.js"></script>
+
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Eventos/NuevoEvento.js"></script>
