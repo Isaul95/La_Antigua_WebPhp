@@ -34,8 +34,6 @@ class NuevoEvento extends CI_Controller {
 		}
 
 
-
-
 	public function insertNewEvent(){
 
 				$ajax_data = $this->input->post();
@@ -48,6 +46,36 @@ class NuevoEvento extends CI_Controller {
 	}
 
 
+	public function deleteEvent(){
+
+				if ($this->input->is_ajax_request()) {
+					$id_evento = $this->input->post('id_evento');
+
+					if ($this->Modelo_Eventos->eliminarEvento($id_evento)) {
+						$data = array('responce' => 'success');
+					} else {
+						$data = array('responce' => 'error');
+					}
+					echo json_encode($data);
+				} else {
+					echo "No direct script access allowed";
+				}
+			}
+
+
+		public function updateEvent(){
+
+					$id_evento = $this->input->post('id_evento');
+					$ajax_data = $this->input->post();
+
+					if ($this->Modelo_Eventos->update_evento($id_evento, $ajax_data)) {
+						$data = array('response' => 'success', 'message' => 'Evento actualizado correctamente...!');
+					} else {
+						$data = array('response' => 'error', 'message' => 'Fallo al actualizar datos del evento...!');
+					}
+				echo json_encode($data);
+
+		}
 
 
 

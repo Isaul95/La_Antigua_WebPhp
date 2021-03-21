@@ -21,7 +21,7 @@
           </div>   =>>  UNA COLUMNA
       </div> -->
 
-      <!--   ================ DIV TO CALENDAR BODY==================  -->
+      <!--   ================ DIV TO print CALENDAR BODY==================  -->
 <div class="row my-4">
     <div class="col-md-12 mx-auto">
 
@@ -61,9 +61,9 @@
               <input type="text" class="form-control" id="titulo" placeholder="Titulo del evento...">
             </div>
 
-            <div class="input-group clockpicker" data-autoclose="true" >
+            <div class="form-group input-group clockpicker" data-autoclose="true" >
               <label for="">Hora del evento: *</label>
-              <input type="text" class="form-control" id="hora" class="form-group" placeholder="Horario del evento...">
+              <input type="text" class="form-control" id="hora"  placeholder="Horario del evento...">
             </div>
 
             <div class="form-group">
@@ -72,7 +72,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group" id="divColor">
             <label for="">Color: </label>
             <input type="color" class="form-control" id="color">
             </div>
@@ -80,16 +80,16 @@
       </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
           <!-- Insert Button -->
           <button type="button" class="btn btn-primary" id="btnAgregarNewEvent">Agregar</button>
+          <button type="button" class="btn btn-success" id="eliminarEvento" >Eliminar</button>
+          <button type="button" class="btn btn-info" id="updateEvento" >Actualizar</button>
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
-
-
-
 
 
               </div>
