@@ -23,6 +23,7 @@ class Mobiliario extends CI_Controller {
 # Listar Mobiliario
 public function listarMobiliario(){
     $posts = $this->ModeloMobiliario->listarMobiliario();
+
     echo json_encode($posts);
 }
 
@@ -40,7 +41,7 @@ public function listarMobiliario(){
 			if ($this->form_validation->run() == FALSE) {
 				$data = array('res' => "error", 'message' => validation_errors());
 			} else {
-
+				/*
         // Cargar imagen
         // Definir ruta en donde guardar la imagen y tipo de dato permitido(png, jpg)
         $config = [
@@ -49,23 +50,41 @@ public function listarMobiliario(){
         ];
 				// Cargar libreria para poder subir imagen
         $this->load->library("upload",$config);
+				*/
 				$imagen='';
-
+				$tipoArchivo='';
+				if (isset($_FILES["imagen"])) {
+				if ($_FILES['imagen']['name'] != '') {
+					// code...
+					$nombreArchivo = $_FILES['imagen']['name'];
+					$tipoArchivo = $_FILES['imagen']['type'];
+					$tamanoArchivo = $_FILES['imagen']['size'];
+					$archivoSubido = fopen($_FILES['imagen']['tmp_name'], 'r+b');
+					$imagen = fread($archivoSubido, $tamanoArchivo);
+					fclose($archivoSubido);
+				}
+			}
+				/*
         if ($this->upload->do_upload('imagen')) {
           // code...
 	        $data = array("upload_data" => $this->upload->data());
 					$imagen = $data['upload_data']['file_name'];
 
-				}else {
+				}
+				*/
+				else {
 					$imagen='';
+					$tipoArchivo='';
 				}
 				//
 	      $ajax_data = array(
 	        'nombre' => $this->input->post('nombre'),
 	        'precio' => $this->input->post('precio'),
 	        'stock' => $this->input->post('stock'),
+					'estado' => $this->input->post('estado'),
 	        'descripcion' => $this->input->post('descripcion'),
-	        'imagen' => $imagen
+	        'imagen' => $imagen,
+					'tipoImagen' => $tipoArchivo
 	      );
 
 				if ($this->ModeloMobiliario->agregarMobiliario($ajax_data)) {
@@ -75,7 +94,6 @@ public function listarMobiliario(){
 				}
 
 	 		echo json_encode($data);
-
 
 			}
 		} else {
@@ -158,8 +176,6 @@ public function updateMobiliario(){
 			//$ajax_data = $this->input->post();
 			//$clave = $this->input->post('id_mobiliario_update');
 			$clave = $this->input->post('clave');
-
-
 			$ajax_data = array(
 				'nombre' => $this->input->post('nombre'),
 				'precio' => $this->input->post('precio'),
@@ -169,22 +185,11 @@ public function updateMobiliario(){
 				'imagen' => $imagen_nueva
 			);
 
-
-
-/*
-			$ajax_data['nombre'] = $this->input->post('nombre');
-			$ajax_data['precio'] = $this->input->post('precio');
-			$ajax_data['stock'] = $this->input->post('stock');
-			$ajax_data['estado'] = $this->input->post('estado');
-			$ajax_data['descripcion'] = $this->input->post('descripcion');
-			$ajax_data['imagen'] = $imagen_nueva;
-*/
 			if ($this->ModeloMobiliario->actualizarMobiliario($clave,$ajax_data)) {
 				//
 				$data = array('responce' => "success", 'message' => "¡Mobiliario actualizado!");
 				} else {
           $data = array('responce' => "error", 'message' => "Error al agregar datos...!");
-					//$data = array('responce' => "error", 'message' => "");
 				}
 			}
 			echo json_encode($data);
@@ -192,6 +197,17 @@ public function updateMobiliario(){
 			echo "No se permite este acceso directo...!!!";
 		}
 }	// Fin de funcion editar
+
+//
+
+public function mobiliarioImagenes($id_foto){
+  				$consulta = $this->ModeloMobiliario->getImg($id_foto);
+  				$archivo = $consulta['imagen'];
+  				$img = $consulta['clave'];
+  				header("Content-type: image/jpeg");
+  				// header("Content-Disposition: inline; filename=$img.pdf");
+  				echo($archivo);
+  			}
 
 
 }  // Fin del controller

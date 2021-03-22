@@ -126,3 +126,8 @@ $('#btn_RegistroPago').DataTable( {
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Platillos/Platillos.js"></script>
 
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Eventos/NuevoEvento.js"></script>
+
+<!-- Mobiliario -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Mobiliario/Mobiliario.js"></script>
+<!-- Clientes -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Clientes/Clientes.js"></script>
