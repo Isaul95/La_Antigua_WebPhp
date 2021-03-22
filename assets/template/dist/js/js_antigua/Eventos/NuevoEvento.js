@@ -88,6 +88,8 @@ var datos = {
                       $("#addNewEvent")[0].reset();
                       $('#ModalEventos').modal('hide');
                       	$('#calendar').fullCalendar('refetchEvents');
+                    //  Redireccionar a la siguiente pagina o liga cuando sea la respuesta como success
+                        // location.href ="http://localhost/antigua/Banquetes/Utensilios";
                   } else {
                       toastr["error"](data.message);
                   }

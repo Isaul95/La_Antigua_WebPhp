@@ -1,19 +1,15 @@
-<?php
+  <?php  /*
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Modelo_AsignarPermisosRoles extends CI_Model { // INICIO DEL MODELO
+class Modelo_AsignarPermisosRoles extends CI_Model {
 
 
-  // ***************************  INSERTAR BAUCHE TABLA **********************
   public function insert_baucher($data){
 
           return $this->db->insert('alta_baucher_banco', $data);
       }
 
 
-	/* -------------------------------------------------------------------------- */
-	/*                              LISRA DE Alumnos                              */
-	/* -------------------------------------------------------------------------- */
 
       public function listarPermisos(){
 
@@ -39,24 +35,6 @@ class Modelo_AsignarPermisosRoles extends CI_Model { // INICIO DEL MODELO
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function insert_permisos($data)
           {
               return $this->db->insert('permisos', $data);
@@ -65,4 +43,4 @@ class Modelo_AsignarPermisosRoles extends CI_Model { // INICIO DEL MODELO
 
 
 
-  } // FIN / CIERRE DEL MODELO
+  } */

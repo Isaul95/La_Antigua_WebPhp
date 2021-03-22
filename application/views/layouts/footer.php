@@ -51,17 +51,12 @@
             "language" : language_espaniol,
           });
 
-
 //   2.- Vista ruta       ====>>>   views\admin\usuarios\list.php
         $('#tbl_usuarios').DataTable( {
             "language" : language_espaniol,
           });
 
-
-
     })
-
-
 
 
 // ES EL LENGUAJE DE LAS TABLAS DE INGLES => ESPAÑOL DataTable()
