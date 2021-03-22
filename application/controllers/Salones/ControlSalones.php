@@ -109,9 +109,6 @@ class ControlSalones extends CI_Controller {
         $this->ModeloSalones->EliminarFotoSeleccionada($Foto->id_foto);
       }
       if ($this->ModeloSalones->EliminarSalonSeleccionado($EliminarID)) {
-        foreach ($FotosSalon as $Foto){
-          unlink('./assets/salonesImagenes/' . $Foto->nombre_foto);
-        }
         $RespuestaConsulta = array('Resultado' => "Exitoso");
       } else {
         $RespuestaConsulta = array('Resultado' => "Erroneo", "No se pudo eliminar el salón");
@@ -134,81 +131,32 @@ class ControlSalones extends CI_Controller {
   }
 
 
-  public function CrearFoto() {
-    if ($this->input->is_ajax_request()) {
-
-      // $config['upload_path'] = './assets/salonesImagenes/';
-      // $config['allowed_types'] = 'gif|jpg|png';
-      // $this->load->library('upload', $config);
-
-      // if (!$this->upload->do_upload('foto')) {
-      //   $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
-      // } else {
-
-        $file_name = $_FILES['foto']['name'];
-         $file_size = $_FILES['foto']['size'];
-         $file_tmp = $_FILES['foto']['tmp_name'];
-         $file_type = $_FILES['foto']['type'];
-
-         $imagen_temporal = $file_tmp;
-         $imagen_name = $file_name;
-					$tipo = $file_type;
-
-          $fp = fopen($imagen_temporal, 'r+b');
-					$binario = fread($fp, filesize($imagen_temporal));
-					fclose($fp);
-
-        $AgregarDatos = $this->input->post();
-				$AgregarDatos['foto'] = $binario; // Documento pdf
-        $AgregarDatos['nombre_foto'] = $imagen_name;
-        $AgregarDatos['id_salon']    = $this->input->post('id_salon');
-
-        if ($this->ModeloSalones->CrearNuevaFoto($AgregarDatos)) {
-          $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Foto agregada!");
-        } else {
-          $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudo agregar la foto");
-        }
-      // }
-      echo json_encode($Respuesta);
-    } else {
-      echo "No se permite este acceso directo";
-    }
+  public function Foto($FotoID){
+    $Consulta = $this->ModeloSalones->BuscarDatosFotoSeleccionada($FotoID);
+    $Foto = $Consulta->foto;
+    header("Content-Type: image/jpeg");
+    print_r($Foto);
   }
 
 
-
-  public function salonesImagenes($id_foto){
-  				$consulta = $this->ModeloSalones->getBaucherId($id_foto);
-  				$archivo = $consulta['foto'];
-  				$img = $consulta['nombre_foto'];
-  				header("Content-type: image/jpeg");
-  				// header("Content-Disposition: inline; filename=$img.pdf");
-  				print_r($archivo);
-  			}
-
-
-
-  public function ModificarFoto() {
+  public function CrearFoto() {
     if ($this->input->is_ajax_request()) {
-      $FotoID = $this->input->post('id_foto_seleccionada');
-      $config['upload_path'] = './assets/salonesImagenes/';
-      $config['allowed_types'] = 'gif|jpg|png';
-      $this->load->library('upload', $config);
-      if (!$this->upload->do_upload('nombre_foto')) {
-        $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => $this->upload->display_errors());
-      } else {
-        if ($EliminarFoto = $this->ModeloSalones->BuscarDatosFotoSeleccionada($FotoID)) {
-          unlink('./assets/salonesImagenes/' . $EliminarFoto->nombre_foto);
-          $data = array("upload_data" => $this->upload->data());
-          $cambiarFoto = $data['upload_data']['file_name'];
-          $ModificarDato['nombre_foto'] = $cambiarFoto;
 
-          if ($this->ModeloSalones->RemplazarFotoSeleccionada($FotoID, $ModificarDato)) {
-            $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡La foto ha sido remplazada!");
-          } else {
-            $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudo remplazar la foto");
-          }
-        }
+      $NombreFoto = $_FILES['foto']['name'];
+      $FotoTemporal = $_FILES['foto']['tmp_name'];
+
+      $Archivo = fopen($FotoTemporal, 'r+b');
+      $BytesFoto = fread($Archivo, filesize($FotoTemporal));
+      fclose($Archivo);
+
+      $AgregarDatos['nombre_foto'] = $NombreFoto;
+      $AgregarDatos['foto'] = $BytesFoto;
+      $AgregarDatos['id_salon'] = $this->input->post('id_salon');
+
+      if ($this->ModeloSalones->CrearNuevaFoto($AgregarDatos)) {
+        $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Foto agregada!");
+      } else {
+        $Respuesta = array('Resultado' => "Erroneo", 'Mensaje' => "No se pudo agregar la foto");
       }
       echo json_encode($Respuesta);
     } else {
@@ -222,7 +170,6 @@ class ControlSalones extends CI_Controller {
       $EliminarID = $this->input->post('eliminarID');
       $EliminarFoto = $this->ModeloSalones->BuscarDatosFotoSeleccionada($FotoID);
       if ($this->ModeloSalones->EliminarFotoSeleccionada($EliminarID)) {
-        unlink('./assets/salonesImagenes/' . $EliminarFoto->nombre_foto);
         $RespuestaConsulta = array('Resultado' => "Exitoso");
       } else {
         $RespuestaConsulta = array('Resultado' => "Erroneo", "No se pudo eliminar la foto");

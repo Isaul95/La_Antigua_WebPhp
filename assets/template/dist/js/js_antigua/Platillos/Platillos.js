@@ -51,7 +51,7 @@ function MostrarTablaPlatillos() {
             orderable: false,
             searchable: false,
             render: function(data, type, row, meta) {
-              var imagenPlatillo = `<img src="${base_url}/assets/platillosImagenes/${row.foto}" width="150" height="150"/>`;
+                var imagenPlatillo = `<img src="ControlPlatillos/Foto/${row.id_platillo}" width="150" height="150"/>`;
               return imagenPlatillo;
             },
           },
@@ -131,8 +131,8 @@ $(document).on('click', '#EditarPlatillo', function(e) {
       $('#CostoModificado').val(informacionPlatillo.DatoPlatillo.costo)
       $('#DescripcionModificada').val(informacionPlatillo.DatoPlatillo.descripcion)
       $('#MostrarImagenActual').html(`
-        <img class="rounded img-thumbnail" src="${base_url}/assets/platillosImagenes/${informacionPlatillo.DatoPlatillo.foto}" width="250" height="250">
-      `);
+          <img class="rounded img-thumbnail" src="ControlPlatillos/Foto/${informacionPlatillo.DatoPlatillo.id_platillo}" width="250" height="250">
+        `);
     },
   });
 });

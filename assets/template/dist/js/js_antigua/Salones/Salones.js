@@ -1,7 +1,6 @@
 const $SeleccionarNuevaFoto = document.querySelector('#SeleccionarNuevaFoto');
       $MostrarFotoSeleccionada = document.querySelector('#MostrarFotoSeleccionada');
-      $RemplazarFotoActual = document.querySelector('#RemplazarFotoActual');
-      $MostrarFotoCambiada = document.querySelector('#MostrarFotoCambiada');
+
 
 $(document).ready(function() {
   MostrarTablaSalones();
@@ -23,14 +22,6 @@ $(document).ready(function() {
     $MostrarFotoSeleccionada.src = "";
     $MostrarFotoSeleccionada.width = "0";
     $MostrarFotoSeleccionada.height = "0";
-  });
-
-
-  $('#ModalCambiarFoto').on('hide.bs.modal', function(e) {
-    $('#FormularioCambiarFoto')[0].reset();
-    $MostrarFotoCambiada.src = "";
-    $MostrarFotoCambiada.width = "0";
-    $MostrarFotoCambiada.height = "0";
   });
 
 
@@ -300,26 +291,16 @@ $(document).on("click", "#TablaFotosSalon", function(e){
             orderable: false,
             searchable: false,
             render: function(data, type, row, meta) {
-              var fotoSalon = `<img src="ControlSalones/salonesImagenes/${row.id_foto}" width="200" height="150"/>`;
+              var fotoSalon = `<img src="ControlSalones/Foto/${row.id_foto}" width="250" height="250"/>`;
               return fotoSalon;
             },
           },
-          // {
-          //   data: 'nombre_foto',
-          //   orderable: false,
-          //   searchable: false,
-          //   render: function(data, type, row, meta) {
-          //     var fotoSalon = `<img src="${base_url}/assets/salonesImagenes/${row.nombre_foto}" width="300" height="300"/>`;
-          //     return fotoSalon;
-          //   },
-          // },
           {
             orderable: false,
             "className": "text-center",
             searchable: false,
             data: function(row, type, set) {
               return `
-                <a href="#" id="EditarFoto" class="btn btn-success btn-remove" ID_Seleccionado="${row.id_foto}" NombreFoto="${row.nombre_foto}"><i class="far fa-edit"></i></a>
                 <a href="#" id="BorrarFoto" class="btn btn-danger btn-remove" ID_Seleccionado="${row.id_foto}">
                 <i class="fas fa-trash-alt"></i></a>
               `;
@@ -339,16 +320,13 @@ $(document).on("click", "#TablaFotosSalon", function(e){
 
 $(document).on("click", "#AgregarFotoSalon", function(e) {
   e.preventDefault();
-  debugger;
 
   var agregarFoto = $('#SeleccionarNuevaFoto')[0].files[0];
   var agregarID = $('#FotoID').val();
-  var archivo = $("#SeleccionarNuevaFoto")[0].files[0];
 
   var agregarInformacion = new FormData();
-  agregarInformacion.append("nombre_foto", agregarFoto);
+  agregarInformacion.append("foto", agregarFoto);
   agregarInformacion.append("id_salon", agregarID);
-  agregarInformacion.append("foto", archivo);
 
   $.ajax({
     type: "post",
@@ -363,49 +341,6 @@ $(document).on("click", "#AgregarFotoSalon", function(e) {
         toastr["success"](response.Mensaje);
         $('#ModalAgregarFoto').modal("hide");
         $('#FormularioAgregarFoto')[0].reset();
-        $('#TablaFotos').DataTable().destroy();
-        $('#TablaFotosSalon').click();
-      } else {
-        toastr["error"](response.Mensaje);
-      }
-    },
-  });
-});
-
-
-$(document).on("click", "#EditarFoto", function(e){
-  $('#FotoSeleccionada').val($(this).attr('ID_Seleccionado'));
-  var nombreFoto = $(this).attr('NombreFoto');
-  $('#MostrarFotoActual').html(`
-    <img class="rounded img-thumbnail" src="${base_url}/assets/salonesImagenes/${nombreFoto}" width="250" height="250">
-  `);
-  $('#ModalCambiarFoto').modal('show');
-});
-
-
-$(document).on("click", "#CambiarFotoSalon", function(e) {
-  e.preventDefault();
-
-  var seleccionadoID = $('#FotoSeleccionada').val();
-  var cambiarFoto = $('#RemplazarFotoActual')[0].files[0];
-
-  var cambiarInformacion = new FormData();
-  cambiarInformacion.append("id_foto_seleccionada", seleccionadoID);
-  cambiarInformacion.append("nombre_foto", cambiarFoto);
-
-  $.ajax({
-    type: "post",
-    url: base_url + 'Salones/ControlSalones/ModificarFoto',
-    data: cambiarInformacion,
-    processData: false,
-    contentType: false,
-    dataType: "json",
-    enctype: 'multipart/form-data',
-    success: function(response) {
-      if (response.Resultado == "Exitoso") {
-        toastr["success"](response.Mensaje);
-        $('#ModalCambiarFoto').modal("hide");
-        $('#FormularioCambiarFoto')[0].reset();
         $('#TablaFotos').DataTable().destroy();
         $('#TablaFotosSalon').click();
       } else {
@@ -468,22 +403,6 @@ $SeleccionarNuevaFoto.addEventListener('change', () => {
   $MostrarFotoSeleccionada.src = objectURL;
   $MostrarFotoSeleccionada.width = "250";
   $MostrarFotoSeleccionada.height = "250";
-});
-
-
-$RemplazarFotoActual.addEventListener('change', () => {
-  const archivos = $RemplazarFotoActual.files;
-  if (!archivos || !archivos.length) {
-    $MostrarFotoCambiada.src = "";
-    $MostrarFotoCambiada.width = "0";
-    $MostrarFotoCambiada.height = "0";
-    return;
-  }
-  const primerArchivo = archivos[0];
-  const objectURL = URL.createObjectURL(primerArchivo);
-  $MostrarFotoCambiada.src = objectURL;
-  $MostrarFotoCambiada.width = "250";
-  $MostrarFotoCambiada.height = "250";
 });
 
 

@@ -262,12 +262,21 @@
 
                     <div class="modal-body">
                       <div class="row">
-                        <div class="col-md-12">
-                          <?php if ($permisos->insert == 1):?>
-                            <div class="d-flex flex-row">
-                              <a type="button" class="btn btn-primary btn-float" data-toggle="modal" data-target="#ModalAgregarFoto"><span class="fa fa-plus"></span> Agregar una nueva foto</a>
+                        <form id="FormularioAgregarFoto">
+                          <div>
+                            <div style="text-align: center;">
+                              <label>Seleccione una foto</label>
                             </div>
-                          <?php endif;?>
+                            <div class="form-control">
+                              <input type="file" class="custom-file-input" id="SeleccionarNuevaFoto" style="padding: 0 15%;">
+                            </div>
+                          </div>
+                          <div style="text-align: center;">
+                            <img id="MostrarFotoSeleccionada" style="padding: 2%;">
+                          </div>
+                        </form>
+                        <div style="text-align: center;">
+                          <button type="button" class="btn btn-primary" id="AgregarFotoSalon">Agregar</button>
                         </div>
                       </div>
                       <input type="hidden" id="FotoID">
@@ -293,82 +302,6 @@
                 </div>
               </div>
 
-
-              <div class="modal fade" id="ModalAgregarFoto" tabindex="-1" aria-labelledby="TituloModalAgregarFoto" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <div class="modal-header bg-primary text-center">
-                      <strong class="modal-title" id="TituloModalModalAgregarFoto">Agregar foto a la galeria del salón</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-                    <div class="modal-body">
-                      <form id="FormularioAgregarFoto">
-                        <div>
-                          <div style="text-align: center;">
-                            <label>Seleccione una foto</label>
-                          </div>
-                          <div class="form-control">
-                            <input type="file" class="custom-file-input" id="SeleccionarNuevaFoto" style="padding: 0 15%;">
-                          </div>
-                        </div>
-                        <div style="text-align: center;">
-                          <img id="MostrarFotoSeleccionada" style="padding: 2%;">
-                        </div>
-                      </form>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary" id="AgregarFotoSalon">Agregar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="modal fade" id="ModalCambiarFoto" tabindex="-1" aria-labelledby="TituloModalCambiarFoto" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <div class="modal-header bg-primary text-center">
-                      <strong class="modal-title" id="TituloModalCambiarFoto">Cambiar la foto actual</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-                    <div class="modal-body">
-                      <form id="FormularioCambiarFoto">
-                        <input type="hidden" id="FotoSeleccionada">
-                        <div style="text-align: center;">
-                          <label>Foto actual</label>
-                        </div>
-                        <div id="MostrarFotoActual" style="text-align: center;"></div>
-                        <div>
-                          <div style="text-align: center;">
-                            <label>Seleccione la foto que remplazará la actual</label>
-                          </div>
-                          <div class="form-control">
-                            <input type="file" class="custom-file-input" id="RemplazarFotoActual" style="padding: 0 15%;">
-                          </div>
-                        </div>
-                        <div style="text-align: center;">
-                          <img id="MostrarFotoCambiada" style="padding: 2%;">
-                        </div>
-                      </form>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary" id="CambiarFotoSalon">Cambiar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
             </div>
           </div>
