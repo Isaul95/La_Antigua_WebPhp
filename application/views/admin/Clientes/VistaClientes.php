@@ -34,8 +34,11 @@
                     <div class="flex-row">
                       <nav class="navbar navbar-light bg-light">
                         <form class="form-inline">
-                          <button class="btn btn-success btn-float" type="button">Agregar Cliente</button>
-                          <button class="btn btn-success btn-float" type="button">Inicio</button>
+                          <button class="btn btn-success btn-float" type="button" id="agregarCliente">Agregar Cliente</button>
+                          <button class="btn btn-success btn-float" type="button" id="inicioc">Inicio</button>
+                          <button class="btn btn-success btn-float" type="button" id="clientesDos">Prueba 2</button>
+                          <button class="btn btn-success btn-float" type="button" id="clientesTres">Prueba 3</button>
+                          <button class="btn btn-success btn-float" type="button" id="clientesCuatro">Prueba 4</button>
                         </form>
                       </nav>
                     </div>
@@ -48,51 +51,13 @@
             <!-- Agregar nuevo registro -->
             <div class="row my-4">
               <div class="col-md-12 mx-auto">
-                <div class="myForm">
 
-                  <form class="" id="addCliente">
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label>Nombre</label>
-                        <input type="text" id="nombreCliente" class="form-control" placeholder="Nombre">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>Dirección</label>
-                        <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label>Telefono</label>
-                        <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>Sexo</label>
-                        <select class="form-control" id="sexoCliente">
-                          <option>Masculino</option>
-                          <option>Femenino</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <label>Email</label>
-                        <input type="text" id="emailCliente" class="form-control" placeholder="Email">
-                      </div>
-                      <div class="form-group col-md-6 form-control-file">
-                        <label>INE</label>
-                        <input type="file" class="custom-file-input" name="ine" id="ine" />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <button type="button" class="btn btn-primary" id="btnaddCliente">Agregar</button>
-                      </div>
-                    </div>
-                  </form>
+                <div id="formcli">
+                  <!-- Aqui se agregan las vistas -->
+                  <center><h1>¡Hola Clientes!</h1></center>
                 </div>
-                <br>
-                <br>
+
+
             </div>
             </div>
 

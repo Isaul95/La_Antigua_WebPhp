@@ -1,6 +1,104 @@
 $(document).ready(function () {
 
 });
+/*
+$(document).on("click", "#agregarCliente", function (e) {
+    e.preventDefault();
+    $("#myForm").show();
+    return false;
+
+
+});
+$(document).on("click", "#inicioc", function (e) {
+    e.preventDefault();
+    $("#myForm").hide();
+    $("#addCliente")[0].reset();
+    $("#btnaddCliente")[0].reset();
+    return false;
+
+
+});
+
+*/
+
+function vistaClientes() {
+  //
+  $.ajax({
+  type: "GET",
+  url: base_url + 'application/views/admin/Clientes/VistaInicioClientes',
+  success: function(datos) {
+      $("#formcli").html(datos);
+      $("#addCliente")[0].reset();
+      //$("#btnaddCliente")[0].reset();
+  }
+})
+
+}
+
+$(document).on("click", "#inicioc", function (e) {
+    e.preventDefault();
+    vistaClientes();
+
+});
+$(document).on("click", "#agregarCliente", function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: "GET",
+    url: base_url + 'application/views/admin/Clientes/formularioClientes',
+    success: function(datos) {
+        $("#formcli").html(datos);
+        $("#addCliente")[0].reset();
+        //$("#btnaddCliente")[0].reset();
+    }
+})
+
+
+});
+
+$(document).on("click", "#clientesDos", function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: "GET",
+    url: base_url + 'application/views/admin/Clientes/clientes_dos',
+    success: function(datos) {
+        $("#formcli").html(datos);
+        $("#addCliente")[0].reset();
+        //$("#btnaddCliente")[0].reset();
+    }
+})
+
+
+});
+
+$(document).on("click", "#clientesTres", function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: "GET",
+    url: base_url + 'application/views/admin/Clientes/clientesTres',
+    success: function(datos) {
+        $("#formcli").html(datos);
+        $("#addCliente")[0].reset();
+        //$("#btnaddCliente")[0].reset();
+    }
+})
+
+
+});
+
+$(document).on("click", "#clientesCuatro", function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: "GET",
+    url: base_url + 'application/views/admin/Clientes/clientesCuatro',
+    success: function(datos) {
+        $("#formcli").html(datos);
+        $("#addCliente")[0].reset();
+        //$("#btnaddCliente")[0].reset();
+    }
+})
+
+
+});
 
 
 
@@ -44,7 +142,7 @@ $(document).on("click", "#btnaddCliente", function (e) {
         //fd.append("tipoImagen", tipoImagen);
         $.ajax({
             type: "post",
-            url: base_url + 'Clientes/Clientes/agregarCliente',
+            url: base_url + 'Clientes/Clientes/addCliente',
             data: fd,
             processData: false,
             contentType: false,
@@ -53,7 +151,7 @@ $(document).on("click", "#btnaddCliente", function (e) {
             success: function (response) {
                 if (response.res == "success") {
                     toastr["success"](response.message);
-                    $("#addCliente")[0].reset();
+                    vistaClientes();
 
                 } else {
                     toastr["error"](response.message);
