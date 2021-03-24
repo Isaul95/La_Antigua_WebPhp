@@ -19,7 +19,7 @@ Esta vista es la del dashboard WELCOME ISAUL HERE IS MY WORld <br> </div>  <! /.
 <form>
                 <center>
                 <!-- <button  type ="submit" class="btn btn-outline-secondary"> -->
-                    <img src="<?php echo base_url()?>assets/template/dist/img/Logo-real.png"  class="user-image" alt="User Image" width=420px heigth=420px link="">
+                    <img src="<?php echo base_url()?>assets/template/dist/img/Logo.png"  class="user-image" alt="User Image" width=420px heigth=420px link="">
                  <!-- </button> -->
                    <center>
 

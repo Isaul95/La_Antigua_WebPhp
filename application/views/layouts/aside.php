@@ -73,14 +73,14 @@
 
       <li class="treeview">
           <a href="#">
-              <i class="fas fa-balance-scale"></i> <span>Banquetes</span>
+              <i class="fas fa-balance-scale"></i> <span>Rutas</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-              <li><a href="<?php echo base_url();?>Banquetes/Platillos">
-                 <i class="far fa-dot-circle"></i>  Platillos</a>
+              <li><a href="<?php echo base_url();?>RutasMobiliario/Rutas">
+                 <i class="far fa-dot-circle"></i>  Rutas Mobiliario</a>
               </li>
 
               <li><a href="<?php echo base_url();?>Banquetes/Utensilios">

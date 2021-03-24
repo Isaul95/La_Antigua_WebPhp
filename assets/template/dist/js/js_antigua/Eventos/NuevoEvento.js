@@ -5,6 +5,7 @@ $('.clockpicker').clockpicker();
 
 
   var calendar = $('#calendar').fullCalendar({
+
       editable:true,
       header:{
           left:'prev,next today',

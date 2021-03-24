@@ -112,10 +112,14 @@ $('#btn_RegistroPago').DataTable( {
 
 <!--  SON LAS LIGAS K SE ESTAN AGREGARNDO PARA LOS MODULOS DE LA ANTIGUA    -->
 
-<!-- =============  platillos ISAUL ============== -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Platillos.js"></script>
+<!-- =============  Rutas para encargado de MOBILIARIO  ISAUL ============== -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Rutas/rutas.js"></script>
 <!-- =============  utensilios  ISAUL ============== -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Utensilios.js"></script>
+
+
+
+
 
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Salones/Salones.js"></script>
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Platillos/Platillos.js"></script>

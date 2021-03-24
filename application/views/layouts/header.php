@@ -25,6 +25,11 @@
 <!-- reloj elegir hora -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/template/clockpicker-css/bootstrap-clockpicker.css">
 
+<!-- Diseño css del gif de loader img -->
+<link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/styles.css">
+
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
     <!-- Toastr -->
       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -34,6 +39,12 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 </head>
+
+
+
+
+
+
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">

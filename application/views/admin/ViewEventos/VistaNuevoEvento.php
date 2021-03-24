@@ -45,7 +45,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- <input type="hidden" id="username" name="username" value="<?php echo $username;?>" > -->
+          <input type="hidden" id="username" name="username" value="<?php echo $username;?>" >
           <input type="hidden" id="id_evento" name="id_evento" >
 
           <!-- Add Record Form -->
@@ -89,6 +89,13 @@
         </div>
       </div>
     </div>
+  </div>
+
+
+
+  <div id="loading-screen-eventos" style="display:none">
+      <img src="<?php echo base_url()?>assets/template/dist/img/ajax-loader.gif">
+      <p> Cargando... </p>
   </div>
 
 

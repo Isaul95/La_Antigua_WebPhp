@@ -14,9 +14,10 @@ class NuevoEvento extends CI_Controller {
 
 
 	public function index(){
-					$data = array(
-						'permisos' => $this->permisos,
-					);
+				$data = array(
+					'permisos' => $this->permisos,
+					'username' => $this->session->userdata('username'),
+				);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
 		$this->load->view('admin/ViewEventos/VistaNuevoEvento',$data);

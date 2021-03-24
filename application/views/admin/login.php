@@ -26,7 +26,7 @@
         <!-- /.login-logo  <font color="#D34787"></font>-->
         <div class="login-box-body">
 
-          <center><img src="<?php echo base_url()?>assets/template/dist/img/logo-cesvi2.png"  class="user-image" alt="User Image" width=120px heigth=120px></center> <br>
+          <center><img src="<?php echo base_url()?>assets/template/dist/img/Logo1.jpg"  class="user-image" alt="User Image" width=120px heigth=120px></center> <br>
          <!-- <center> <label><h3>Bienvenidos</h3></font></label> </center> -->
 
             <p class="login-box-msg"><center><h4>Introduzca sus datos de ingreso</h4></center></p>
