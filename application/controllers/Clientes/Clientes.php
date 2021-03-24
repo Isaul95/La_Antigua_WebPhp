@@ -8,7 +8,7 @@ class Clientes extends CI_Controller {
 		 $this->permisos = $this->backend_lib->control();
 		 $this->load->helper(array('form', 'url'));
 	 	 $this->load->library(array('session', 'form_validation'));
-	 	 $this->load->model("Clientes/ModeloClientes");
+	 	 $this->load->model("Clientes/ModeloCliente");
 	 }
 
 	public function index(){
