@@ -161,15 +161,21 @@
 <?php endif;?>
 
     <li>
-        <a href="<?php echo base_url();?>Platillos/ControlPlatillos">
-            <i class="fas fa-drumstick-bite"></i> <span>Platillos</span>
-        </a>
+      <a href="<?php echo base_url();?>Platillos/ControlPlatillos">
+          <i class="fas fa-drumstick-bite"></i> <span>Platillos</span>
+      </a>
     </li>
 
     <li>
-        <a href="<?php echo base_url();?>Salones/ControlSalones">
-            <i class="fas fa-home"></i> <span>Salones</span>
-        </a>
+      <a href="<?php echo base_url();?>Salones/ControlSalones">
+        <i class="fas fa-home"></i> <span>Salones</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="<?php echo base_url();?>PlatillosClientes/ControlPlatillosClientes">
+        <i class="fas fa-drumstick-bite"></i> <span>Elegir platillos</span>
+      </a>
     </li>
 
 <!-- ============================== Inicio Modificacion Nacho ======================================== -->
