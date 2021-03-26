@@ -21,10 +21,10 @@
 
 	<div class="example-two">
 		<ul class="tabs">
-			<li><a href="#tab1"></span><span class="tab-text">Inicio</span></a></li>
-			<li><a href="#tab2"></span><span class="tab-text">Nosotros</span></a></li>
-			<li><a href="#tab3"></span><span class="tab-text" class="hide">Servicios</span></a></li>
-			<li><a href="#tab4"></span><span class="tab-text">Blog</span></a></li>
+			<li><a href="#tab1"></span><span class="tab-text">Datos personales</span></a></li>
+			<li><a href="#tab2"></span><span class="tab-text">Salón de eventos</span></a></li>
+			<li><a href="#tab3"></span><span class="tab-text">Mobiliario</span></a></li>
+			<li><a href="#tab4"></span><span class="tab-text">Banquetes</span></a></li>
 		</ul>
 
 <hr style="background-color: black; color: black; height: 0px;">
