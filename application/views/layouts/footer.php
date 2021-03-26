@@ -41,6 +41,11 @@
 <script src="<?php echo base_url();?>assets/template/js/es.js"></script>
 <script src="<?php echo base_url();?>assets/template/clockpicker-js/bootstrap-clockpicker.js"></script>
 
+<!-- xxxxxxxxxxxx -->
+<!-- <script src="<?php echo base_url();?>assets/template/js/organictabs.jquery.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
 
 <script>
 
@@ -115,7 +120,7 @@ $('#btn_RegistroPago').DataTable( {
 <!-- =============  Rutas para encargado de MOBILIARIO  ISAUL ============== -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Rutas/rutas.js"></script>
 <!-- =============  utensilios  ISAUL ============== -->
-<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Banquetes/Utensilios.js"></script>
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Eventos/contratos.js"></script>
 
 
 
@@ -130,3 +135,5 @@ $('#btn_RegistroPago').DataTable( {
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Mobiliario/Mobiliario.js"></script>
 <!-- Clientes -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Clientes/Clientes.js"></script>
+
+<script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/banquetes/Banquetes.js"></script>

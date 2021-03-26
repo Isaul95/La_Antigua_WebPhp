@@ -1,3 +1,4 @@
+
 <div class="content-wrapper colorfondo"> <!-- STAR ALL CONTENT -->
              <!-- Main content -->
             <section class="content">
@@ -5,146 +6,115 @@
                 <div class="box box-solid colorfondo">
                     <div class="box-body">
 <div class="container">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12 mt-5">
       <h1 class="text-center">
-      <strong><font color="#D34787">Inventario Utensilios</font></strong>
+      <strong><font color="#D34787">Prueba Tabs</font></strong>
       </h1>
       <hr style="background-color: black; color: black; height: 1px;">
-    </div>
-  </div>
+        </div>
+  </div> -->
+
+
   <div class="row">
     <div class="col-md-12">
-      <div class="row">
-          <div class="col-md-12">
 
-      <?php if($permisos->insert == 1):?>
-        <div class="d-flex flex-row">
-              <a type="button" class="btn btn-primary btn-float" data-toggle="modal" data-target="#modal_add_licenciatura"> <span class="fa fa-plus"></span> Nuevo Utensilio</a>
+	<div class="example-two">
+		<ul class="tabs">
+			<li><a href="#tab1"></span><span class="tab-text">Inicio</span></a></li>
+			<li><a href="#tab2"></span><span class="tab-text">Nosotros</span></a></li>
+			<li><a href="#tab3"></span><span class="tab-text" class="hide">Servicios</span></a></li>
+			<li><a href="#tab4"></span><span class="tab-text">Blog</span></a></li>
+		</ul>
+
+<hr style="background-color: black; color: black; height: 0px;">
+
+		<div class="secciones">
+
+			<article id="tab1">
+
+        <div class="panel panel-default">
+			<div class="panel-heading text-center">	<h4>Datos del responsable del evento</h4></div>
+        <br>
+        <br>
+
+        <div class="panel-body">
+
+        <div class="myForm" id="myForm">
+
+          <form class="" id="addCliente">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Nombre: *</label>
+                <input type="text" id="nombreCliente" class="form-control" placeholder="Nombre">
               </div>
-      <?php endif;?>
-
-          </div>
-      </div>
-<hr> <!-- Le da una linea sombreada para ver la divicion -->
-<div class="row my-4">
-    <div class="col-md-12 mx-auto">
-
-
-      <table id="tbl_Utensilios" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important">
-        <thead class="text-center bg-primary">
-          <tr>
-            <th width="3%" type="hidden">#</th>
-            <th>Licenciatura</th>
-            <th>Clave</th>
-            <th>Fecha</th>
-            <th class="text-center" width="7%">Acciones</th>
-          </tr>
-        </thead>
-      </table>
-
-    </div>
-  </div>
-      <!-- Modal Agregar nueuvo registro -->
-      <div class="modal fade" id="modal_add_licenciatura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header bg-primary text-center">
-              <strong class="modal-title" id="exampleModalLabel">Agregar licenciatura</strong>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <div class="form-group col-md-6">
+                <label>Dirección: *</label>
+                <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
+              </div>
             </div>
-            <div class="modal-body">
-          <form id="addcarrera">
-                <div class="form-group">
-                    <label for="">Licenciatura</label>
-                  <input type="text" class="form-control" id="licenciatura" placeholder="Licenciatura">
-                </div>
-
-                <div class="form-group">
-                  <label for="">Clave</label>
-                  <input type="text" class="form-control" id="clave_licenciatura" placeholder="Rvoe">
-                </div>
-
-              <div class="form-group">
-                  <label for="">Fecha</label>
-                  <input type="text" id="datepicker_fecha_licenciatura" />
-                </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Telefono: *</label>
+                <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Sexo: *</label>
+                <select class="form-control" id="sexoCliente">
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label>Email: *</label>
+                <input type="text" id="emailCliente" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group col-md-6 form-control-file">
+                <label>INE: *</label>
+                <input type="file" class="custom-file-input" name="ine" id="ine" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <button type="button" class="btn btn-primary" id="btnaddCliente">Agregar</button>
+              </div>
+            </div>
           </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-              <!-- Insert Button -->
-              <button type="button" class="btn btn-primary" id="btnaddcarrera">Agregar</button>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <!-- Modal preparado para editar datos y file -->
-      <div class="modal fade" id="modaleditcarrera" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Editar periodos</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="container-fluid">
-                <div class="row text-center">
-                  <div class="col-md-12 my-3">
-                    <div id="show_img"></div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <form id="formeditarcarrera">
-                    <input type="hidden" id="id_licenciatura_update">
-                    <div class="form-group">
-                    <label for="">Licenciatura</label>
-                  <input type="text" class="form-control" id="licenciatura_update" placeholder="Ciclo escolar">
-                </div>
-
-                <div class="form-group">
-                  <label for="">Clave</label>
-                  <input type="text" id="clave_licenciatura_update" />
-                </div>
-
-              <div class="form-group">
-                  <label for="">Fecha</label>
-                  <input type="text" id="datepicker_fecha_licenciatura_update" />
-                </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-              <button type="button" class="btn btn-primary" id="update_carrera">Actualizar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-    </div>
-  </div>
-
-
 
 </div>
 
+</div>
 
-<!-- AKI TERMIAN LO MIO LO NUEVO QUE AGREGUE -->
+			</article>
+
+
+			<article id="tab2">
+				<h1>Nosotros</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel voluptates unde, consequuntur aliquid architecto rem numquam expedita minima dolorem pariatur recusandae, eius quod quia aspernatur id impedit, tenetur! Aspernatur incidunt molestiae dolores animi ea praesentium ipsam tenetur voluptas cupiditate perspiciatis eum nihil, natus exercitationem libero earum fuga dignissimos impedit numquam, quasi, placeat officiis voluptates, ad reprehenderit fugiat? Fugiat aperiam et magni, molestiae, numquam consectetur vitae sapiente cupiditate totam laboriosam voluptate obcaecati, aliquam placeat? Suscipit dolores fuga laudantium sed, qui magni iusto dolore quia. Quis fugit exercitationem porro. Rerum nihil omnis recusandae ratione fuga alias eligendi, earum sunt veritatis praesentium eum perspiciatis. Molestias deserunt, iure neque animi quod! Impedit reprehenderit cumque, numquam velit quae cum eius quidem similique laudantium hic deleniti!</p>
+			</article>
+			<article id="tab3" >
+				<h1>Servicios</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea numquam odio voluptate. Aliquam incidunt similique, et quasi ducimus quos aut autem non dignissimos dicta sit provident, voluptatibus ut blanditiis perspiciatis cum, vel temporibus minima enim. Asperiores omnis placeat officiis a tenetur sit recusandae, reprehenderit neque. Tempora quibusdam, perferendis id ratione culpa dolorum! Nemo, animi?</p><br>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum dignissimos at esse, ipsum rerum assumenda nisi obcaecati! Aliquam iure voluptatem incidunt, explicabo sit labore, perferendis eius ad vel quia. Praesentium, doloribus. Quisquam provident nostrum totam itaque debitis, minima, tempore dolores!</p>
+			</article>
+			<article id="tab4">
+				<h1>Blog</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea numquam odio voluptate. Aliquam incidunt similique, et quasi ducimus quos aut autem non dignissimos dicta sit provident, voluptatibus ut blanditiis perspiciatis cum, vel temporibus minima enim. Asperiores omnis placeat officiis a tenetur sit recusandae, reprehenderit neque. Tempora quibusdam, perferendis id ratione culpa dolorum! Nemo, animi? Eveniet eaque perspiciatis, libero quia, pariatur iusto, ipsum porro quod, ut tempora cum quo non illum. Non eligendi incidunt sequi, molestias quia perspiciatis architecto repudiandae quod.</p><br>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam ipsa ducimus amet at cumque sed numquam, explicabo impedit optio quas iste aperiam quidem ipsam rerum libero voluptatibus perferendis officiis voluptatum!</p>
+			</article>
+		</div>
+	</div>
 
 
 
+
+    </div>
+  </div>
+
+</div>
 
                     </div>
                     <!-- /.box-body -->
@@ -152,8 +122,5 @@
                 <!-- /.box -->
             </section>
             <!-- / MAIN content -->
-
-
-
 
     </div> <!-- /END ALL CONTENT -->

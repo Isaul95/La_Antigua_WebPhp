@@ -1,0 +1,41 @@
+/*
+	 Organic Tabs
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+/* * { margin: 0; padding: 0; } */
+/* * { margin: 0; padding: 0; }
+body { font: 12px Georgia, serif; }
+html { overflow-y: scroll; } */
+a { text-decoration: none; }
+/* a:focus { outline: 0; }
+p { font-size: 15px; margin: 0 0 15px 0; } */
+#page-wrap { width: 440px; margin: 20px auto; }
+
+/* Generic Utility */
+.hide { position: absolute; top: -9999px; left: -9999px; }
+
+
+
+/* Specific to example two */
+
+/* Propiedades del contendor div prinvipal donde cargar todo el body */
+.example-two .secciones { background: #eee; padding: 18px; margin: 0 0 20px 0;  }
+/* .example-two .secciones { background: #eee;   position: fixed; left: 90px;} */
+
+.example-two ul { list-style: none; }
+.example-two ul li a { display: block; border-bottom: 1px solid #666; padding: 4px; color: #666; }
+.example-two ul li a:hover { background: #333; color: white; }
+.example-two ul li:last-child a { border: none; }
+
+.example-two .tabs { overflow: hidden; }
+.example-two .tabs li { width: 200px; float: left;  margin: 0 10px 0 50px }
+.example-two .tabs li.last { margin-right: 0; }
+/* Es el color actual que tienen medio gris y letras negras */
+.example-two .tabs li a { display: block; padding: 5px; background: #EAEDED ; color: black; font-size: 20px; text-align: center; border: 0; }
+
+/* Cunaod esta activa el tab cabia a este color verde oscuro y letras blancas */
+.example-two li a.active,.example-two li a.active:hover { background-color: #084B05 !important; color: white; }
+
+.example-two .tabs li a:hover, .example-two .tabs li a:focus { background: #0575f4;}

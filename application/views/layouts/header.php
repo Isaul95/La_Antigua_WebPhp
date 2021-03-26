@@ -28,6 +28,8 @@
 <!-- Diseño css del gif de loader img -->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/styles.css">
 
+<link rel="stylesheet" href="<?php echo base_url();?>assets/template/estilos/tabs.css">
+
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />

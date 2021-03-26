@@ -56,13 +56,39 @@
             </a>
           <ul class="treeview-menu">
 
-                <li><a href="<?php echo base_url();?>Administrativos/Profesores">
+                <!-- <li><a href="<?php echo base_url();?>Administrativos/Profesores">
                   <i class="far fa-dot-circle"></i> Profesores </a>
+                </li> -->
+
+                <li><a href="<?php echo base_url();?>Eventos/Contratos">
+                  <i class="far fa-dot-circle"></i> Contratos</a>
+                </li>
+
+                <li>
+                  <a href="<?php echo base_url();?>Platillos/ControlPlatillos">
+                      <i class="fas fa-drumstick-bite"></i> <span>Platillos</span>
+                  </a>
                 </li>
 
                 <li><a href="<?php echo base_url();?>Administrativos/Banquetes">
                     <i class="far fa-dot-circle"></i> Banquetes </a>
                 </li>
+
+                <li>
+                  <a href="<?php echo base_url();?>Salones/ControlSalones">
+                    <i class="fas fa-home"></i> <span>Salones</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="<?php echo base_url();?>Mobiliario/Mobiliario">
+                  <i class="fas fa-chair"></i> Mobiliario</a>
+                </li>
+
+                <!-- <li>
+                  <a href="<?php echo base_url();?>Clientes/Clientes">
+                  <i class="fas fa-users"></i> Clientes</a>
+                </li> -->
 
           </ul>
       </li>
@@ -83,9 +109,9 @@
                  <i class="far fa-dot-circle"></i>  Rutas Mobiliario</a>
               </li>
 
-              <li><a href="<?php echo base_url();?>Banquetes/Utensilios">
+              <!-- <li><a href="<?php echo base_url();?>Banquetes/Utensilios">
                 <i class="far fa-dot-circle"></i>  Utensilios</a>
-              </li>
+              </li> -->
           </ul>
       </li>
 
@@ -103,9 +129,9 @@
                  <i class="far fa-dot-circle"></i>  Crear Nuevo Evento</a>
               </li>
 
-              <li><a href="<?php echo base_url();?>Eventos/ListaEventos">
-                <i class="far fa-dot-circle"></i>  Consultar Eventos</a>
-              </li>
+              <!-- <li><a href="<?php echo base_url();?>Eventos/ListaEventos">
+                <i class="far fa-dot-circle"></i> Contratos</a>
+              </li> -->
           </ul>
       </li>
 
@@ -140,7 +166,7 @@
 <?php if($user==1):?>
       <li class="treeview">
           <a href="#">
-            <i class="fas fa-user-shield"></i> <span>Administrador</span>
+            <i class="fas fa-user-shield"></i> <span>Usuarios y permisos</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -160,17 +186,17 @@
     </li>
 <?php endif;?>
 
-    <li>
+    <!-- <li>
       <a href="<?php echo base_url();?>Platillos/ControlPlatillos">
           <i class="fas fa-drumstick-bite"></i> <span>Platillos</span>
       </a>
-    </li>
+    </li> -->
 
-    <li>
+    <!-- <li>
       <a href="<?php echo base_url();?>Salones/ControlSalones">
         <i class="fas fa-home"></i> <span>Salones</span>
       </a>
-    </li>
+    </li> -->
 
     <li>
       <a href="<?php echo base_url();?>PlatillosClientes/ControlPlatillosClientes">
@@ -180,16 +206,16 @@
 
 <!-- ============================== Inicio Modificacion Nacho ======================================== -->
       <!-- Inicio Seccion de Mobiliario -->
-      <li>
+  <!--    <li>
         <a href="<?php echo base_url();?>Mobiliario/Mobiliario">
         <i class="fas fa-chair"></i> Mobiliario</a>
       </li>
-      <!-- Fin Seccion de Mobiliario -->
-      <!-- Inicio Seccion de Clientes -->
+
+
       <li>
         <a href="<?php echo base_url();?>Clientes/Clientes">
         <i class="fas fa-users"></i> Clientes</a>
-      </li>
+      </li>   -->
       <!-- Fin Seccion de Clientes -->
 
 

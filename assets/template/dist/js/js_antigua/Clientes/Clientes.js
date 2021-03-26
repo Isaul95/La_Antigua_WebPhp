@@ -180,3 +180,16 @@ var language_espaniol = {
         "previous": "Anterior"
     }, /* TODO ESTO ES PARA CAMBIAR DE IDIOMA */
 }
+
+
+
+
+//
+//
+// 1.- https://www.youtube.com/watch?v=2CuzeOODfuI
+//
+// 2.- https://css-tricks.com/organic-tabs/
+//
+// 3.- http://www.formacionwebonline.com/crear-tabs-solapas-pestanas-jquery-html-forma-sencilla/
+//
+//

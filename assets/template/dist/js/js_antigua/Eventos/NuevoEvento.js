@@ -90,7 +90,8 @@ var datos = {
                       $('#ModalEventos').modal('hide');
                       	$('#calendar').fullCalendar('refetchEvents');
                     //  Redireccionar a la siguiente pagina o liga cuando sea la respuesta como success
-                        // location.href ="http://localhost/antigua/Banquetes/Utensilios";
+                        location.href ="http://localhost/antigua/Eventos/Contratos";
+                    //                  http://localhost/antigua/Eventos/Contratos
                   } else {
                       toastr["error"](data.message);
                   }

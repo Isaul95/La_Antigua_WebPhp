@@ -167,6 +167,7 @@ function llenarTablaPlatillos() {
   function modalCapturaHoraSalida(id_platillo){
 
     		$("#modal_Add_HoraSalida").modal("show");
+        $("#addHoraSalida")[0].reset();
     		$("#id_x").val(id_platillo);
             // $("#tbl_Platillos").DataTable().destroy();
         		// llenarTablaPlatillos();
@@ -175,9 +176,9 @@ function llenarTablaPlatillos() {
 
 
   function modalCapturaHoraEntrega(id_platillo){
-    		// debugger;
 
     		$("#modal_Add_HoraEntrega").modal("show");
+        $("#addHoraEntrega")[0].reset();
     		$("#id_x").val(id_platillo);
             // $("#tbl_Platillos").DataTable().destroy();
         		// llenarTablaPlatillos();
