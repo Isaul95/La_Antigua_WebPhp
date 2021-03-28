@@ -137,3 +137,6 @@ $('#btn_RegistroPago').DataTable( {
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Clientes/Clientes.js"></script>
 
 <script src="<?php echo base_url();?>assets/template/dist/js/js-cesvi/Administrativos/banquetes/Banquetes.js"></script>
+
+<!-- Email -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Email/Email.js"></script>

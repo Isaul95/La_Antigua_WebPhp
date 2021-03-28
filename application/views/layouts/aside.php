@@ -89,6 +89,13 @@
                   <a href="<?php echo base_url();?>Clientes/Clientes">
                   <i class="fas fa-users"></i> Clientes</a>
                 </li> -->
+                <!-- Inicio Seccion de Email -->
+              <li>
+                <a href="<?php echo base_url();?>Email/Email">
+                <i class="fas fa-mail-bulk"></i> Email</a>
+              </li>
+              <!-- Fin Seccion de Email -->
+
 
           </ul>
       </li>
