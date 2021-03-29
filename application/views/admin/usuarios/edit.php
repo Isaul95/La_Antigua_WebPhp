@@ -19,7 +19,7 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                                
+
                              </div>
                         <?php endif;?>
                         <form action="<?php echo base_url();?>administrador/usuarios/update" method="POST">
@@ -44,7 +44,12 @@
                                 <label for="username">Usuario:</label>
                                 <input type="text" id="username" name="username" class="form-control" value="<?php echo $usuario->username;?>">
                             </div>
-                           
+
+                            <div class="form-group">
+                                <label for="username">Password:</label>
+                                <input type="text" id="password" name="password" class="form-control" value="<?php echo $usuario->password;?>">
+                            </div>
+
                             <div class="form-group">
                                 <label for="rol">Roles:</label>
                                 <select name="rol" id="rol" class="form-control">

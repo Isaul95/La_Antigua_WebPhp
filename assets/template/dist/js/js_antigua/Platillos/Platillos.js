@@ -55,6 +55,29 @@ function MostrarTablaPlatillos() {
               return imagenPlatillo;
             },
           },
+
+
+
+
+
+
+          {
+        orderable: false,
+        searchable: false,
+        "className": "text-center",
+        render : function(data, type, row) {
+  var a = `
+      <a title="Generar Certificado de Estudios" href="ControlPlatillos/generaHorarioProfesor" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
+            `;
+             return a;
+            },
+        },
+
+
+
+
+
+
           {
             orderable: false,
             searchable: false,

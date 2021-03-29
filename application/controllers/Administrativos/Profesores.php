@@ -298,83 +298,31 @@ public function eliminarprofesores()
 /* --------------------------------------- ---------------------------------- */
 
 public function generaHorarioProfesor(){
-	/*
-	 * Se crea la function para hacer el llamado en el js
-	 * se hace todo la parte del reporte
-	 */
-	error_reporting(0);
-
-	include_once('src/phpjasperxml_0.9d/class/tcpdf/tcpdf.php');
-	include_once("src/phpjasperxml_0.9d/class/PHPJasperXML.inc.php");
-
-	// SE HACE LA CONECION PARA CADA HOJA DE ESTAS
-	$server = "localhost";
-	$user = "root";
-	$pass = "";
-	$db = "cesvi_webapp";
+			// require_once "./third_party/fpdf/fpdf.php";
+			require "./src/report-fpdf/fpdf.php";
+			//              src\report-fpdf\fpdf.php
+			// include_once("./application/config/setting.php");
 
 
-	$PHPJasperXML = new PHPJasperXML();
-	 // $PHPJasperXML->debugsql=true;
-	// 	$PHPJasperXML-> debugsql = false; // Si desea ver la setencia del sql del reporte lo pones en true
+			$pdf = new FPDF();
 
-	// $PHPJasperXML->arrayParameter=array("numcontrol"=>$numero_control);
-	// $PHPJasperXML->arrayParameter=array("parameter1"=>1);
+			// $pdf->AddPage('P','A4',0);
+			$pdf->AddPage();
+			$pdf->SetFont('Arial','B', 12);
 
-	$PHPJasperXML->load_xml_file("src/ReportesPDF_Cesvi_jrxml/certificado_estudios.jrxml");
+	 $pdf->Cell(100,10, utf8_decode('Este header se muestra en cada página generada'),1,1,'L');
+			// $pdf->Cell(0,10,utf8_decode('Este footer se muestra en cada página generada'),1,0,'L');
+			// $this->Ln(20);
 
-	$PHPJasperXML->transferDBtoArray($server,$user,$pass,$db);
-	$PHPJasperXML->outpage('I','CertificadoEstudios_.pdf');
+			$pdf->Output("Lista de Xalumnos.pdf", 'I');
+
 
 }
 
 
 
+
+
+
+
 }  // Fin del controller
-
-
-
-//
-// function updateTeamLogo() {
-// 	global $server, $db, $dbUser, $dbKey;
-//
-// 	try {
-// 	  $conn = new PDO("mysql:host=" . $server . ";dbname=" . $db, $dbUser, $dbKey);
-// 	  $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//
-// 	  $file = $_FILES["teamLogo"]["tmp_name"];
-//
-// 	  if(!isset($file)) {
-// 		echo "Please select an image to upload";
-// 	  } else {
-// 		$fileSize = getimagesize($_FILES["teamLogo"]["tmp_name"]);
-//
-// 		if ($fileSize) {
-// 		  $img = file_get_contents($_FILES["teamLogo"]["tmp_name"]);
-// 		  $sql = $conn -> prepare("UPDATE Team SET (teamID, teamLogo) VALUES (:teamID, :teamLogo) WHERE teamID=:teamID");
-// 		  $sql -> bindValue(":teamID", $_POST["teamID"]);
-// 		  $sql -> bindValue(":teamLogo", $img);
-//
-// 		  $result = $sql -> execute();
-//
-// 		  if ($result == null) {
-// 			echo "Error uploading image";
-// 		  } else {
-// 			echo "Image uploaded";
-// 		  }
-// 		} else {
-// 		  echo "The file to be uploaded is not an image";
-// 		}
-// 	  }
-// 	}
-//
-// 	catch(PDOException $e) {
-// 	  echo "An error occured: " . $e -> getMessage();
-// 	}
-//
-// 	$conn = null;
-//   }
-//
-//   if (isset($_POST["updateTeam"])) {
-// 	updateTeamLogo();
-//   }

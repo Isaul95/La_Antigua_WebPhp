@@ -186,4 +186,109 @@ class ControlPlatillos extends CI_Controller {
     }
   }
 
+
+
+
+
+
+
+  //
+  // public function generaHorarioProfesor(){
+  // 			 require "./src/report-fpdf/fpdf.php";
+  //
+  //
+  //       // Cabecera de p�gina
+  //
+  // 	$pdf = new FPDF();
+  //       	// Logo
+  //       	// $pdf->Image('src/reporte-fpdf/tutorial/logo.png',10,8,33);
+  //       	// $pdf->Arial bold 15
+  //       	$pdf->SetFont('Arial','B',15);
+  //       	// Movernos a la derecha
+  //       	$pdf->Cell(80);
+  //       	// T�tulo
+  //       	// $pdf->Cell(30,10,'Title',1,0,'L');
+  //       	// Salto de l�nea
+  //       	$pdf->Ln(20);
+  //
+  //
+  //       // Pie de p�gina
+  //
+  //       	// Posici�n: a 1,5 cm del final
+  //       	$pdf->SetY(-15);
+  //       	// Arial italic 8
+  //       	$pdf->SetFont('Arial','I',8);
+  //       	// N�mero de p�gina
+  //       	$pdf->Cell(0,10,'Page '.$pdf->PageNo().'/{nb}',0,0,'C');
+  //
+  //       // Creaci�n del objeto de la clase heredada
+  //       // $pdf = new PDF();
+  //       $pdf->AliasNbPages();
+  //       $pdf->AddPage();
+  //       $pdf->SetFont('Times','',12);
+  //       for($i=1;$i<=40;$i++)
+  //       	$pdf->Cell(0,10,'Imprimiendo l�nea n�mero '.$i,0,1);
+  //       $pdf->Output();
+  //
+  //
+  // }
+
+
+
+    public function generaHorarioProfesor(){
+
+    			 require "./src/report-fpdf/fpdf.php";
+      // include_once("./application/config/setting.php");
+
+
+           $pdf = new FPDF();
+
+           // $pdf->AddPage('P','A4',0);
+           $pdf->AddPage();
+           $pdf->SetFont('Arial','B', 12);
+
+           $pdf->Cell(100,10, utf8_decode('Este header se muestra en cada página generada'),1,1,'L');
+           // $pdf->Cell(0,10,utf8_decode('Este footer se muestra en cada página generada'),1,0,'L');
+           // $this->Ln(20);
+
+
+   /*
+  * TITULOS DE COLUMNAS
+  *
+  * $this-&amp;gt;pdf-&amp;gt;Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+  */
+
+          $pdf->Cell(15,10,'NUM',    1,0,'C');
+          $pdf->Cell(65,10,'PATERNO',1,0,'C');
+          $pdf->Cell(60,10,'MATERNO',1,0,'C');
+          $pdf->Cell(55,10,'NOMBRE', 1,1,'C');
+          // $pdf->Cell(40,10,'FECHA DE NACIMIENTO','TB',0,'C','1');
+
+
+           $DatesPlatillos = $this->ModeloPlatillos->EnlistarPlatillos();
+
+
+    foreach ($DatesPlatillos as $DatesPlatillos) {
+          // se imprime el numero actual y despues se incrementa el valor de $x en uno
+          // Se imprimen los datos de cada alumno
+          $pdf->SetFont('Arial','', 10);
+          $pdf->Cell(15,10,$DatesPlatillos->nombre_platillo , 1, 0, 'C');
+          $pdf->Cell(65,10,$DatesPlatillos->costo           , 1, 0, 'C');
+          $pdf->Cell(60,10,$DatesPlatillos->descripcion     , 1, 0, 'C');
+          $pdf->Cell(55,10,$DatesPlatillos->ingredientes    , 1, 0, 'C');
+          $pdf->Ln(10);
+
+    //    $pdf->Cell(25,5,$DatesPlatillos-> ,B',0,'L',0);
+    //    $pdf->Cell(25,5,$DatesPlatillos-> ,BR',0,'C',0);
+    //  Se agrega un salto de linea
+    }
+
+           $pdf->Output("Lista de Xalumnos.pdf", 'I');
+
+
+    }
+
+
+
+
 }

@@ -5,10 +5,12 @@
       <section class="sidebar">
 <!-- ========= Aqui se reciben los roles =========== -->
             <?php
-                $user=null;
-                $student=2;
-                $admin=1;
-                $profesor=3;
+                $user      =null;
+                $mobiliario   =2;
+                $banquetes =4;
+                $admin     =1;
+                $profesor  =3;
+                $ruta      =5;
                 $user= $this->session->userdata("rol");
                 // echo $user;
             ?>
@@ -28,21 +30,61 @@
 <!-- <?php echo $this->session->userdata("username")?> <br>
 <?php echo $this->session->userdata("rol")?> -->
 
- <?php if($user==$student):?>
+ <?php if($user==$mobiliario):?>
         <li class="treeview">
                <a href="#">
-                   <i class="fas fa-user-graduate"></i>  <span>Alumnos</span>
+                   <i class="fas fa-user-graduate"></i>  <span>Encargado Mobiliario</span>
                    <span class="pull-right-container">
                        <i class="fa fa-angle-left pull-right"></i>
                    </span>
                </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo base_url();?>alumnos/altaBaucherBanco">
-                    <i class="fas fa-money-check-alt"></i> Subir Baucher</a>
+                <li><a href="<?php echo base_url();?>Mobiliario/Mobiliario">
+                    <i class="far fa-dot-circle"></i> Lista de eventos</a>
                  </li>
             </ul>
         </li>
  <?php endif;?>
+
+
+
+
+ <?php if($user==$ruta):?>
+        <li class="treeview">
+               <a href="#">
+                   <i class="fas fa-user-graduate"></i>  <span>Encargado Rutas</span>
+                   <span class="pull-right-container">
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </span>
+               </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url();?>RutasMobiliario/Rutas">
+                    <i class="far fa-dot-circle"></i> Lista de rutas</a>
+                 </li>
+            </ul>
+        </li>
+ <?php endif;?>
+
+
+
+
+
+ <?php if($user==$banquetes):?>
+        <li class="treeview">
+               <a href="#">
+                   <i class="fas fa-user-graduate"></i>  <span>Encargado Banquetes</span>
+                   <span class="pull-right-container">
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </span>
+               </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url();?>Platillos/ControlPlatillos">
+                    <i class="far fa-dot-circle"></i> Lista de banquetes</a>
+                 </li>
+            </ul>
+        </li>
+ <?php endif;?>
+
 
 
 <!-- ROLE ADMIN ===================== Empieza rol ADMIN to vistas ===================== -->

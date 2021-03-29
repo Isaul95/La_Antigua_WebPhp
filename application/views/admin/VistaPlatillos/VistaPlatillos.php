@@ -38,6 +38,7 @@
                         <th class="text-center" width="12%">Costo</th>
                         <th class="text-center" width="35%">Descripción</th>
                         <th class="text-center" width="20%">Foto</th>
+                        <th class="text-center" width="10%">PDF</th>
                         <th class="text-center" width="13%">Acciones</th>
                       </tr>
                     </thead>
