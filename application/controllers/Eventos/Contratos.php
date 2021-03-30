@@ -17,6 +17,7 @@ class Contratos extends CI_Controller {
 
 		$data = array(
 			'permisos' => $this->permisos,
+			'username' => $this->session->userdata('username'),
 		);
 
 		$this->load->view('layouts/header');

@@ -80,4 +80,53 @@ class NuevoEvento extends CI_Controller {
 
 
 
+
+
+
+    public function generaReportePdfEvento($idEvento){
+
+    			 require "./src/report-fpdf/fpdf.php";
+
+           $pdf = new FPDF();
+
+           // $pdf->AddPage('P','A4',0);
+           $pdf->AddPage();
+           $pdf->SetFont('Arial','B', 12);
+
+           $pdf->Cell(100,10, utf8_decode('Este header se muestra en cada página generada'),1,1,'L');
+
+
+          $pdf->Cell(15,10,'NUM',    1,0,'C');
+          $pdf->Cell(65,10,'PATERNO',1,0,'C');
+          $pdf->Cell(60,10,'MATERNO',1,0,'C');
+          $pdf->Cell(55,10,'NOMBRE', 1,1,'C');
+
+
+           // $DatesPlatillos = $this->ModeloPlatillos->EnlistarPlatillos();
+
+
+    // foreach ($DatesPlatillos as $DatesPlatillos) {
+    //       // se imprime el numero actual y despues se incrementa el valor de $x en uno
+    //       // Se imprimen los datos de cada alumno
+    //       $pdf->SetFont('Arial','', 10);
+    //       $pdf->Cell(15,10,$DatesPlatillos->nombre_platillo , 1, 0, 'C');
+    //       $pdf->Cell(65,10,$DatesPlatillos->costo           , 1, 0, 'C');
+    //       $pdf->Cell(60,10,$DatesPlatillos->descripcion     , 1, 0, 'C');
+    //       $pdf->Cell(55,10,$DatesPlatillos->ingredientes    , 1, 0, 'C');
+    //       $pdf->Ln(10);
+		//
+    // }
+
+          $pdf->Output("ReporteEvento_#".$idEvento.".pdf", 'I');
+
+    }
+
+
+
+
+
+
+
+
+
 }  // Fin del controller

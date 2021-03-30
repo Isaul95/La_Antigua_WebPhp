@@ -90,7 +90,7 @@ var datos = {
                       $('#ModalEventos').modal('hide');
                       	$('#calendar').fullCalendar('refetchEvents');
                     //  Redireccionar a la siguiente pagina o liga cuando sea la respuesta como success
-                        location.href ="http://localhost/antigua/Eventos/Contratos";
+                        // location.href ="http://localhost/antigua/Eventos/Contratos";
                     //                  http://localhost/antigua/Eventos/Contratos
                   } else {
                       toastr["error"](data.message);
@@ -98,6 +98,19 @@ var datos = {
               },
           });
       }
+  });
+
+
+  $(document).on("click", "#nuevoEventoCliente ", function(e) {
+      e.preventDefault();
+debugger;
+    // var datos = {
+           var id_evento = $("#id_evento").val();
+         // }
+
+            //  Redireccionar a la siguiente pagina o liga cuando sea la respuesta como success
+            location.href ="http://localhost/antigua/Eventos/Contratos?Numero_Evento="+id_evento+"";
+
   });
 
 
@@ -180,3 +193,25 @@ var datos = {
           });
       }
   });
+
+
+
+//  Generar reporte fianl del evento x cliente
+
+  function btnGenerarReporteEvento() {
+    // debugger;
+   var idEvento = $("#id_evento").val();
+// var numero_control = $('#numero_control_constancia').val();
+// var detalle        = $("#detalle_constancia").val();
+// var semestre       = $("#semestre_constancia").val();
+// var opcion         = $("#opcion_constancia").val();
+// var carrera        = $("#carrera_constancia").val();
+
+    // var url = base_url+"Administrativos/DocumentosAlumnos/generaConstanciaAlumno/" + numero_control + "/" + detalle + "/" + semestre + "/" + opcion + "/" + carrera ;
+    //     window.open(url, "_blank", numero_control);
+
+    var url = base_url+"Eventos/NuevoEvento/generaReportePdfEvento/"+ idEvento;
+        window.open(url,  idEvento);
+
+
+      }

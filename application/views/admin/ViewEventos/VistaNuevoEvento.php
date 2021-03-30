@@ -81,6 +81,8 @@
         </div>
         <div class="modal-footer">
           <!-- Insert Button -->
+          <button type="button" class="btn btn-primary" id="nuevoEventoCliente">Agregar Contrato</button>
+
           <button type="button" class="btn btn-primary" id="btnAgregarNewEvent">Agregar</button>
           <button type="button" class="btn btn-success" id="eliminarEvento" >Eliminar</button>
           <button type="button" class="btn btn-info" id="updateEvento" >Actualizar</button>

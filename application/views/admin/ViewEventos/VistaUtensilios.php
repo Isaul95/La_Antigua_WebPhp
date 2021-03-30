@@ -16,6 +16,10 @@
   </div> -->
 
 
+<input type="hidden" id="username" class="username" value="<?php echo $username;?>" >
+<input type="hidden" id="id_evento" class="id_evento" value="<?php echo $_GET["Numero_Evento"]; ?>" >
+
+
   <div class="row">
     <div class="col-md-12">
 
@@ -25,6 +29,7 @@
 			<li><a href="#tab2"></span><span class="tab-text">Salón de eventos</span></a></li>
 			<li><a href="#tab3"></span><span class="tab-text">Mobiliario</span></a></li>
 			<li><a href="#tab4"></span><span class="tab-text">Banquetes</span></a></li>
+      <li><a href="#tab5"></span><span class="tab-text">Generar Reporte</span></a></li>
 		</ul>
 
 <hr style="background-color: black; color: black; height: 0px;">
@@ -120,6 +125,81 @@
             </section>
           </div>
         </article>
+
+        <article id="tab5">
+
+          <div class="panel panel-default">
+        <div class="panel-heading text-center">	<h4>Realizar reporte general del evento</h4></div>
+          <br>
+          <br>
+
+          <div class="panel-body">
+
+          <div class="myForm" id="myForm">
+
+            <!-- <form class="" id="addCliente">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Nombre: *</label>
+                  <input type="text" id="nombreCliente" class="form-control" placeholder="Nombre">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Dirección: *</label>
+                  <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Telefono: *</label>
+                  <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Sexo: *</label>
+                  <select class="form-control" id="sexoCliente">
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Email: *</label>
+                  <input type="text" id="emailCliente" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6 form-control-file">
+                  <label>INE: *</label>
+                  <input type="file" class="custom-file-input" name="ine" id="ine" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <button type="button" class="btn btn-primary" id="btnaddCliente">Agregar</button>
+                </div>
+              </div>
+            </form>
+          </div> -->
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <button type="button" class="btn btn-primary" onclick="btnGenerarReporteEvento()">Generar Reporte de cleinte</button>
+    </div>
+  </div>
+
+  <!-- <div id="generarConstanciaPDFAlumno">
+
+                    <center>
+                      <h4><font color="#3498DB">Generar Constancia del Alumno</font></h4> <br>
+                     <a onclick="generaConstanciaPdfStuden()">
+                       <i class="far fa-file-pdf fa-2x"></i></a>
+                     </center> <br>
+
+            </div> -->
+
+
+  </div>
+
+        </article>
+
 
 		</div>
 	</div>
