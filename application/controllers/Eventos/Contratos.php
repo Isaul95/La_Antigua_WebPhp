@@ -26,13 +26,37 @@ class Contratos extends CI_Controller {
 	}
 
 
+	public function MostrarSalones() {
+	    $MostrarConsulta = $this->Modelo_Eventos->EnlistarSalones();
+	    echo json_encode($MostrarConsulta);
+	  }
 
 
+		public function MostrarMobiliario() {
+	    $MostrarConsulta = $this->Modelo_Eventos->EnlistarMobiliario();
+	    echo json_encode($MostrarConsulta);
+	  }
 
 
+	  public function Imagen($ClaveMueble) {
+	    $Consulta = $this->Modelo_Eventos->BuscarDatosMuebleSeleccionado($ClaveMueble);
+	    $Imagen = $Consulta->imagen;
+	    header("Content-Type: image/jpeg");
+	    print_r($Imagen);
+	  }
+
+		public function MostrarPlatillos() {
+	    $MostrarConsulta = $this->Modelo_Eventos->EnlistarPlatillos();
+	    echo json_encode($MostrarConsulta);
+	  }
 
 
-
+	  public function Foto($PlatilloID) {
+	    $Consulta = $this->Modelo_Eventos->BuscarDatosPlatilloSeleccionado($PlatilloID);
+	    $Foto = $Consulta->foto;
+	    header("Content-Type: image/jpeg");
+	    print_r($Foto);
+	  }
 
 
 }  // Fin del controller
