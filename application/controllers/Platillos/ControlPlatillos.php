@@ -246,6 +246,9 @@ class ControlPlatillos extends CI_Controller {
            // $pdf->AddPage('P','A4',0);
            $pdf->AddPage();
            $pdf->SetFont('Arial','B', 12);
+           // $pdf->Image('src/LogCesvi.jpg', 5, 5, 30);
+           // $pdf->Image('src/LogCesvi.jpg' , 80 ,22, 35 , 38,'JPG');
+           $pdf->Image("ssbu.jpg",60,50, 100, 70,’JPG’,"http://evilnapsis.com/");
 
            $pdf->Cell(100,10, utf8_decode('Este header se muestra en cada página generada'),1,1,'L');
            // $pdf->Cell(0,10,utf8_decode('Este footer se muestra en cada página generada'),1,0,'L');

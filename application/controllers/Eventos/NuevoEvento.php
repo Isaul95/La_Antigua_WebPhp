@@ -92,9 +92,11 @@ class NuevoEvento extends CI_Controller {
            // $pdf->AddPage('P','A4',0);
            $pdf->AddPage();
            $pdf->SetFont('Arial','B', 12);
+					 $pdf->Image('src/LogCesvi.jpg', 3, 3, 50);
 
-           $pdf->Cell(100,10, utf8_decode('Este header se muestra en cada página generada'),1,1,'L');
-
+					  $pdf->SetY(20);
+           $pdf->Cell(0,20, utf8_decode('Este header se muestra en cada página generada'),0,0,'C');
+					 $pdf->Ln(27);
 
           $pdf->Cell(15,10,'NUM',    1,0,'C');
           $pdf->Cell(65,10,'PATERNO',1,0,'C');

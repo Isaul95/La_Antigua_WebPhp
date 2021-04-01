@@ -65,7 +65,7 @@ function VisualizarMobiliario() {
           + "<div class=\"col-sm-4 col-md-4\">"
             + "<div class=\"thumbnail\" style=\"width: 100%;\">"
               + "<img src=\"Contratos/Imagen/" + tablaMobiliario[mueble].clave + "\""
-              + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 300px !important;\">"
+              + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 200px !important;\">"
               + "<div class=\"caption\" style=\"width: 100%;\">"
                 + "<h3>" + tablaMobiliario[mueble].nombre + "</h3>"
                 + "<h4>$" + tablaMobiliario[mueble].precio + "</h4>"
@@ -73,6 +73,9 @@ function VisualizarMobiliario() {
                 + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"3\" readonly>"
                 + tablaMobiliario[mueble].descripcion + "</textarea>"
               + "</div>"
+
+            +  "<button onclick=addToVenta('"+ tablaMobiliario[mueble].clave +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir al carrito'+"</button>"
+
             + "</div>"
           + "</div>"
       }
@@ -94,7 +97,7 @@ function VisualizarPlatillos() {
           + "<div class=\"col-sm-4 col-md-4\">"
             + "<div class=\"thumbnail\" style=\"width: 100%;\">"
               + "<img src=\"Contratos/Foto/" + tablaPlatillos[platillo].id_platillo + "\""
-              + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 300px !important;\">"
+              + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 200px !important;\">"
               + "<div class=\"caption\" style=\"width: 100%;\">"
                 + "<h3>" + tablaPlatillos[platillo].nombre_platillo + "</h3>"
                 + "<h4>$" + tablaPlatillos[platillo].costo + "</h4>"
@@ -109,3 +112,74 @@ function VisualizarPlatillos() {
     },
   });
 }
+
+
+
+
+
+  function addToVenta (id_mobiliario){
+      debugger;
+            var datos = {
+                clave : id_mobiliario,
+            }
+alert("Id =>" + datos.clave);
+            // const swalWithBootstrapButtons = Swal.mixin({
+            //   customClass: {
+            //     confirmButton: 'btn btn-success',
+            //     cancelButton: 'btn btn-danger mr-2'
+            //   },
+            //   buttonsStyling: false
+            // })
+            //
+            // swalWithBootstrapButtons.fire({
+            //   title: 'Esta seguro de borrar el baucher del alumno...?',
+            //   text: "!Esta acción es irreversile!",
+            //   icon: 'warning',
+            //   showCancelButton: true,
+            //   confirmButtonText: 'Si, bórralo!',
+            //   cancelButtonText: 'No, cancelar!',
+            //   reverseButtons: true
+            // }).then((result) => {
+            //   if (result.value) {
+            //
+            //       $.ajax({
+            //         // url: base_url+'mantenimiento/RegistroPagos/eliminar',
+            //            url: base_url+'Finanzas/HabilitarAlumnos/eliminarAllRegistro',
+            //         type: "post",
+            //         dataType: "json",
+            //         data: {
+            //           numero_control: numero_control,
+            //           id_alta_baucher_banco : id_alta_baucher_banco
+            //         },
+            //         success: function(data){
+            //           if (data.responce == "success") {
+            //               swalWithBootstrapButtons.fire(
+            //                 '¡Eliminado!',
+            //                 'Su archivo ha sido eliminado.!',
+            //                 'success'
+            //               );
+            //               $('#tbl_listaHistPagosParcialidad').DataTable().destroy();
+            //               litaHistorialParcialidadXAlumnos();
+            //           }else{
+            //               swalWithBootstrapButtons.fire(
+            //                 '¡Eliminado',
+            //                 'El registro no se elimino...!',
+            //                 'error'
+            //               );
+            //           }
+            //         }
+            //       });
+            //
+            //   } else if (
+            //     /* Read more about handling dismissals below */
+            //     result.dismiss === Swal.DismissReason.cancel
+            //   ) {
+            //     swalWithBootstrapButtons.fire(
+            //       'Cancelada',
+            //       'El registro no se elimino...!',
+            //       'error'
+            //     )
+            //   }
+            // });
+
+        }

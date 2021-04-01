@@ -28,11 +28,17 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
         $InformacionTablaSalones = $this->db->get('salones');
         return $InformacionTablaSalones->result();
       }
-  
+
 
       public function EnlistarMobiliario() {
-        $InformacionTablaMobiliario = $this->db->get('mobiliario');
-        return $InformacionTablaMobiliario->result();
+        // $InformacionTablaMobiliario = $this->db->get('mobiliario');
+        // return $InformacionTablaMobiliario->result();
+
+        $this->db->select(" clave, nombre, precio, id_categoria, stock, estado, descripcion ");
+    $this->db->from("mobiliario");
+    $resultados = $this->db->get();
+    return $resultados->result();
+
       }
 
 
@@ -48,9 +54,34 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
 
 
       public function EnlistarPlatillos() {
-        $InformacionTablaPlatillos = $this->db->get('platillos');
-        return $InformacionTablaPlatillos->result();
+        // $InformacionTablaPlatillos = $this->db->get('platillos');
+        // return $InformacionTablaPlatillos->result();
+
+        $this->db->select("id_platillo, nombre_platillo, costo, descripcion");
+    $this->db->from("platillos");
+    $resultados = $this->db->get();
+    return $resultados->result();
+
       }
+
+
+
+        // public function obtenercarreras(){
+        //     $this->db->select("id_platillo, nombre_platillo, costo, descripcion");
+        // $this->db->from("platillos");
+        // $resultados = $this->db->get();
+        // return $resultados->result();
+        // }
+
+
+
+
+        public function obtenercarreras(){
+            $this->db->select("id_platillo, nombre_platillo, costo, descripcion");
+        $this->db->from("platillos");
+        $resultados = $this->db->get();
+        return $resultados->result();
+        }
 
 
       public function BuscarDatosPlatilloSeleccionado($BuscarID) {
