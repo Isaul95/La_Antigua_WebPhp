@@ -32,7 +32,7 @@ class ControlPlatillos extends CI_Controller {
 
 
   public function Foto($PlatilloID){
-    $Consulta = $this->ModeloPlatillos->BuscarDatosPlatilloSeleccionado($PlatilloID);
+    $Consulta = $this->ModeloPlatillos->Buscarfotodeplatillo($PlatilloID);
     $Foto = $Consulta->foto;
     header("Content-Type: image/jpeg");
     print_r($Foto);
@@ -64,17 +64,20 @@ class ControlPlatillos extends CI_Controller {
       if ($this->form_validation->run() == FALSE) {
         $Respuesta = array ('Resultado' => "Erroneo", 'Mensaje' => validation_errors());
       } else {
+        if (isset($_FILES['foto']['name'])) {
 
-        $NombreFoto = $_FILES['foto']['name'];
-        $FotoTemporal = $_FILES['foto']['tmp_name'];
+          $NombreFoto = $_FILES['foto']['name'];
+          $FotoTemporal = $_FILES['foto']['tmp_name'];
 
-        $Archivo = fopen($FotoTemporal, 'r+b');
-        $BytesFoto = fread($Archivo, filesize($FotoTemporal));
-        fclose($Archivo);
+          $Archivo = fopen($FotoTemporal, 'r+b');
+          $BytesFoto = fread($Archivo, filesize($FotoTemporal));
+          fclose($Archivo);
 
+          $AgregarDatos['nombre_foto'] = $NombreFoto;
+          $AgregarDatos['foto'] = $BytesFoto;
+        }
         $AgregarDatos = $this->input->post();
-        $AgregarDatos['nombre_foto'] = $NombreFoto;
-        $AgregarDatos['foto'] = $BytesFoto;
+       
 
         if ($this->ModeloPlatillos->CrearNuevoPlatillo($AgregarDatos)) {
           $Respuesta = array('Resultado' => "Exitoso", 'Mensaje' => "¡Platillo agregado!");

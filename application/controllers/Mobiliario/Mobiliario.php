@@ -26,6 +26,12 @@ public function listarMobiliario(){
 
     echo json_encode($posts);
 }
+public function Foto($PlatilloID){
+    $Consulta = $this->ModeloMobiliario->Buscarfotodemobiliario($PlatilloID);
+    $Foto = $Consulta->imagen;
+    header("Content-Type: image/jpeg");
+    print_r($Foto);
+  }
 
 
 # Agregar nuevo mobiliario
@@ -83,8 +89,9 @@ public function listarMobiliario(){
 	        'stock' => $this->input->post('stock'),
 					'estado' => $this->input->post('estado'),
 	        'descripcion' => $this->input->post('descripcion'),
+			'nombre_foto' => $nombreArchivo,
 	        'imagen' => $imagen,
-					'tipoImagen' => $tipoArchivo
+					
 	      );
 
 				if ($this->ModeloMobiliario->agregarMobiliario($ajax_data)) {
@@ -151,39 +158,27 @@ public function updateMobiliario(){
 			$data = array('res' => "error", 'message' => validation_errors());
 		} else {
 
-			// Cargar imagen
-			// Definir ruta en donde guardar la imagen y tipo de dato permitido(png, jpg)
-			$config = [
-				"upload_path" => './assets/imagenesMob/',
-				'allowed_types' => "png|jpg"
-			];
-			// Cargar libreria para poder subir imagen
-			$this->load->library("upload",$config);
-			$imagen_nueva='';
+			
+			if (isset($_FILES['imagen']['name'])) {
 
-			if ($this->upload->do_upload('imagen')) {
-				// code...
-
-				$data = array("upload_data" => $this->upload->data());
-				$imagen_nueva = $data['upload_data']['file_name'];
-				//$ajax_data['imagen'] = $imagen_nueva;
-
-			}else {
-				$imagen_nueva = $this->input->post('imagen');
-				//$ajax_data['imagen'] = $imagen_nueva;
-			}
-			//
-			//$ajax_data = $this->input->post();
-			//$clave = $this->input->post('id_mobiliario_update');
+				$NombreFoto = $_FILES['imagen']['name'];
+				$FotoTemporal = $_FILES['imagen']['tmp_name'];
+	  
+				$Archivo = fopen($FotoTemporal, 'r+b');
+				$BytesFoto = fread($Archivo, filesize($FotoTemporal));
+				fclose($Archivo);
+	  
+				$ajax_data['nombre_foto'] = $NombreFoto;
+				$ajax_data['imagen'] = $BytesFoto;
+			  }
+			
 			$clave = $this->input->post('clave');
-			$ajax_data = array(
-				'nombre' => $this->input->post('nombre'),
-				'precio' => $this->input->post('precio'),
-				'stock' => $this->input->post('stock'),
-				'estado' => $this->input->post('estado'),
-				'descripcion' => $this->input->post('descripcion'),
-				'imagen' => $imagen_nueva
-			);
+			$ajax_data['nombre'] = $this->input->post('nombre');
+			$ajax_data['precio'] = $this->input->post('precio');
+			$ajax_data['stock'] = $this->input->post('stock');
+			$ajax_data['estado'] = $this->input->post('estado');
+			$ajax_data['descripcion'] = $this->input->post('descripcion');
+		
 
 			if ($this->ModeloMobiliario->actualizarMobiliario($clave,$ajax_data)) {
 				//

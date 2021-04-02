@@ -5,12 +5,20 @@ class ModeloMobiliario extends CI_Model { // INICIO DEL MODELO
 
 # Listar datos de la tabla mobiliario
 public function listarMobiliario(){
-
-  $resultados = $this->db->get('mobiliario');
-  return $resultados->result();
-
+  $this->db->select('clave,nombre,precio,stock,estado,descripcion,nombre_foto');
+  $this->db->from('mobiliario');
+  $resultados = $this->db->get();
+    return $resultados->result();
 }
-
+public function Buscarfotodemobiliario($BuscarID) {
+    $this->db->select('imagen');
+    $this->db->from('mobiliario');
+    $this->db->where('clave', $BuscarID);
+    $DatosPlatillo = $this->db->get();
+    if (count($DatosPlatillo->result()) > 0) {
+      return $DatosPlatillo->row();
+    }
+  }
 # Agregar nuevo articulo
 public function agregarMobiliario($data)
     {
@@ -21,7 +29,7 @@ public function agregarMobiliario($data)
 // Buscar por id
 public function single_entry($id)
           {
-              $this->db->select('*');
+              $this->db->select('clave,nombre,precio,stock,estado,descripcion');
               $this->db->from('mobiliario');
               $this->db->where('clave', $id);
               $query = $this->db->get();

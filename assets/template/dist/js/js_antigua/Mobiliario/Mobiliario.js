@@ -23,6 +23,7 @@ function llenartablamobiliario() {
         url: base_url + 'Mobiliario/Mobiliario/listarMobiliario',
         dataType: "json",
         success: function (response) {
+            console.log(response);
             var i = "1";
             $("#tbl_mobilario").DataTable({
                 data: response,
@@ -49,28 +50,26 @@ function llenartablamobiliario() {
                     {
                         data: "descripcion",
                     },
-                    /*
+                    
                     {
-                    data: "imagen",
-                    orderable: false,
-                    searchable: false,
-                    render: function (data, type, row, meta) {
-                        var imagen = `${row.imagen}`;
-                          var a;
-                            if(imagen != "null" && imagen != "undefined" && imagen != ""){
-                                var a = `
-                                <center><img src="../assets/imagenesMob/" target="_blank" class="img-thumbnail" width="50" height="35" /></center>
-
-                             `;
+                        data: 'nombre_foto',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                            var foto = `${row.nombre_foto}`;
+                            var imagenMobiliario="";
+                            if(foto!="null"&&foto!="undefined"&&foto!=""){
+                                imagenMobiliario    = `<img src="Mobiliario/Foto/${row.clave}" width="150" height="150"/>`;
+                                 
                             }
                             else{
-                                a = 'Sin imagen';
+                                imagenMobiliario="Sin imagen";
                             }
-
-                        return a;
-                    }
-                  },
-                  */
+                             
+                          return imagenMobiliario;
+                        },
+                      },
+                  
 
                         {
                         orderable: false,
@@ -218,7 +217,10 @@ $(document).on("click", "#edit_mobiliario", function (e) {
             $('#stock_nuevo').val(data.post.stock);
             $('#estado_nuevo').val(data.post.estado);
             $('#descripcion_nueva').val(data.post.descripcion);
-            $('#uploaded_image').val(data.post.imagen);
+          //  $('#uploaded_image').val(data.post.imagen);
+            $('#MostrarImagenActualMobiliario').html(`
+          <img class="rounded img-thumbnail" src="Mobiliario/Foto/${data.post.clave}" width="250" height="250">
+        `);
         },
     });
 });

@@ -31,11 +31,16 @@ function MostrarTablaPlatillos() {
     url: base_url + 'Platillos/ControlPlatillos/VerPlatillos',
     dataType: 'json',
     success: function(datosTablaPlatillos) {
+      
       var contador = "1";
       $('#TablaPlatillos').DataTable({
         data: datosTablaPlatillos,
         responsive: true,
-        columns: [
+        columns: [{
+          data: 'id_platillo',
+            "visible": false,
+            "searchable": false
+          },
           {
             data: 'nombre_platillo',
           },
@@ -47,37 +52,25 @@ function MostrarTablaPlatillos() {
             orderable: false,
           },
           {
-            data: 'foto',
+            data: 'nombre_foto',
             orderable: false,
             searchable: false,
             render: function(data, type, row, meta) {
-                var imagenPlatillo = `<img src="ControlPlatillos/Foto/${row.id_platillo}" width="150" height="150"/>`;
-              return imagenPlatillo;
+              //  var imagenPlatillo = `<img src="ControlPlatillos/Foto/${row.id_platillo}" width="150" height="150"/>`;
+              //return imagenPlatillo;
+              var foto = `${row.nombre_foto}`;
+                            var imagenPlatillo="";
+                            if(foto!="null"&&foto!="undefined"&&foto!=""){
+                              var imagenPlatillo = `<img src="ControlPlatillos/Foto/${row.id_platillo}" width="150" height="150"/>`;
+                                 
+                            }
+                            else{
+                              imagenPlatillo="Sin imagen";
+                            }
+                             
+                          return imagenPlatillo;
             },
           },
-
-
-
-
-
-
-          {
-        orderable: false,
-        searchable: false,
-        "className": "text-center",
-        render : function(data, type, row) {
-  var a = `
-      <a title="Generar Certificado de Estudios" href="ControlPlatillos/generaHorarioProfesor" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
-            `;
-             return a;
-            },
-        },
-
-
-
-
-
-
           {
             orderable: false,
             searchable: false,

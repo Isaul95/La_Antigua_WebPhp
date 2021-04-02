@@ -5,10 +5,20 @@ class ModeloBanquetes extends CI_Model { // INICIO DEL MODELO
 
 # Listar datos de la tabla mobiliario
 public function listarBanquetes(){
+  $this->db->select('id_banquete,nombre,precio,descripcion,nombre_foto');
+  $this->db->from('banquetes');
+  $resultados = $this->db->get();
+    return $resultados->result();
 
-  $resultados = $this->db->get('banquetes');
-  return $resultados->result();
-
+}
+public function Buscarfotodebanquete($BuscarID) {
+  $this->db->select('imagen');
+  $this->db->from('banquetes');
+  $this->db->where('id_banquete', $BuscarID);
+  $DatosPlatillo = $this->db->get();
+  if (count($DatosPlatillo->result()) > 0) {
+    return $DatosPlatillo->row();
+  }
 }
 
 # Agregar nuevo Banquete
@@ -21,7 +31,7 @@ public function agregarBanquete($data)
 // Buscar por id
 public function single_entry($id)
           {
-              $this->db->select('*');
+              $this->db->select('id_banquete,nombre,precio,descripcion');
               $this->db->from('banquetes');
               $this->db->where('id_banquete', $id);
               $query = $this->db->get();

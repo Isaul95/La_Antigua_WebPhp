@@ -45,25 +45,25 @@ function llenartablabanquetes() {
 
 
                     {
-                    data: "imagen",
-                    orderable: false,
-                    searchable: false,
-                    render: function (data, type, row, meta) {
-                        var imagen = `${row.imagen}`;
-                          var a;
-                            if(imagen != "null" && imagen != "undefined" && imagen != ""){
-                                var a = `
-                                <center><img src="../assets/imagenesMob/${row.imagen}" target="_blank" class="img-thumbnail" width="50" height="35" /></center>
-
-                             `;
-                            }
-                            else{
-                                a = 'Sin imagen';
-                            }
-
-                        return a;
-                    }
-                  },
+                        data: 'nombre_foto',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                          //  var imagenPlatillo = `<img src="ControlPlatillos/Foto/${row.id_platillo}" width="150" height="150"/>`;
+                          //return imagenPlatillo;
+                          var foto = `${row.nombre_foto}`;
+                                        var imagenbanquete="";
+                                        if(foto!="null"&&foto!="undefined"&&foto!=""){
+                                          var imagenbanquete = `<img src="Banquetes/Foto/${row.id_banquete}" width="150" height="150"/>`;
+                                             
+                                        }
+                                        else{
+                                            imagenbanquete="Sin imagen";
+                                        }
+                                         
+                                      return imagenbanquete;
+                        },
+                      },
 
 
                     {
@@ -203,7 +203,10 @@ $(document).on("click", "#edit_banquete", function (e) {
             $('#nombre_banquete_new').val(data.post.nombre);
             $('#precio_banquete_new').val(data.post.precio);
             $('#descripcion_banquete_new').val(data.post.descripcion);
-            $('#uploaded_image_ban').val(data.post.imagen);
+          //  $('#uploaded_image_ban').val(data.post.imagen);
+          $('#MostrarImagenActualBanquetes').html(`
+          <img class="rounded img-thumbnail" src="Banquetes/Foto/${data.post.id_banquete}" width="250" height="250">
+        `);
         },
     });
 });

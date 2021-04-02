@@ -168,7 +168,7 @@ class ControlSalones extends CI_Controller {
   public function EliminarFoto() {
     if ($this->input->is_ajax_request()) {
       $EliminarID = $this->input->post('eliminarID');
-      $EliminarFoto = $this->ModeloSalones->BuscarDatosFotoSeleccionada($FotoID);
+      
       if ($this->ModeloSalones->EliminarFotoSeleccionada($EliminarID)) {
         $RespuestaConsulta = array('Resultado' => "Exitoso");
       } else {

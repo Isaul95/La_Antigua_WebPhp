@@ -25,7 +25,12 @@ public function listarBanquetes(){
     $posts = $this->ModeloBanquetes->listarBanquetes();
     echo json_encode($posts);
 }
-
+public function Foto($PlatilloID){
+    $Consulta = $this->ModeloBanquetes->Buscarfotodebanquete($PlatilloID);
+    $Foto = $Consulta->imagen;
+    header("Content-Type: image/jpeg");
+    print_r($Foto);
+  }
 
 # Agregar nuevo mobiliario
 	public function agregarBanquete(){
@@ -39,32 +44,32 @@ public function listarBanquetes(){
 			if ($this->form_validation->run() == FALSE) {
 				$data = array('res' => "error", 'message' => validation_errors());
 			} else {
-
-        // Cargar imagen
-        // Definir ruta en donde guardar la imagen y tipo de dato permitido(png, jpg)
-        $config = [
-          "upload_path" => "./assets/imagenesMob/",
-          'allowed_types' => "png|jpg"
-        ];
-				// Cargar libreria para poder subir imagen
-        $this->load->library("upload",$config);
 				$imagen='';
-
-        if ($this->upload->do_upload('imagen')) {
-          // code...
-	        $data = array("upload_data" => $this->upload->data());
-					$imagen = $data['upload_data']['file_name'];
-
-				}else {
-					$imagen='';
+				$tipoArchivo='';
+				if (isset($_FILES["imagen"])) {
+				if ($_FILES['imagen']['name'] != '') {
+					// code...
+					$nombreArchivo = $_FILES['imagen']['name'];
+					$tipoArchivo = $_FILES['imagen']['type'];
+					$tamanoArchivo = $_FILES['imagen']['size'];
+					$archivoSubido = fopen($_FILES['imagen']['tmp_name'], 'r+b');
+					$imagen = fread($archivoSubido, $tamanoArchivo);
+					fclose($archivoSubido);
 				}
-				//
-	      $ajax_data = array(
-	        'nombre' => $this->input->post('nombre'),
-	        'precio' => $this->input->post('precio'),
-	        'descripcion' => $this->input->post('descripcion'),
-	        'imagen' => $imagen
-	      );
+			}
+			else {
+				$imagen='';
+				$tipoArchivo='';
+			}
+			//
+			$ajax_data = array(
+				'nombre' => $this->input->post('nombre'),
+				'precio' => $this->input->post('precio'),
+				'descripcion' => $this->input->post('descripcion'),
+				'nombre_foto' => $nombreArchivo,
+				'imagen' => $imagen
+			);
+        
 
 				if ($this->ModeloBanquetes->agregarBanquete($ajax_data)) {
 					$data = array('res' => "success", 'message' => "¡Banquete agregado!");
@@ -128,37 +133,28 @@ public function updateBanquetes(){
 			$data = array('res' => "error", 'message' => validation_errors());
 		} else {
 
-			// Cargar imagen
-			// Definir ruta en donde guardar la imagen y tipo de dato permitido(png, jpg)
-			$config = [
-				"upload_path" => './assets/imagenesMob/',
-				'allowed_types' => "png|jpg"
-			];
-			// Cargar libreria para poder subir imagen
-			$this->load->library("upload",$config);
-			$imagen_nueva='';
+			
 
-			if ($this->upload->do_upload('imagen')) {
-				// code...
-
-				$data = array("upload_data" => $this->upload->data());
-				$imagen_nueva = $data['upload_data']['file_name'];
-				//$ajax_data['imagen'] = $imagen_nueva;
-
-			}else {
-				$imagen_nueva = $this->input->post('imagen');
-				//$ajax_data['imagen'] = $imagen_nueva;
-			}
-
-			$id_banquete = $this->input->post('id_banquete');
+			
 
 
-			$ajax_data = array(
-				'nombre' => $this->input->post('nombre'),
-				'precio' => $this->input->post('precio'),
-				'descripcion' => $this->input->post('descripcion'),
-				'imagen' => $imagen_nueva
-			);
+			if (isset($_FILES['imagen']['name'])) {
+
+				$NombreFoto = $_FILES['imagen']['name'];
+				$FotoTemporal = $_FILES['imagen']['tmp_name'];
+	  
+				$Archivo = fopen($FotoTemporal, 'r+b');
+				$BytesFoto = fread($Archivo, filesize($FotoTemporal));
+				fclose($Archivo);
+	  
+				$ajax_data['nombre_foto'] = $NombreFoto;
+				$ajax_data['imagen'] = $BytesFoto;
+			  }
+			
+			  $id_banquete = $this->input->post('id_banquete');
+			$ajax_data['nombre'] = $this->input->post('nombre');
+			$ajax_data['precio'] = $this->input->post('precio');
+			$ajax_data['descripcion'] = $this->input->post('descripcion');
 
 			if ($this->ModeloBanquetes->actualizarBanquete($id_banquete,$ajax_data)) {
 				//

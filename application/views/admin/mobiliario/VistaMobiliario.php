@@ -43,7 +43,7 @@
                       <th width="7%">Stock</th>
                       <th width="10%">Estado</th>
                       <th>Descripcion</th>
-                      <th width="8%">Imagen</th>
+                     <th width="20%">Imagen</th>
                       <th class="text-center" width="7%">Acciones</th>
                     </tr>
                   </thead>
@@ -141,6 +141,7 @@
                               <label for="">Descripción</label>
                               <textarea class="form-control" id="descripcion_nueva" rows="3"></textarea>
                             </div>
+                            <div id="MostrarImagenActualMobiliario" style="text-align: center;"></div>
                             <div class="form-group">
                               <label>Seleccionar imagen...</label>
                               <input type="file" class="form-control-file" name="imagen_nueva" id="imagen_nueva" />

@@ -34,11 +34,11 @@
                   <table class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" id="TablaPlatillos" style="background: white!important;" cellspacing="0">
                     <thead class="text-center bg-primary">
                       <tr>
+                        <th></th>
                         <th class="text-center" width="20%">Platillo</th>
                         <th class="text-center" width="12%">Costo</th>
                         <th class="text-center" width="35%">Descripción</th>
                         <th class="text-center" width="20%">Foto</th>
-                        <th class="text-center" width="10%">PDF</th>
                         <th class="text-center" width="13%">Acciones</th>
                       </tr>
                     </thead>

@@ -122,6 +122,7 @@
                               <label for="">Descripción</label>
                               <textarea class="form-control" id="descripcion_banquete_new" rows="3"></textarea>
                             </div>
+                            <div id="MostrarImagenActualBanquetes" style="text-align: center;"></div>
                             <div class="form-group">
                               <label>Seleccionar imagen...</label>
                               <input type="file" class="form-control-file" id="imagen_banquete_new" />
