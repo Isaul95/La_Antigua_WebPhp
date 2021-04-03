@@ -271,9 +271,9 @@
                               <input type="file" class="custom-file-input" id="SeleccionarNuevaFoto" style="padding: 0 15%;">
                             </div>
                           </div>
-                          <div style="text-align: center;">
+                          <!-- <div style="text-align: center;">
                             <img id="MostrarFotoSeleccionada" style="padding: 2%;">
-                          </div>
+                          </div> -->
                         </form>
                         <div style="text-align: center;">
                           <button type="button" class="btn btn-primary" id="AgregarFotoSalon">Agregar</button>
@@ -286,8 +286,8 @@
                           <table class="table table-striped table-bordered table-hover table-condensed dt-responsive nowrap" id="TablaFotos" style="background: white!important;" cellspacing="0" width="100%">
                             <thead class="text-center bg-primary">
                               <tr>
-                                <th class="text-center" width="50%">Foto</th>
-                                <th class="text-center" width="15%">Acciones</th>
+                                <th class="text-center" width="60%">Foto</th>
+                                <th class="text-center" width="8%">Acciones</th>
                               </tr>
                             </thead>
                           </table>

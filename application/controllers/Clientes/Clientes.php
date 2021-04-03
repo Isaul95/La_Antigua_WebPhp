@@ -8,7 +8,7 @@ class Clientes extends CI_Controller {
 		 $this->permisos = $this->backend_lib->control();
 		 $this->load->helper(array('form', 'url'));
 	 	 $this->load->library(array('session', 'form_validation'));
-	 	 $this->load->model("Clientes/ModeloClientes");
+	 	 $this->load->model("Clientes/ModeloCliente");
 	 }
 
 	public function index(){
@@ -53,8 +53,8 @@ class Clientes extends CI_Controller {
 					'ine' => $ine
 				);
 
-				if ($this->ModeloClientes->agregarCliente($ajax_data)) {
-					$data = array('res' => "success", 'message' => "¡Cliente agregado!");
+				if ($this->ModeloCliente->agregarCliente($ajax_data)) {
+					$data = array('res' => "success", 'message' => "¡Datos del cliente agregado correctamente!");
 				} else {
 					$data = array('res' => "error", 'message' => "¡Error! :(");
 				}
@@ -66,6 +66,37 @@ class Clientes extends CI_Controller {
 			echo "No se permite este acceso directo...!!!";
 		}
 	}
+
+
+
+
+/* =========  Una vez agregado los datos del cliente se recuperan esos datos para visualizarlos NO EDIT  ========== */
+	public function verDatosCliente(){
+		if ($this->input->is_ajax_request()) {
+			$id_cliente = $this->input->post('id_cliente');
+			if ($post = $this->ModeloCliente->extraer_datesCliente($id_cliente)) {
+				 $data = array('responce' => "success", "post" => $post);
+			}else{
+				$data = array('responce' => "error", "Fallos...!!! Controller(verDatosCliente()) ");
+			}
+			echo json_encode($data);
+		}else {
+			echo "No se permite este acceso directo...!!!";
+		}
+	}
+
+
+
+	public function verPdfIneXCliente($id_cliente){
+			$consulta = $this->ModeloCliente->getIneCliente($id_cliente);
+			$archivo = $consulta['ine'];
+			$img = $consulta['nombre_ine'];
+			header("Content-type: application/pdf");
+			header("Content-Disposition: inline; filename=$img");
+			print_r($archivo);
+
+		}
+
 
 
 

@@ -4,6 +4,8 @@ $(document).ready(function () {
   VisualizarMobiliario();
   VisualizarPlatillos();
 
+  verCarrusel();
+
    $('ul.tabs li a:first').addClass('active');
 	$('.secciones article').hide();
 	$('.secciones article:first').show();
@@ -31,19 +33,25 @@ function VisualizarSalones() {
       var textoHTML='';
       for (var salon = 0; salon < tablaSalones.length; salon++) {
         textoHTML+= ""
+//    title="+"Ver&nbsp;Galería"+" onclick=verGaleriaSalon('"+ tablaSalones[salon].id_salon +"')
           + "<div class=\"col-sm-4 col-md-4\">"
             + "<div class=\"thumbnail\" style=\"width: 100%;\">"
+  + "<img title="+"Ver&nbsp;Galería"+" onclick=verGaleriaSalon('"+ tablaSalones[salon].id_salon +"') src=\"Contratos/ImagenSalon/" + tablaSalones[salon].id_salon + "\""
+  + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 200px !important;\">"
               + "<div class=\"caption\" style=\"width: 100%;\">"
                 + "<h3>" + tablaSalones[salon].nombre_salon + "</h3>"
-                + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"3\" readonly>"
+                + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"2\" readonly>"
                 + tablaSalones[salon].direccion + "</textarea>"
-                + "<h4>$" + tablaSalones[salon].costo_alquiler + "</h4>"
-                + "<h4>Para " + tablaSalones[salon].capacidad + " personas</h4>"
+                + "<h4> <center> <strong> Precio: $" + tablaSalones[salon].costo_alquiler + "</strong> <center> </h4>"
+                + "<h4> Capacidad para: " + tablaSalones[salon].capacidad + " personas</h4>"
                 + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"3\" readonly>"
                 + tablaSalones[salon].descripcion + "</textarea>"
-                + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"3\" readonly>"
+                + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"1\" readonly>"
                 + tablaSalones[salon].horarios + "</textarea>"
               + "</div>"
+
+              +  "<button onclick=addSalonVenta('"+ tablaSalones[salon].id_salon +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+
             + "</div>"
           + "</div>"
       }
@@ -74,7 +82,7 @@ function VisualizarMobiliario() {
                 + tablaMobiliario[mueble].descripcion + "</textarea>"
               + "</div>"
 
-            +  "<button onclick=addToVenta('"+ tablaMobiliario[mueble].clave +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir al carrito'+"</button>"
+            +  "<button onclick=addMobiliarioVenta('"+ tablaMobiliario[mueble].clave +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
 
             + "</div>"
           + "</div>"
@@ -104,6 +112,9 @@ function VisualizarPlatillos() {
                 + "<textarea class=\"text-justify\" style=\"border: none; resize: none; width: 100%;\" rows=\"3\" readonly>"
                 + tablaPlatillos[platillo].descripcion + "</textarea>"
               + "</div>"
+
+              +  "<button onclick=addBanqueteVenta('"+ tablaPlatillos[platillo].id_platillo +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+
             + "</div>"
           + "</div>"
           //console.log(document.getElementById('Ima'+platillo).width);
@@ -117,12 +128,12 @@ function VisualizarPlatillos() {
 
 
 
-  function addToVenta (id_mobiliario){
+  function addMobiliarioVenta (id_mobiliario){
       debugger;
             var datos = {
                 clave : id_mobiliario,
             }
-alert("Id =>" + datos.clave);
+alert("Id Mobiliario =>" + datos.clave);
             // const swalWithBootstrapButtons = Swal.mixin({
             //   customClass: {
             //     confirmButton: 'btn btn-success',
@@ -183,3 +194,161 @@ alert("Id =>" + datos.clave);
             // });
 
         }
+
+
+
+
+
+  function addSalonVenta (id_salon){
+      // debugger;
+            var datos = {
+                id_salon : id_salon,
+            }
+            alert("Id Salon =>" + datos.id_salon);
+    }
+
+
+  function verGaleriaSalon (id_salon){
+      $("#id_salonXGaleria").val(id_salon);
+    $("#modalGaleriaFotosxSalon").modal("show");
+    }
+
+
+
+  function addBanqueteVenta (id_platillo){
+      // debugger;
+            var datos = {
+                id_platillo : id_platillo,
+            }
+            alert("Id Banquete =>" + datos.id_platillo);
+    }
+
+
+
+
+
+
+
+    //
+    // function verCarrusel() {
+    //   $.ajax({
+    //     type: 'get',
+    //     url: base_url + 'Eventos/Contratos/MostrarSalones',
+    //     dataType: 'json',
+    //     success: function(tablaSalones) {
+    //       var textoHTML='';
+    //       for (var salon = 0; salon < tablaSalones.length; salon++) {
+    //         textoHTML+= ""
+    //             + "<div class=\"carousel-inner\" >"
+    //               + "<img src=\"Contratos/ImagenSalon/" + tablaSalones[salon].id_salon + "\""
+    //               + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 100% !important;\">"
+    //               + "<div class=\"caption\" style=\"width: 100%;\">"
+    //                 // + "<h3>" + tablaSalones[salon].nombre_salon + "</h3>"
+    //               // + "</div>"
+    //
+    //             + "</div>"
+    //           + "</div>"
+    //
+    //           + "<div class=\"left carousel-control\" href=\"#myCarousel\" data-slide=\"prev\">"
+    //           + "<div class=\"right carousel-control\" href=\"#myCarousel\" data-slide=\"next\">"
+    //
+    //       }
+    //       $('#carruselSalones').html(textoHTML);
+    //     },
+    //   });
+    // }
+
+
+
+
+
+
+//
+//         function verCarrusel() {
+//           $.ajax({
+//             type: 'get',
+//             url: base_url + 'Eventos/Contratos/MostrarSalones',
+//             dataType: 'json',
+//             success: function(tablaSalones) {
+//               var textoHTML='';
+//               var activeClass = "";
+//               var setActive = 0;
+//
+//               for (var salon = 0; salon < tablaSalones.length; salon++) {
+//
+//                 if(!setActive) {
+//                     setActive = 1;
+//                     activeClass = 'active';
+//                 }
+//
+//                 textoHTML+= ""
+// + "<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\" >"
+//                 + "<div class=\"item" + activeClass + "\" >"
+//                 + "<div class=\"col-xs-12\">"
+//                 // + "<a href=\"+ tablaSalones[salon].id_salon + \">"
+//               + "<img src=\"Contratos/ImagenSalon/" + tablaSalones[salon].id_salon + "\""
+//               + "class=\"img-fluid card-img-top\" style=\"width: 100%; height: 100% !important;\">"
+//               + "</a>"
+//                         // + "<h3>" + tablaSalones[salon].nombre_salon + "</h3>"
+//                       // + "</div>"
+//
+//                     + "</div>"
+//                   + "</div>"
+//
+//                   // + "<a class=\"sr-only\" class=\"glyphicon glyphicon-chevron-left\" class=\"left carousel-control\" href=\"#myCarousel\" data-slide=\"prev\"></a>"
+//                   // + "<a class=\"sr-only\" class=\"glyphicon glyphicon-chevron-right\" class=\"right carousel-control\" href=\"#myCarousel\" data-slide=\"next\"></a>"
+// + "</div>"
+//               }
+//               $('#carruselSalones').html(textoHTML);
+//             },
+//           });
+//         }
+
+
+
+
+
+
+
+
+
+    function verCarrusel() {
+      $.ajax({
+        type: 'get',
+        url: base_url + 'Eventos/Contratos/MostrarSalones',
+        dataType: 'json',
+        success: function(tablaSalones) {
+          // debugger;
+          var textoHTML='';
+          var setActive = 0;
+
+          for (var salon = 0; salon < tablaSalones.length; salon++) {
+            var activeClass = "";
+
+                if(!setActive) {
+                    setActive = 1;
+                    activeClass = 'active';
+                }
+// + "<h3>" + tablaMobiliario[mueble].nombre + "</h3>"
+            textoHTML+= ""
+                + "<div class=\"item" + activeClass + "\" >"
+                    // + "<div class=\"col-xs-12\">"
+                    // + "<a href=\""+ tablaSalones[salon].id_salon +"\">"
+                  + "<img src=\"Contratos/ImagenSalon/" + tablaSalones[salon].id_salon + "\" "
+                  + "class=\"img-fluid card-img-top\" style=\"width: 100%;  !important;\">"
+                  + "</a>"
+                    // + "<h3>" + tablaSalones[salon].nombre_salon + "</h3>"
+                // + "</div>"
+
+              // +  "<button onclick=addBanqueteVenta('"+ tablaPlatillos[platillo].id_platillo +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+
+                // + "</div>"
+              + "</div>"
+
+              // + "<div class=\"left carousel-control\" href=\"#myCarousel\" data-slide=\"prev\">"
+              // + "<div class=\"right carousel-control\" href=\"#myCarousel\" data-slide=\"next\">"
+          }
+          $('#carruselSalones').html(textoHTML);
+        },
+      });
+    }

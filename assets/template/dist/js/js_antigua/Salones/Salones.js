@@ -291,7 +291,7 @@ $(document).on("click", "#TablaFotosSalon", function(e){
             orderable: false,
             searchable: false,
             render: function(data, type, row, meta) {
-              var fotoSalon = `<img src="ControlSalones/Foto/${row.id_foto}" width="250" height="250"/>`;
+              var fotoSalon = `<img src="ControlSalones/Foto/${row.id_foto}" width="350" height="200"/>`;
               return fotoSalon;
             },
           },
@@ -389,21 +389,21 @@ $(document).on('click', '#BorrarFoto', function(e) {
   });
 });
 
-
-$SeleccionarNuevaFoto.addEventListener('change', () => {
-  const archivos = $SeleccionarNuevaFoto.files;
-  if (!archivos || !archivos.length) {
-    $MostrarFotoSeleccionada.src = "";
-    $MostrarFotoSeleccionada.width = "0";
-    $MostrarFotoSeleccionada.height = "0";
-    return;
-  }
-  const primerArchivo = archivos[0];
-  const objectURL = URL.createObjectURL(primerArchivo);
-  $MostrarFotoSeleccionada.src = objectURL;
-  $MostrarFotoSeleccionada.width = "250";
-  $MostrarFotoSeleccionada.height = "250";
-});
+//
+// $SeleccionarNuevaFoto.addEventListener('change', () => {
+//   const archivos = $SeleccionarNuevaFoto.files;
+//   if (!archivos || !archivos.length) {
+//     $MostrarFotoSeleccionada.src = "";
+//     $MostrarFotoSeleccionada.width = "0";
+//     $MostrarFotoSeleccionada.height = "0";
+//     return;
+//   }
+//   const primerArchivo = archivos[0];
+//   const objectURL = URL.createObjectURL(primerArchivo);
+//   $MostrarFotoSeleccionada.src = objectURL;
+//   $MostrarFotoSeleccionada.width = "250";
+//   $MostrarFotoSeleccionada.height = "250";
+// });
 
 
 var idiomaEspañolTablas = {

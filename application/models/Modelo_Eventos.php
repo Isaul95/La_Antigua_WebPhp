@@ -53,6 +53,23 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
       }
 
 
+
+// Se consulta la ultima inagen de la galeria de fotos del salon correspondiente al salon = id_salon
+    public function datosSalonSeleccionado($id_salon) {
+      $this->db->select('*');
+      $this->db->from('fotos_salones');
+      $this->db->where(' id_salon = ', $id_salon);
+      // $this->db->where('id_foto = (SELECT MAX(id_foto ) FROM fotos_salones) AND id_salon = ', $id_salon);
+      $DatosMueble = $this->db->get();
+      if (count($DatosMueble->result()) > 0) {
+        return $DatosMueble->row();
+      }
+    }
+
+
+
+
+
       public function EnlistarPlatillos() {
         // $InformacionTablaPlatillos = $this->db->get('platillos');
         // return $InformacionTablaPlatillos->result();

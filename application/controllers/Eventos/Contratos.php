@@ -46,6 +46,17 @@ class Contratos extends CI_Controller {
 	    print_r($Imagen);
 	  }
 
+
+
+	  public function ImagenSalon($id_salon) {
+	    $Consulta = $this->Modelo_Eventos->datosSalonSeleccionado($id_salon);
+	    $Imagen = $Consulta->foto;
+	    header("Content-Type: image/jpeg");
+	    print_r($Imagen);
+	  }
+
+
+
 		public function MostrarPlatillos() {
 	    $MostrarConsulta = $this->Modelo_Eventos->EnlistarPlatillos();
 	    echo json_encode($MostrarConsulta);
