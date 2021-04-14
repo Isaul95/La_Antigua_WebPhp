@@ -73,4 +73,11 @@ public function extraer_InDescripcionVenta($venta){
 
 
 
+  //  Salon en cero
+    public function insert_InVentaRealizarCobroTotal($data){
+          return $this->db->update('venta', $data, array('id_venta' => $data['id_venta']));
+      }
+
+
+
 } // FIN / CIERRE DEL MODELO

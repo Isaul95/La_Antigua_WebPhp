@@ -131,14 +131,6 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
     }
 
 
-    // public function obtenerSalonKEstaEnVenta(){
-    //     $this->db->select(" id, salon, cantidad_salon, importe ");
-    // $this->db->from("descripcion_de_venta");
-    // $resultados = $this->db->get();
-    // return $resultados->result();
-    // }
-
-
   public function obtenerSalonKEstaEnVenta($venta){
     // $this->db->distinct();
     $this->db->select(" dv.id, dv.salon, sal.nombre_salon, dv.cantidad_salon, dv.importe, dv.venta ");
@@ -214,13 +206,6 @@ public function extraer_SumTotalVentaActual($venta){
       }
   }
 
-
-             // public function consultaTotalProcesadosDelDia(){
-             //       $this->db->select("SUM(total) as totalProcesados");
-             //       $this->db->from("procesados");
-             //          $resultados = $this->db->get();
-             //          return $resultados->result();
-             // }
 
 
 

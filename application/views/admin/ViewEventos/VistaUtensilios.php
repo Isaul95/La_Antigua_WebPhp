@@ -302,10 +302,6 @@
 
     <article id="tab6">
 
-      <input type="hidden" id="total_salon" name="total_salon" >
-      <input type="hidden" id="total_mobiliario" name="total_mobiliario" >
-      <input type="hidden" id="total_platillos" name="total_platillos" >
-
     <div class="panel panel-default">
         <div class="panel-heading text-center">	<h4><strong>Realizar cobro total $</strong></h4></div>
           <div class="panel-body">
@@ -313,49 +309,49 @@
             <div class="myForm" id="myForm">
 
               <form class="" id="addPagoCobroForm">
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>Total a pagar: $</label> <br>
-                <h3> <strong>   <label id="cobroTotal">  </label>  </strong> </h3>
-                   <!-- <label id="cobroTotal"><h3> <strong>  </strong> </h3></label> -->
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Pago: *</label>
-                    <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>Telefono: *</label>
-                    <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Sexo: *</label>
-                    <select class="form-control" id="sexoCliente">
-                      <option>Masculino</option>
-                      <option>Femenino</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>Email: *</label>
-                    <input type="text" id="emailCliente" class="form-control" placeholder="Email">
-                  </div>
 
-                  <div id="divAddPdf">
-                      <div class="form-group col-md-6 form-control-file">
-                        <label>INE: *</label>
-                        <input type="file" class="custom-file-input" name="ine" id="ine" />
-                      </div>
-                  </div>
-
-                </div>
                 <div class="row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-3">
+                  <h3> <strong>  <label>Total a pagar: $</label>  </strong> </h3>
+                <!-- <h3> <strong>   <label id="cobroTotal">  </label>  </strong> </h3> -->
+                  </div>
+                  <div class="form-group col-md-6">
+                      <h3> <strong>   <label id="cobroTotal"></label>  </strong> </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <h3> <strong>  <label>Pago: $</label>  </strong> </h3>
+                  </div>
+                  <div class="form-group col-md-2"> <br>
+                    <input type="text" id="pagoNumero" class="form-control text-center" placeholder="00.00">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <h3> <strong>  <label>Cambio: $</label>  </strong> </h3>
+                  </div>
+                  <div class="form-group col-md-2"> <br>
+                    <input type="text" id="cambioNumero" class="form-control text-center" placeholder="00.00">
+                  </div>
+                </div>
+
+                <!-- <div class="row">
+                  <div class="form-group text-center">
                     <button type="button" class="btn btn-danger" id="btnAddPagoCobroTotal">Cobrar Venta</button>
                   </div>
+                </div> -->
+
+                <div class="row">
+                  <div class="text-center">
+                      <button type="button" class="btn btn-danger btn-float" onclick="btnAddPagoCobroTotal()">
+                         <i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;<label><h4>Cobrar Venta</h4></label>&nbsp;&nbsp;
+                      </button>
+                  </div>
                 </div>
+
               </form>
             </div>
 
@@ -363,7 +359,6 @@
     </div>
 
     </article>
-
 
     </div>
   </div>

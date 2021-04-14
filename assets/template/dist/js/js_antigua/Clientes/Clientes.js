@@ -277,8 +277,8 @@ verSiYaExistePlatillosEnVenta();
         cliente       : $("#id_clienteAdd").val(),
         evento        : $("#id_evento_Agregado").val(),
         estado_venta  : "En_captura",
-        fecha_reporte : fecha,
-        hora          : hora,
+        // fecha_reporte : fecha,
+        // hora          : hora,
       }
 
       if (datos.cliente == "" || datos.evento == "") {
@@ -863,7 +863,6 @@ function eliminarPlatillosDeLaVenta(id, platillo, venta) {
 function sumTotalVentas_Salon_Mob_Platillo(){
 
     var venta = $("#id_ventaDesdeVenta").val();
-    // var id_ev = $("#id_eventoCliente").val();
 
     $.ajax({
         type: "post",
@@ -874,22 +873,51 @@ function sumTotalVentas_Salon_Mob_Platillo(){
         dataType: "json",
         success: function (data) {
               if (data.responce == "success") {
-
-            //  $('#id_clienteAdd').val(data.post.id_cliente)
                 $('#cobroTotal').html(data.post.totalVentas);
-
                   }else{
-
                   }
-
-              // $('#nombreCliente').val(data.post.nombre)
-              // $('#direccionCliente').val(data.post.direccion)
-              // $('#telefonoCliente').val(data.post.telefono)
-              // $('#sexoCliente').val(data.post.sexo)
-              // $('#emailCliente').val(data.post.email)
-              // $('#id_evento_Agregado').val(data.post.id_evento)
-              // deshabilitar_form_cliente();
 
         },
     });
 }
+
+
+
+
+
+  /* -----------------   Realizar el cobro de la venta total dle dia venta actual  ----------------- */
+    function  btnAddPagoCobroTotal(){
+debugger;
+
+var totalNumero = document.getElementById("cobroTotal").innerHTML; // De esta forma obtienee el valor de un label
+
+      var datos = {
+          // venta : id_venta,
+          id_venta      : $("#id_ventaDesdeVenta").val(),
+          total         : totalNumero,
+          pago          : $("#pagoNumero").val(),
+          cambio        : $("#cambioNumero").val(),
+          estado_venta  : "Realizada",
+          fecha_reporte : fecha,
+          hora          : hora,
+        }
+
+        if (datos.pago == "" ) {
+            alert("Debe realizar el pago...!");
+        } else {
+            $.ajax({
+                type: "post",
+                url: base_url + 'Clientes/Clientes/createRealizarCobroTerminar',
+                data: (datos),
+                dataType: "json",
+                success: function(data) {
+                    if (data.responce == "success") {
+                        toastr["success"](data.message);
+                          $('#addPagoCobroForm')[0].reset();
+                    } else {
+                        toastr["error"](data.message);
+                    }
+                },
+            });
+        }
+    }

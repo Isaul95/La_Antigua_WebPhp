@@ -177,5 +177,17 @@ class Clientes extends CI_Controller {
 
 
 
+	public function createRealizarCobroTerminar(){
+
+				$ajax_data = $this->input->post();
+				if ($this->ModeloCliente->insert_InVentaRealizarCobroTotal($ajax_data)) {
+					$data = array('responce' => 'success', 'message' => 'Se agrego la venta correctamente...!');
+				} else {
+					$data = array('responce' => 'error', 'message' => 'Fallo al agregar la venta Final...!');
+				}
+			echo json_encode($data);
+	}
+
+
 
 }  // Fin del controller
