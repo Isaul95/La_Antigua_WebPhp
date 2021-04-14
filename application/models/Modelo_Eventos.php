@@ -112,4 +112,116 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
       }
 
 
+
+  public function agregarPiezasAlquiladosMobil($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+
+
+  public function agregarCantidadPersonasPlatilloElegido($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+
+  public function agregarDetallesSalon($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+    // public function obtenerSalonKEstaEnVenta(){
+    //     $this->db->select(" id, salon, cantidad_salon, importe ");
+    // $this->db->from("descripcion_de_venta");
+    // $resultados = $this->db->get();
+    // return $resultados->result();
+    // }
+
+
+  public function obtenerSalonKEstaEnVenta($venta){
+    // $this->db->distinct();
+    $this->db->select(" dv.id, dv.salon, sal.nombre_salon, dv.cantidad_salon, dv.importe, dv.venta ");
+    $this->db->from(" descripcion_de_venta dv ");
+    $this->db->join(" salones sal","dv.salon = sal.id_salon");
+    $this->db->where('dv.venta', $venta);
+    // $this->db->where('m.especialidad', $especialidad);
+
+    $resultados = $this->db->get();
+    return $resultados->result();
+    }
+
+
+
+
+
+  public function obtenerMobiliarioKEstaEnVenta($venta){
+    $this->db->select(" dv.id, dv.mobiliario, mob.nombre, mob.precio, dv.cantidad_piezas_mobiliario, dv.precio_total_mob, dv.venta ");
+    $this->db->from(" descripcion_de_venta dv ");
+    $this->db->join(" mobiliario mob","dv.mobiliario = mob.clave");
+    $this->db->where('dv.venta', $venta);
+
+    $resultados = $this->db->get();
+    return $resultados->result();
+    }
+
+
+
+
+  public function obtenerPlatillosKEstaEnVenta($venta){
+    $this->db->select(" dv.id, dv.platillo, pla.nombre_platillo, pla.costo, dv.cantidad_personas_platillo, dv.precio_total_platillo, dv.venta ");
+    $this->db->from(" descripcion_de_venta dv ");
+    $this->db->join(" platillos pla","dv.platillo = pla.id_platillo");
+    $this->db->where('dv.venta', $venta);
+
+    $resultados = $this->db->get();
+    return $resultados->result();
+    }
+
+
+
+
+//  Salon en cero
+  public function eliminarSalonEnCapturaDeVenta($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+//  Mobiliario en cero
+  public function eliminarMobiliarioEnCapturaDeVenta($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+
+//  Platillos en cero
+  public function eliminarPlatillosEnCapturaDeVenta($data){
+        return $this->db->update('descripcion_de_venta', $data, array('venta' => $data['venta']));
+    }
+
+
+
+
+/* =========  suma venta tptal  ========== */
+public function extraer_SumTotalVentaActual($venta){
+      $this->db->select(' SUM( precio_total_mob + precio_total_platillo + cantidad_salon) as totalVentas ');
+      $this->db->from('descripcion_de_venta');
+      $this->db->where('venta', $venta);
+      // $this->db->where('user_session', $user_session);
+      $query = $this->db->get();
+      if (count($query->result()) > 0) {
+          return $query->row();
+      }
+  }
+
+
+             // public function consultaTotalProcesadosDelDia(){
+             //       $this->db->select("SUM(total) as totalProcesados");
+             //       $this->db->from("procesados");
+             //          $resultados = $this->db->get();
+             //          return $resultados->result();
+             // }
+
+
+
   } // FIN / CIERRE DEL MODELO

@@ -50,7 +50,10 @@ class Clientes extends CI_Controller {
 					'telefono' => $this->input->post('telefono'),
 					'sexo' => $this->input->post('sexo'),
 					'email' => $this->input->post('email'),
-					'ine' => $ine
+					'ine' => $ine,
+					'user_session' => $this->input->post('user_session'),
+					'id_evento' => $this->input->post('id_evento'),
+					'nombre_ine' => $nombreArchivo
 				);
 
 				if ($this->ModeloCliente->agregarCliente($ajax_data)) {
@@ -73,8 +76,10 @@ class Clientes extends CI_Controller {
 /* =========  Una vez agregado los datos del cliente se recuperan esos datos para visualizarlos NO EDIT  ========== */
 	public function verDatosCliente(){
 		if ($this->input->is_ajax_request()) {
-			$id_cliente = $this->input->post('id_cliente');
-			if ($post = $this->ModeloCliente->extraer_datesCliente($id_cliente)) {
+			$id_evento = $this->input->post('id_evento');
+			$user_session = $this->input->post('user_session');
+
+			if ($post = $this->ModeloCliente->extraer_datesCliente($id_evento, $user_session)) {
 				 $data = array('responce' => "success", "post" => $post);
 			}else{
 				$data = array('responce' => "error", "Fallos...!!! Controller(verDatosCliente()) ");
@@ -96,6 +101,79 @@ class Clientes extends CI_Controller {
 			print_r($archivo);
 
 		}
+
+
+
+/* =========    ========== */
+		public function verSiExisteVentaActual(){
+			if ($this->input->is_ajax_request()) {
+
+				$usuario = $this->input->post('usuario');
+				$cliente = $this->input->post('cliente');
+				$evento = $this->input->post('evento');
+
+				if ($post = $this->ModeloCliente->extraer_ventaActual($usuario, $cliente, $evento)) {
+					 // $data = array('responce' => 'success', 'message' => 'Ya existe venta...!');
+					 $data = array('responce' => "success", "post" => $post, 'message' => 'Ya existe venta...!');
+				}else{
+					 $data = array('responce' => 'error', 'message' => 'Aun no existe venta...!');
+				}
+				echo json_encode($data);
+			}else {
+				echo "No se permite este acceso directo...!!!";
+			}
+		}
+
+
+
+
+
+	public function createNewVenta(){
+
+				$ajax_data = $this->input->post();
+				if ($this->ModeloCliente->insert_createNewVenta($ajax_data)) {
+					$data = array('responce' => 'success', 'message' => 'Nuevo venta agregado correctamente...!');
+				} else {
+					$data = array('responce' => 'error', 'message' => 'Fallo al agregar venta...!');
+				}
+			echo json_encode($data);
+	}
+
+
+
+
+	public function createNewInsertInDescripcionVenta(){
+
+				$ajax_data = $this->input->post();
+				if ($this->ModeloCliente->insert_InDescripcionVenta($ajax_data)) {
+					$data = array('responce' => 'success', 'message' => 'Se agrego en descripcion de venta correctamente...!');
+				} else {
+					$data = array('responce' => 'error', 'message' => 'Fallo al agregar descripcion de venta...!');
+				}
+			echo json_encode($data);
+	}
+
+
+
+
+	/* =========  Descripcion de Venta  ========== */
+	public function verSiExisteVentaActualInDescripcionVenta(){
+		if ($this->input->is_ajax_request()) {
+
+			$venta = $this->input->post('venta');
+			// $cliente = $this->input->post('cliente');
+
+			if ($post = $this->ModeloCliente->extraer_InDescripcionVenta($venta)) {
+				 $data = array('responce' => 'success', 'message' => 'Ya existe en descripcion de venta...!');
+				 // $data = array('responce' => "success", "post" => $post, 'message' => 'Ya existe en descripcion de venta...!');
+			}else{
+				 $data = array('responce' => 'error', 'message' => 'Aun no existe en descripcion venta...!');
+			}
+			echo json_encode($data);
+		}else {
+			echo "No se permite este acceso directo...!!!";
+		}
+	}
 
 
 

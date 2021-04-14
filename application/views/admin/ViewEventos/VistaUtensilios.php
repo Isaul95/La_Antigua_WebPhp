@@ -15,9 +15,11 @@
         </div>
   </div> -->
 
+<input type="hidden" id="username_cliente" class="username_cliente" value="<?php echo $username;?>" >
+<input type="hidden" id="id_eventoCliente" class="id_eventoCliente" value="<?php echo $_GET["Numero_Evento"]; ?>" >
 
-<input type="hidden" id="username" class="username" value="<?php echo $username;?>" >
-<input type="hidden" id="id_evento" class="id_evento" value="<?php echo $_GET["Numero_Evento"]; ?>" >
+<!-- Aki se almacena el idVenta una cvez k inserta en venta cuando ya exista evento, y cliene -->
+<input type="hidden" id="id_ventaDesdeVenta" class="id_ventaDesdeVenta" >
 
 
   <div class="row">
@@ -29,7 +31,8 @@
 			<li><a href="#tab2"></span><span class="tab-text">Salón de eventos</span></a></li>
 			<li><a href="#tab3"></span><span class="tab-text">Mobiliario</span></a></li>
 			<li><a href="#tab4"></span><span class="tab-text">Banquetes</span></a></li>
-      <li><a href="#tab5"></span><span class="tab-text">Generar Reporte</span></a></li>
+      <li><a href="#tab5"></span><span class="tab-text">General Reporte</span></a></li>
+      <li><a href="#tab6"></span><span class="tab-text">Cobro</span></a></li>
 		</ul>
 
 <hr style="background-color: black; color: black; height: 0px;">
@@ -46,7 +49,10 @@
         <div class="panel-body">
 
         <div class="myForm" id="myForm">
-<input type="hidden" id="id_clienteAdd" name="id_clienteAdd" >
+
+          <input type="hidden" id="id_clienteAdd" name="id_clienteAdd" >
+          <input type="hidden" id="id_evento_Agregado" name="id_evento_Agregado" >
+
           <form class="" id="addClienteForm">
             <div class="row">
               <div class="form-group col-md-6">
@@ -106,14 +112,30 @@
 
 </div>
 
+<div class="text-center">
+    <button type="button" class="btn btn-danger btn-float" onclick="regresarACaledar()">
+       <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;<label><h5>Regresar a calendario de eventos</h5></label>
+    </button>
+</div>
+
 			</article>
 
 
       <article id="tab2">
+
+        <input type="hidden" id="id_clienteAdd" name="id_clienteAdd" >
+
           <div class="px-lg-5">
             <section class="content">
               <div class="row">
                 <div id="Salones"></div>
+
+              </div>
+
+              <div id="SalonElegido">
+
+                <h4><strong>Ya elihio el salon</strong></h4>
+
               </div>
             </section>
           </div>
@@ -125,6 +147,11 @@
               <div class="row">
                 <div id="Mobiliario"></div>
               </div>
+
+              <div id="MobiliarioElegido">
+                <h4><strong>Ya eligio el moboliario</strong></h4>
+              </div>
+
             </section>
           </div>
         </article>
@@ -135,84 +162,46 @@
               <div class="row">
                 <div id="Platillos"></div>
               </div>
+
+              <div id="PlatillosElegido">
+                <h4><strong>Ya eligio el Platillos Elegido</strong></h4>
+              </div>
+
             </section>
           </div>
         </article>
 
         <article id="tab5">
 
-          <div class="panel panel-default">
-        <div class="panel-heading text-center">	<h4>Realizar reporte general del evento</h4></div>
-          <br>
-          <br>
+  <div class="panel panel-default">
+<div class="panel-heading text-center">	<h4><strong>Reporte general de sal&oacute;n</strong></h4></div>
 
-          <div class="panel-body">
+    <div class="panel-body">
 
-          <div class="myForm" id="myForm">
+<!--     SALON ELEGIDO EN VENTA    -->
 
-            <!-- <form class="" id="addCliente">
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label>Nombre: *</label>
-                  <input type="text" id="nombreCliente" class="form-control" placeholder="Nombre">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Dirección: *</label>
-                  <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label>Telefono: *</label>
-                  <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Sexo: *</label>
-                  <select class="form-control" id="sexoCliente">
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label>Email: *</label>
-                  <input type="text" id="emailCliente" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6 form-control-file">
-                  <label>INE: *</label>
-                  <input type="file" class="custom-file-input" name="ine" id="ine" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-12">
-                  <button type="button" class="btn btn-primary" id="btnaddCliente">Agregar</button>
-                </div>
-              </div>
-            </form>
-          </div> -->
+        <!-- <div class="form-group text-center">
+            <label><h4><strong>Sal&oacute;n</strong></h4></label>
+        </div> -->
 
-  <div class="row">
-    <div class="form-group col-md-12">
-      <button type="button" class="btn btn-primary" onclick="btnGenerarReporteEvento()">Generar Reporte de cleinte</button>
-    </div>
-  </div>
+        <div class="row my-4">
+          <div class="col-md-12 mx-auto">
 
-  <!-- <div id="generarConstanciaPDFAlumno">
-
-                    <center>
-                      <h4><font color="#3498DB">Generar Constancia del Alumno</font></h4> <br>
-                     <a onclick="generaConstanciaPdfStuden()">
-                       <i class="far fa-file-pdf fa-2x"></i></a>
-                     </center> <br>
-
-            </div> -->
-
-
-  </div>
-
-        </article>
-
+            <table id="tbl_VentaSalon" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important" width="100%">
+              <thead class="text-center bg-primary">
+                <tr>
+                  <th width="3%" type="hidden">Id</th>
+                  <th width="3%" type="hidden">IdProducto</th>
+                  <th>Producto</th>
+                  <!-- <th width="7%">Cantidad</th> -->
+                  <th width="7%">P.Unitario</th>
+                  <th width="10%">Importe</th>
+                  <th class="text-center" width="7%">Acciones</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
 
 		</div>
 	</div>
@@ -220,10 +209,249 @@
 
 
 
+
+  <div class="panel panel-default">
+<div class="panel-heading text-center">	<h4><strong>Reporte general de mobiliario</strong></h4></div>
+
+  <div class="panel-body">
+
+<!--    MOBILIARIO ELEGIDO EN VENTA    -->
+
+        <!-- <div class="form-group text-center">
+            <label><h4><strong>Mobiliario</strong></h4></label>
+        </div> -->
+
+        <div class="row my-4">
+          <div class="col-md-12 mx-auto">
+
+            <table id="tbl_VentaMobiliario" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important" width="100%">
+              <thead class="text-center bg-primary">
+                <tr>
+                  <th width="3%" type="hidden">Id</th>
+                  <th width="3%" type="hidden">IdProducto</th>
+                  <th>Producto</th>
+                  <th width="7%">Cantidad</th>
+                  <th width="7%">P.Unitario</th>
+                  <th width="10%">Importe</th>
+                  <th class="text-center" width="7%">Acciones</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+
+		</div>
+	</div>
+
+
+
+
+  <div class="panel panel-default">
+<div class="panel-heading text-center">	<h4><strong>Reporte general de platillos</strong></h4></div>
+
+    <div class="panel-body">
+
+<!--    MOBILIARIO ELEGIDO EN VENTA    -->
+
+        <!-- <div class="form-group text-center">
+            <label><h4><strong>Platillos</strong></h4></label>
+        </div> -->
+
+        <div class="row my-4">
+          <div class="col-md-12 mx-auto">
+
+            <table id="tbl_VentaPlatillos" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important" width="100%">
+              <thead class="text-center bg-primary">
+                <tr>
+                  <th width="3%" type="hidden">Id</th>
+                  <th width="3%" type="hidden">IdProducto</th>
+                  <th>Producto</th>
+                  <th width="7%">Cantidad</th>
+                  <th width="7%">P.Unitario</th>
+                  <th width="10%">Importe</th>
+                  <th class="text-center" width="7%">Acciones</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+
+		</div>
+	</div>
+
+
+
+          <!-- <div class="myForm" id="myForm"> -->
+
+
+  <!--   RE´PRTE PDF PARA GENERAR VENTA
+   <div class="row">
+    <div class="form-group col-md-12">
+      <button type="button" class="btn btn-primary" onclick="btnGenerarReporteEvento()">Generar Reporte de cleinte</button>
+    </div>
+  </div> -->
+
+
+
+  <!-- </div> -->
+
+        </article>
+
+
+
+
+    <article id="tab6">
+
+      <input type="hidden" id="total_salon" name="total_salon" >
+      <input type="hidden" id="total_mobiliario" name="total_mobiliario" >
+      <input type="hidden" id="total_platillos" name="total_platillos" >
+
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">	<h4><strong>Realizar cobro total $</strong></h4></div>
+          <div class="panel-body">
+
+            <div class="myForm" id="myForm">
+
+              <form class="" id="addPagoCobroForm">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label>Total a pagar: $</label> <br>
+                <h3> <strong>   <label id="cobroTotal">  </label>  </strong> </h3>
+                   <!-- <label id="cobroTotal"><h3> <strong>  </strong> </h3></label> -->
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Pago: *</label>
+                    <input type="text" id="direccionCliente" class="form-control" placeholder="Dirección">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label>Telefono: *</label>
+                    <input type="text" id="telefonoCliente" class="form-control" placeholder="Telefono">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Sexo: *</label>
+                    <select class="form-control" id="sexoCliente">
+                      <option>Masculino</option>
+                      <option>Femenino</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label>Email: *</label>
+                    <input type="text" id="emailCliente" class="form-control" placeholder="Email">
+                  </div>
+
+                  <div id="divAddPdf">
+                      <div class="form-group col-md-6 form-control-file">
+                        <label>INE: *</label>
+                        <input type="file" class="custom-file-input" name="ine" id="ine" />
+                      </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-danger" id="btnAddPagoCobroTotal">Cobrar Venta</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+        </div>
+    </div>
+
+    </article>
+
+
     </div>
   </div>
 
 </div>
+
+
+
+
+
+
+
+<!--     CANTIDAD D EPIEZAS ELEGIDAS PARA EL MOBILIARIO     -->
+<div class="modal fade" id="modalAddCantidadMob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-center">
+            <strong class="modal-title" id="exampleModalLabel">Agregar Cantidad (piezas)</strong>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <input type="hidden" id="id_modalMobiliario" name="id_modalMobiliario">
+            <input type="hidden" id="precio_modalMobiliario" name="precio_modalMobiliario">
+            <input type="hidden" id="userAltaMob" name="userAltaMob" value="<?php echo $username;?>" >
+
+        <form id="addCantidadMobi">
+              <div class="form-group">
+                  <label for="">Cantidad del mobiliario: *</label>
+                <input type="text" class="form-control" id="piezasMob" placeholder="Número de piezas">
+              </div>
+
+              <!-- <div class="form-group">
+                <label for="">Clave</label>
+                <input type="text" class="form-control" id="clave_licenciatura" placeholder="Rvoe">
+              </div> -->
+
+        </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <!-- Insert Button -->
+            <button type="button" class="btn btn-primary" id="btnAddPiezasMobiliario">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!--     CANTIDAD D PERSONAS ELEGIDAS PARA EL PLATILLO     -->
+    <div class="modal fade" id="modalAddCantidadPlatillos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-center">
+                <strong class="modal-title" id="exampleModalLabel">Agregar Cantidad de Personas</strong>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+              <input type="hidden" id="id_modalPlatillo" name="id_modalPlatillo">
+              <input type="hidden" id="precio_modalPlatillo" name="precio_modalPlatillo">
+              <input type="hidden" id="userAltaMob" name="userAltaMob" value="<?php echo $username;?>" >
+
+            <form id="addCantidadPersonasPlatillos">
+
+                  <div class="form-group">
+                      <label for="">Cantidad de personas: *</label>
+                    <input type="text" class="form-control" id="cantidadPersonasPlatillo" placeholder="Número de personas">
+                  </div>
+
+            </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <!-- Insert Button -->
+                <button type="button" class="btn btn-primary" id="btnAddCantidadPersonaPlatillo">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
 
 
 
@@ -321,8 +549,11 @@
 
 
 
-</div>
 
+
+
+
+</div>
 
 <!--      carruselSalones    -->
 

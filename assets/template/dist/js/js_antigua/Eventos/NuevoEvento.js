@@ -25,6 +25,7 @@ $('.clockpicker').clockpicker();
           $("#btnAgregarNewEvent").show();  // Btn agregar new event hide
             $("#eliminarEvento").hide();  // Btn delete new event hide
             $("#updateEvento").hide();  // Btn update new event hide
+            $("#nuevoEventoCliente").hide();  // Btn Add Event new event hide
             $("#divColor").show();
          	},
       editable:true,
@@ -48,6 +49,7 @@ $('.clockpicker').clockpicker();
             $("#btnAgregarNewEvent").hide();  // Btn agregar new event hide
             $("#eliminarEvento").show();  // Btn delete new event show
             $("#updateEvento").show();  // Btn update new event show
+            $("#nuevoEventoCliente").show();  // Btn Add Event new event show
             $("#divColor").hide();
 
       } // FIN
@@ -67,7 +69,7 @@ $('.clockpicker').clockpicker();
       debugger;
 
 var datos = {
-       // hora : $("#hora").val(),
+       user_session : $("#username").val(),
        start : $("#fecha_evento").val()+" "+$('#hora').val(),
        title : $("#titulo").val(),
        descripcion : $("#descripcion").val(),

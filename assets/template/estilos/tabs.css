@@ -30,7 +30,7 @@ p { font-size: 15px; margin: 0 0 15px 0; } */
 .example-two ul li:last-child a { border: none; }
 
 .example-two .tabs { overflow: hidden; }
-.example-two .tabs li { width: 200px; float: left;  margin: 0 10px 0 10px }
+.example-two .tabs li { width: 170px; float: left;  margin: 0 5px 0 5px }
 /* .example-two .tabs li { width: 200px; float: left;  margin: 0 10px 0 50px }  ASI ESTABA CON 4 */
 .example-two .tabs li.last { margin-right: 0; }
 /* Es el color actual que tienen medio gris y letras negras */

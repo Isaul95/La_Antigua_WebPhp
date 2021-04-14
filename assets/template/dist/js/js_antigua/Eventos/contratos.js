@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
   VisualizarSalones();
+
   VisualizarMobiliario();
   VisualizarPlatillos();
 
@@ -50,7 +51,7 @@ function VisualizarSalones() {
                 + tablaSalones[salon].horarios + "</textarea>"
               + "</div>"
 
-              +  "<button onclick=addSalonVenta('"+ tablaSalones[salon].id_salon +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+              +  "<button onclick=addSalonVenta('"+ tablaSalones[salon].id_salon +"','"+ tablaSalones[salon].costo_alquiler +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
 
             + "</div>"
           + "</div>"
@@ -82,7 +83,7 @@ function VisualizarMobiliario() {
                 + tablaMobiliario[mueble].descripcion + "</textarea>"
               + "</div>"
 
-            +  "<button onclick=addMobiliarioVenta('"+ tablaMobiliario[mueble].clave +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+            +  "<button onclick=addMobiliarioVenta('"+ tablaMobiliario[mueble].clave +"','"+ tablaMobiliario[mueble].precio +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
 
             + "</div>"
           + "</div>"
@@ -113,7 +114,7 @@ function VisualizarPlatillos() {
                 + tablaPlatillos[platillo].descripcion + "</textarea>"
               + "</div>"
 
-              +  "<button onclick=addBanqueteVenta('"+ tablaPlatillos[platillo].id_platillo +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
+      +  "<button onclick=addBanqueteVenta('"+ tablaPlatillos[platillo].id_platillo +"','"+ tablaPlatillos[platillo].costo +"') type='button' class=\"btn btn-danger\" style=\"width: 100%; height: 40px !important;\">"+'Añadir '+"</button>"
 
             + "</div>"
           + "</div>"
@@ -128,84 +129,54 @@ function VisualizarPlatillos() {
 
 
 
-  function addMobiliarioVenta (id_mobiliario){
-      debugger;
-            var datos = {
-                clave : id_mobiliario,
-            }
-alert("Id Mobiliario =>" + datos.clave);
-            // const swalWithBootstrapButtons = Swal.mixin({
-            //   customClass: {
-            //     confirmButton: 'btn btn-success',
-            //     cancelButton: 'btn btn-danger mr-2'
-            //   },
-            //   buttonsStyling: false
-            // })
-            //
-            // swalWithBootstrapButtons.fire({
-            //   title: 'Esta seguro de borrar el baucher del alumno...?',
-            //   text: "!Esta acción es irreversile!",
-            //   icon: 'warning',
-            //   showCancelButton: true,
-            //   confirmButtonText: 'Si, bórralo!',
-            //   cancelButtonText: 'No, cancelar!',
-            //   reverseButtons: true
-            // }).then((result) => {
-            //   if (result.value) {
-            //
-            //       $.ajax({
-            //         // url: base_url+'mantenimiento/RegistroPagos/eliminar',
-            //            url: base_url+'Finanzas/HabilitarAlumnos/eliminarAllRegistro',
-            //         type: "post",
-            //         dataType: "json",
-            //         data: {
-            //           numero_control: numero_control,
-            //           id_alta_baucher_banco : id_alta_baucher_banco
-            //         },
-            //         success: function(data){
-            //           if (data.responce == "success") {
-            //               swalWithBootstrapButtons.fire(
-            //                 '¡Eliminado!',
-            //                 'Su archivo ha sido eliminado.!',
-            //                 'success'
-            //               );
-            //               $('#tbl_listaHistPagosParcialidad').DataTable().destroy();
-            //               litaHistorialParcialidadXAlumnos();
-            //           }else{
-            //               swalWithBootstrapButtons.fire(
-            //                 '¡Eliminado',
-            //                 'El registro no se elimino...!',
-            //                 'error'
-            //               );
-            //           }
-            //         }
-            //       });
-            //
-            //   } else if (
-            //     /* Read more about handling dismissals below */
-            //     result.dismiss === Swal.DismissReason.cancel
-            //   ) {
-            //     swalWithBootstrapButtons.fire(
-            //       'Cancelada',
-            //       'El registro no se elimino...!',
-            //       'error'
-            //     )
-            //   }
-            // });
-
-        }
-
-
-
-
-
-  function addSalonVenta (id_salon){
+  function addMobiliarioVenta (id_mobiliario, precioMob){
       // debugger;
+
+          $("#id_modalMobiliario").val(id_mobiliario);
+          $("#precio_modalMobiliario").val(precioMob);
+
+        $("#modalAddCantidadMob").modal("show");
+    //  alert("Id Mobiliario =>" + datos.clave);
+
+
+      }
+
+
+
+
+
+  function addSalonVenta (id_salon, costo_alquiler){
+    debugger;
+
             var datos = {
-                id_salon : id_salon,
+                salon : id_salon,
+                cantidad_salon : costo_alquiler,
+                // venta : 1,
+                venta : $("#id_ventaDesdeVenta").val(),
             }
-            alert("Id Salon =>" + datos.id_salon);
+
+            $.ajax({
+            type: "post",
+            url: base_url + 'Eventos/Contratos/insertSalon',
+            data: (datos),
+            dataType: "json",
+            success: function(data) {
+                if (data.responce == "success") {
+                    toastr["success"](data.message);
+                    // VisualizarSalones();
+                    $("#tbl_VentaSalon").DataTable().destroy();
+                    llenartablaSalonEnVenta();         // Esta function esta en Clientes.js
+                    verSiYaExisteSalonEnVenta();
+                } else {
+                    toastr["error"](data.message);
+                }
+            },
+        });
+
+
     }
+
+
 
 
   function verGaleriaSalon (id_salon){
@@ -215,12 +186,12 @@ alert("Id Mobiliario =>" + datos.clave);
 
 
 
-  function addBanqueteVenta (id_platillo){
-      // debugger;
-            var datos = {
-                id_platillo : id_platillo,
-            }
-            alert("Id Banquete =>" + datos.id_platillo);
+  function addBanqueteVenta (id_platillo, precioPlatillo){
+
+          $("#id_modalPlatillo").val(id_platillo);
+          $("#precio_modalPlatillo").val(precioPlatillo);
+          $("#modalAddCantidadPlatillos").modal("show");
+            // alert("Id Banquete =>" + datos.id_platillo);
     }
 
 
@@ -352,3 +323,100 @@ alert("Id Mobiliario =>" + datos.clave);
         },
       });
     }
+
+
+
+
+
+
+
+
+
+/* -----------------------   AGREGAR HORA DE SALIDA DEL MOBILIARIO  -------------------------- */
+
+  $(document).on("click", "#btnAddPiezasMobiliario", function(e) {
+      e.preventDefault();
+debugger;
+      var piezasIngresadasMob = $("#piezasMob").val();
+      var precioMob = $("#precio_modalMobiliario").val();
+
+      precioXpiezaMob = (precioMob * piezasIngresadasMob);
+
+    var datos = {
+        cantidad_piezas_mobiliario : $("#piezasMob").val(),
+        mobiliario : $("#id_modalMobiliario").val(),
+        precio_total_mob : precioXpiezaMob,
+        venta : $("#id_ventaDesdeVenta").val(),
+      }
+
+      if (datos.cantidad_mobiliario == "") {
+          alert("Debe capturar la cantidad de piezas...!");
+      } else {
+          $.ajax({
+              type: "post",
+              url: base_url + 'Eventos/Contratos/insertPiezasAlquiladosMobil',
+              data: (datos),
+              dataType: "json",
+              success: function(data) {
+                  if (data.responce == "success") {
+                      toastr["success"](data.message);
+                      $("#addCantidadMobi")[0].reset();
+                      $('#modalAddCantidadMob').modal('hide');
+
+                      $("#tbl_VentaMobiliario").DataTable().destroy();
+                      llenartablaMobiliarioEnVenta();         // Esta function esta en Clientes.js
+                      verSiYaExisteMobiliarioEnVenta();
+
+                  } else {
+                      toastr["error"](data.message);
+                  }
+              },
+          });
+      }
+  });
+
+
+
+
+  /* -----------------------   AGREGAR HORA DE SALIDA DEL MOBILIARIO  -------------------------- */
+
+    $(document).on("click", "#btnAddCantidadPersonaPlatillo", function(e) {
+        e.preventDefault();
+        var piezasIngresadasPlat = $("#cantidadPersonasPlatillo").val();
+        var precioPlat = $("#precio_modalPlatillo").val();
+
+        precioXpiezaPlat = (precioPlat * piezasIngresadasPlat);
+
+
+      var datos = {
+          cantidad_personas_platillo : $("#cantidadPersonasPlatillo").val(),
+          platillo : $("#id_modalPlatillo").val(),
+          precio_total_platillo : precioXpiezaPlat,
+          venta : $("#id_ventaDesdeVenta").val(),
+        }
+
+        if (datos.cantidad_platillo == "") {
+            alert("Debe capturar la cantidad de piezas...!");
+        } else {
+            $.ajax({
+                type: "post",
+                url: base_url + 'Eventos/Contratos/insertCantidadPersonasPlatillos',
+                data: (datos),
+                dataType: "json",
+                success: function(data) {
+                    if (data.responce == "success") {
+                        toastr["success"](data.message);
+                        $("#addCantidadPersonasPlatillos")[0].reset();
+                        $('#modalAddCantidadPlatillos').modal('hide');
+
+                        $("#tbl_VentaPlatillos").DataTable().destroy();
+                        llenarTablaPlatillosEnVenta();         // Esta function esta en Clientes.js
+                        verSiYaExistePlatillosEnVenta();
+
+                    } else {
+                        toastr["error"](data.message);
+                    }
+                },
+            });
+        }
+    });
