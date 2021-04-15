@@ -127,29 +127,36 @@
 
           <div class="px-lg-5">
             <section class="content">
+
               <div class="row">
                 <div id="Salones"></div>
-
               </div>
 
               <div id="SalonElegido">
-
-                <h4><strong>Ya elihio el salon</strong></h4>
-
+                  <div class="text-center">
+                    <h4><strong>Ya se eligi el sal&oacute;n</strong></h4>
+                      <i class="far fa-image fa-9x"></i>
+                  </div>
               </div>
+
             </section>
           </div>
+
         </article>
 
         <article id="tab3">
           <div class="px-lg-5">
             <section class="content">
+
               <div class="row">
                 <div id="Mobiliario"></div>
               </div>
 
               <div id="MobiliarioElegido">
-                <h4><strong>Ya eligio el moboliario</strong></h4>
+                <div class="text-center">
+                  <h4><strong>Ya se eligi&oacute; el mobiliario</strong></h4>
+                    <i class="fas fa-chair fa-9x"></i>
+                </div>
               </div>
 
             </section>
@@ -159,12 +166,16 @@
         <article id="tab4">
           <div class="px-lg-5">
             <section class="content">
+
               <div class="row">
                 <div id="Platillos"></div>
               </div>
 
               <div id="PlatillosElegido">
-                <h4><strong>Ya eligio el Platillos Elegido</strong></h4>
+                <div class="text-center">
+                  <h4><strong>Ya se eligier&oacute;n los platillos</strong></h4>
+                    <i class="fas fa-utensils fa-9x"></i> 
+                </div>
               </div>
 
             </section>
@@ -318,6 +329,7 @@
                   <div class="form-group col-md-6">
                       <h3> <strong>   <label id="cobroTotal"></label>  </strong> </h3>
                   </div>
+
                 </div>
 
                 <div class="row">
@@ -325,7 +337,7 @@
                     <h3> <strong>  <label>Pago: $</label>  </strong> </h3>
                   </div>
                   <div class="form-group col-md-2"> <br>
-                    <input type="text" id="pagoNumero" class="form-control text-center" placeholder="00.00">
+                    <input type="text" id="pagoNumero" class="form-control text-center" placeholder="00.00" >
                   </div>
                 </div>
 
@@ -333,8 +345,8 @@
                   <div class="form-group col-md-3">
                     <h3> <strong>  <label>Cambio: $</label>  </strong> </h3>
                   </div>
-                  <div class="form-group col-md-2"> <br>
-                    <input type="text" id="cambioNumero" class="form-control text-center" placeholder="00.00">
+                  <div class="form-group col-md-6"> <br>
+                    <input type="text" id="cambioNumero" class="form-control text-center" readonly>
                   </div>
                 </div>
 
@@ -345,11 +357,18 @@
                 </div> -->
 
                 <div class="row">
+
                   <div class="text-center">
-                      <button type="button" class="btn btn-danger btn-float" onclick="btnAddPagoCobroTotal()">
+                      <button type="button" class="btn btn-danger btn-float" id="addPago" onclick="btnAddPagoCobroTotal()">
                          <i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;<label><h4>Cobrar Venta</h4></label>&nbsp;&nbsp;
                       </button>
+
+                      <button type="button" class="btn btn-danger btn-float" id="addPago" onclick="btnAddPagoCobroTotal()">
+                         <i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;<label><h4>Venta a credito</h4></label>&nbsp;&nbsp;
+                      </button>
                   </div>
+
+
                 </div>
 
               </form>

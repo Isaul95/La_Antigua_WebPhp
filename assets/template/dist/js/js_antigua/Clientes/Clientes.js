@@ -1,5 +1,6 @@
   $(document).ready(function () {
 
+$("#addPago").prop('disabled', true);
 
 // SE EXTRAE LA FECHA DEL DIA ACTUAL
       var f = new Date();
@@ -921,3 +922,31 @@ var totalNumero = document.getElementById("cobroTotal").innerHTML; // De esta fo
             });
         }
     }
+
+
+// VALIDACION DEL PAGO VS TOTAL Y EL CAMBIO
+    $("#pagoNumero").on("keyup",  function(e){
+debugger;
+      var totalNumero = document.getElementById("cobroTotal").innerHTML; // De esta forma obtienee el valor de un label
+
+              var cambio =   parseInt(totalNumero)-parseInt($('#pagoNumero').val());
+              var pago = $('#pagoNumero').val();
+              var total = parseInt(totalNumero);
+                  if( pago == ""){
+
+                    $('#cambioNumero').val("");
+
+                  }
+                  else if(pago<total){
+                      // $('#cambioNumero').val(cambio);
+                      // $("#addPago").prop('disabled', false);
+
+                      $('#cambioNumero').val("¡La cantidad a pagar debe ser mayor o igual al total!");
+                      $("#addPago").prop('disabled', true);
+                  }else{  // (pago == " ")
+                    // $('#cambioNumero').val(" ");
+                    $('#cambioNumero').val(cambio);
+                    $("#addPago").prop('disabled', false);
+                  }
+
+            });
