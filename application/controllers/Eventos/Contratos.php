@@ -115,9 +115,9 @@ class Contratos extends CI_Controller {
 //  Consulta el salon que esta en venta ACTUALMENTE
 	public function verSalonEnVenta(){
 
-		$venta = $this->input->post('venta');
-	    $posts = $this->Modelo_Eventos->obtenerSalonKEstaEnVenta($venta);
-	    echo json_encode($posts);
+			$venta = $this->input->post('venta');
+			$posts = $this->Modelo_Eventos->obtenerSalonKEstaEnVenta($venta);
+			echo json_encode($posts);
 
 	}
 
@@ -245,6 +245,247 @@ class Contratos extends CI_Controller {
 			echo "No se permite este acceso directo...!!!";
 		}
 	}
+
+
+
+
+
+
+
+//  Generar reporte PDF datelles generales del salon
+
+  public function generaReportePDFSalonDetails($venta){
+//
+// $server = $venta;
+// echo $server;
+
+  			 require "./src/report-fpdf/fpdf.php";
+
+         $pdf = new FPDF();
+
+         // $pdf->AddPage('P','A4',0);
+         $pdf->AddPage();
+         $pdf->SetFont('Arial','B', 14);
+				 $pdf->Image('src/Logo.png', 3, 3, 50);
+
+				  $pdf->SetY(5);
+         $pdf->Cell(200,10, utf8_decode('Reporte General de salón de eventos'),0,0,'C');
+				 $pdf->Ln();
+
+
+				 $DatesPlatillos = $this->Modelo_Eventos->obtenerSalonKEstaEnVenta($venta);
+
+				foreach ($DatesPlatillos as $DatesPlatillos) {
+
+ 				$pdf->SetFont('Arial','', 12);
+				 $pdf->Cell(135,20, utf8_decode('NOMBRE:'),0,0,'C');
+				 	$pdf->SetX(40);
+				 $pdf->Cell(150,20, $DatesPlatillos->name_cliente,0,0,'C');
+				 $pdf->Ln(7);
+
+				 $pdf->Cell(140,20, utf8_decode('DIRECCIÓN:'),0,0,'C');
+				 $pdf->SetX(40);
+				$pdf->Cell(150,20, $DatesPlatillos->direccionCliente,0,0,'C');
+				 $pdf->Ln(7);
+				 $pdf->Cell(150,20, utf8_decode('FECHA EVENTO:'),0,0,'C');
+				 $pdf->SetX(40);
+				$pdf->Cell(175,20, $DatesPlatillos->start,0,0,'C');
+				 $pdf->Ln(35);
+
+				  $pdf->SetFont('Arial','B', 10);
+					$pdf->SetFillColor(11,63,71);//Fondo verde de celda
+			  $pdf->SetTextColor(255, 255, 255); //Letra color blanco
+				$pdf->SetDrawColor(88, 88 ,88);
+        $pdf->Cell(50,8, utf8_decode('NOMBRE DEL SALÓN'), 1,0,'C',1);
+        $pdf->Cell(84,8, utf8_decode('DIRECCIÓN'),1,0,'C',1);
+        $pdf->Cell(30,8,'COSTO',1,0,'C',1);
+        $pdf->Cell(30,8,'CAPACIDAD', 1,1,'C',1);
+
+
+  //        $DatesPlatillos = $this->Modelo_Eventos->obtenerSalonKEstaEnVenta($venta);
+	//
+  // foreach ($DatesPlatillos as $DatesPlatillos) {
+        // se imprime el numero actual y despues se incrementa el valor de $x en uno
+        // Se imprimen los datos de cada alumno
+        $pdf->SetFont('Arial','', 10);
+				// $pdf->SetFillColor(2,157,116);//Fondo verde de celda
+			$pdf->SetTextColor(5, 2, 1); //Letra color negra
+			// $pdf->SetDrawColor(5, 2, 1);
+
+        $pdf->Cell(50,10,$DatesPlatillos->nombre_salon , 1, 0, 'C');
+
+				if($pdf->GetStringWidth($DatesPlatillos->direccion) > 70){
+								$pdf->SetFont('Arial','', 7);
+        						$pdf->Cell(84,10,$DatesPlatillos->direccion  , 1, 0, 'C');
+								$pdf->SetFont('Arial','', 10);
+							}else{
+								$pdf->Cell(84,10,$DatesPlatillos->direccion  , 1, 0, 'C');
+							}
+
+        $pdf->Cell(30,10,$DatesPlatillos->cantidad_salon     , 1, 0, 'C');
+        $pdf->Cell(30,10,$DatesPlatillos->capacidad    , 1, 0, 'C');
+        // $pdf->Ln(10);
+
+						   $pdf->Ln(30);
+							 $pdf->SetFillColor(11,63,71);//Fondo verde de celda
+						 $pdf->SetTextColor(255, 255, 255); //Letra color blanco
+						 $pdf->SetDrawColor(88, 88 ,88);
+										$pdf->Cell(195,8, utf8_decode('DESCRIPCIÓN GRAL DEL SALÓN'),1,0,'C',1);
+										$pdf->Ln(8);
+
+										if($pdf->GetStringWidth($DatesPlatillos->direccion) > 70){
+														$pdf->SetFont('Arial','', 8);
+														$pdf->SetTextColor(5, 2, 1); //Letra color negra
+						        		$pdf->Cell(195,10, utf8_decode($DatesPlatillos->descripcion)  , 1, 0, 'C');
+												$pdf->SetFont('Arial','', 10);
+										}else{
+													$pdf->Cell(195,10, utf8_decode($DatesPlatillos->descripcion)  , 1, 0, 'C');
+										}
+  }
+
+
+
+
+
+
+        $pdf->Output("ReporteEvento_#".$venta.".pdf", 'I');
+
+  }
+
+
+
+
+//  Generar reporte PDF datelles generales del mobiliario para entrega al area de mobil..
+
+	  public function generaReportePDFMobiliarioDetails($venta){
+
+	  			 require "./src/report-fpdf/fpdf.php";
+
+	         $pdf = new FPDF();
+
+	         // $pdf->AddPage('P','A4',0);
+	         $pdf->AddPage();
+	         $pdf->SetFont('Arial','B', 14);
+					 $pdf->Image('src/Logo.png', 3, 3, 50);
+
+					  $pdf->SetY(5);
+	         $pdf->Cell(200,10, utf8_decode('Reporte General del Mobiliario de eventos'),0,0,'C');
+					 $pdf->Ln();
+
+$DatesPlatillos = $this->Modelo_Eventos->obtenerMobiliarioKEstaEnVenta($venta);
+foreach ($DatesPlatillos as $DatesPlatillos) {
+
+					 $pdf->SetFont('Arial','', 12);
+	 				 $pdf->Cell(135,20, utf8_decode('NOMBRE:'),0,0,'C');
+	 				 	$pdf->SetX(40);
+	 				 $pdf->Cell(150,20, $DatesPlatillos->name_cliente ,0,0,'C');
+	 				 $pdf->Ln(7);
+
+	 				 $pdf->Cell(140,20, utf8_decode('DIRECCIÓN:'),0,0,'C');
+	 				 $pdf->SetX(40);
+	 				$pdf->Cell(150,20,$DatesPlatillos->direccionCliente,0,0,'C');
+	 				 $pdf->Ln(7);
+	 				 $pdf->Cell(150,20, utf8_decode('FECHA EVENTO:'),0,0,'C');
+	 				 $pdf->SetX(40);
+	 				$pdf->Cell(175,20,$DatesPlatillos->start ,0,0,'C');
+	 				 $pdf->Ln(35);
+
+					  $pdf->SetFont('Arial','B', 10);
+						$pdf->SetFillColor(11,63,71);//Fondo verde de celda
+					$pdf->SetTextColor(255, 255, 255); //Letra color blanco
+					$pdf->SetDrawColor(88, 88 ,88);
+	        $pdf->Cell(70,8, utf8_decode('NOMBRE DEL MOBILIARIO'), 1,0,'C',1);
+	        $pdf->Cell(40,8, utf8_decode('CANTIDAD'),1,0,'C',1);
+	        $pdf->Cell(40,8,'P. UNITARIO',1,0,'C',1);
+	        $pdf->Cell(40,8,'IMPORTE', 1,1,'C',1);
+
+
+	         // $DatesPlatillos = $this->Modelo_Eventos->obtenerMobiliarioKEstaEnVenta($venta);
+
+	  // foreach ($DatesPlatillos as $DatesPlatillos) {
+	        // se imprime el numero actual y despues se incrementa el valor de $x en uno
+	        // Se imprimen los datos de cada alumno
+	        $pdf->SetFont('Arial','', 10);
+					$pdf->SetTextColor(5, 2, 1); //Letra color negra
+	        $pdf->Cell(70,10,$DatesPlatillos->nombre , 1, 0, 'C');
+	        $pdf->Cell(40,10,$DatesPlatillos->cantidad_piezas_mobiliario  , 1, 0, 'C');
+	        $pdf->Cell(40,10,$DatesPlatillos->precio     , 1, 0, 'C');
+	        $pdf->Cell(40,10,$DatesPlatillos->precio_total_mob    , 1, 0, 'C');
+	        $pdf->Ln(10);
+	  }
+
+	        $pdf->Output("ReporteMobiliario_".$venta.".pdf", 'I');
+
+	  }
+
+
+
+
+
+//  Generar reporte PDF datelles generales del mobiliario para entrega al area de mobil..
+
+  public function generaReportePDFPlatillosDetails($venta){
+
+  			 require "./src/report-fpdf/fpdf.php";
+
+         $pdf = new FPDF();
+
+         // $pdf->AddPage('P','A4',0);
+         $pdf->AddPage();
+         $pdf->SetFont('Arial','B', 14);
+				 $pdf->Image('src/Logo.png', 3, 3, 50);
+
+				  $pdf->SetY(5);
+         $pdf->Cell(200,10, utf8_decode('Reporte General de Platillos de eventos'),0,0,'C');
+				 $pdf->Ln();
+
+				 $DatesPlatillos = $this->Modelo_Eventos->obtenerPlatillosKEstaEnVenta($venta);
+
+  foreach ($DatesPlatillos as $DatesPlatillos) {
+
+		$pdf->SetFont('Arial','', 12);
+		$pdf->Cell(135,20, utf8_decode('NOMBRE:'),0,0,'C');
+		 $pdf->SetX(40);
+		$pdf->Cell(150,20, $DatesPlatillos->name_cliente ,0,0,'C');
+		$pdf->Ln(7);
+
+		$pdf->Cell(140,20, utf8_decode('DIRECCIÓN:'),0,0,'C');
+		$pdf->SetX(40);
+	 $pdf->Cell(150,20,$DatesPlatillos->direccionCliente,0,0,'C');
+		$pdf->Ln(7);
+		$pdf->Cell(150,20, utf8_decode('FECHA EVENTO:'),0,0,'C');
+		$pdf->SetX(40);
+	 $pdf->Cell(175,20,$DatesPlatillos->start ,0,0,'C');
+		$pdf->Ln(35);
+
+				  $pdf->SetFont('Arial','B', 10);
+					$pdf->SetFillColor(11,63,71);//Fondo verde de celda
+				$pdf->SetTextColor(255, 255, 255); //Letra color blanco
+				$pdf->SetDrawColor(88, 88 ,88);
+        $pdf->Cell(70,8, utf8_decode('NOMBRE DEL PLATILLO'), 1,0,'C',1);
+        $pdf->Cell(40,8, utf8_decode('CANTIDAD'),1,0,'C',1);
+        $pdf->Cell(40,8,'P. UNITARIO',1,0,'C',1);
+        $pdf->Cell(40,8,'IMPORTE', 1,1,'C',1);
+
+
+  //        $DatesPlatillos = $this->Modelo_Eventos->obtenerPlatillosKEstaEnVenta($venta);
+	//
+  // foreach ($DatesPlatillos as $DatesPlatillos) {
+        // se imprime el numero actual y despues se incrementa el valor de $x en uno
+        // Se imprimen los datos de cada alumno
+        $pdf->SetFont('Arial','', 10);
+				$pdf->SetTextColor(5, 2, 1); //Letra color negra
+        $pdf->Cell(70,10,$DatesPlatillos->nombre_platillo , 1, 0, 'C');
+        $pdf->Cell(40,10,$DatesPlatillos->cantidad_personas_platillo  , 1, 0, 'C');
+        $pdf->Cell(40,10,$DatesPlatillos->costo     , 1, 0, 'C');
+        $pdf->Cell(40,10,$DatesPlatillos->precio_total_platillo    , 1, 0, 'C');
+        $pdf->Ln(10);
+  }
+
+        $pdf->Output("ReportePlatillos_".$venta.".pdf", 'I');
+
+  }
+
 
 
 

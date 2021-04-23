@@ -39,7 +39,7 @@
                    </span>
                </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo base_url();?>Mobiliario/Mobiliario">
+                <li><a href="<?php echo base_url();?>RutasMobiliario/Rutas">
                     <i class="far fa-dot-circle"></i> Lista de eventos</a>
                  </li>
             </ul>
@@ -78,7 +78,7 @@
                    </span>
                </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo base_url();?>Platillos/ControlPlatillos">
+                <li><a href="<?php echo base_url();?>Platillos/ListaPlatillosEncargado">
                     <i class="far fa-dot-circle"></i> Lista de banquetes</a>
                  </li>
             </ul>

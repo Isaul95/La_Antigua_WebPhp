@@ -140,3 +140,6 @@ $('#btn_RegistroPago').DataTable( {
 
 <!-- Email -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Email/Email.js"></script>
+
+<!-- La persona encargada de los platillos preparacion -->
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/EncargadosAreas/ListasDePlatillosToEncargado.js"></script>

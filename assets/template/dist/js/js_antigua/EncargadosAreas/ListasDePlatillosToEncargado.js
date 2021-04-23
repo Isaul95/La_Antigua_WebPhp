@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    llenarTablaRutasParaMobiliario(); // SEINICIALIZA LA FUNCTIO DE LA CARGA DEL LISTADO DE LA TABLA
+    llenarTablaPlatillosEntregaVenta(); // SEINICIALIZA LA FUNCTIO DE LA CARGA DEL LISTADO DE LA TABLA
 
     $('.clockpicker').clockpicker();
 
@@ -30,8 +30,8 @@ $(document).ready(function () {
                       toastr["success"](data.message);
                       $("#addHoraSalida")[0].reset();
                       $('#modal_Add_HoraSalida').modal('hide');
-                        $("#tbl_RutasEntregaMobil").DataTable().destroy();
-                    		llenarTablaRutasParaMobiliario();
+                        $("#tbl_platillosParaEntrega").DataTable().destroy();
+                    		llenarTablaPlatillosEntregaVenta();
                   } else {
                       toastr["error"](data.message);
                   }
@@ -65,8 +65,8 @@ $(document).ready(function () {
                         toastr["success"](data.message);
                         $("#addHoraEntrega")[0].reset();
                         $('#modal_Add_HoraEntrega').modal('hide');
-                          $("#tbl_RutasEntregaMobil").DataTable().destroy();
-                      		llenarTablaRutasParaMobiliario();
+                          $("#tbl_platillosParaEntrega").DataTable().destroy();
+                      		llenarTablaPlatillosEntregaVenta();
                     } else {
                         toastr["error"](data.message);
                     }
@@ -81,16 +81,16 @@ $(document).ready(function () {
 
 
 
-function llenarTablaRutasParaMobiliario() {
+function llenarTablaPlatillosEntregaVenta() {
 
   $("#loading-screen").show();
    // $('.container').html('<div class="loading"><img src="'+ base_url + 'assets/template/dist/img/ajax-loader.gif" alt="loading" /><br/>Un momento, por favor...</div>');
     $.ajax({
         type: "get",
-        url: base_url + 'RutasMobiliario/Rutas/listarMobiliarioParaEntrega',
+        url: base_url + 'Platillos/ListaPlatillosEncargado/listarPlatillosEncargadoParaEntrega',
         dataType: "json",
         success: function (response) {
-            $("#tbl_RutasEntregaMobil").DataTable({
+            $("#tbl_platillosParaEntrega").DataTable({
                 data: response,
                 responsive: true,
                 columns: [
@@ -100,7 +100,7 @@ function llenarTablaRutasParaMobiliario() {
                         "searchable": false
                     },
                     {
-                        data: "mobiliario",
+                        data: "platillo",
                         "visible": false,
                         "searchable": false
                     },
@@ -119,62 +119,17 @@ function llenarTablaRutasParaMobiliario() {
                         data: "direccion",
                     },
                     {
-                        data: "nombre",
+                        data: "nombre_platillo",
                     },
                     {
-                        data: "precio",
+                        data: "costo",
                         "className": "text-center",
                     },
                     {
-                        data: "cantidad_piezas_mobiliario",
+                        data: "cantidad_personas_platillo",
                         "className": "text-center",
                     },
-                    // {
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     data: function (row, type, set) {
-                    //         return `
-                    //     <a title="Capturar hora de entrega" onclick=modalCapturaHoraEntrega('${row.id_platillo}') class="btn btn-primary btn-remove"><i class="far fa-clock"></i></a>`;
-                    //     },
-                    // },
-                    {
-                        // data: "descripcion",
-                        orderable: false,
-                        searchable: false,
-                        "className": "text-center",
-                        // data: function (row, type, set) {
-                        //     return `<a title="Capturar hora de salida" onclick=modalCapturaHoraSalida('${row.id_platillo}') class="btn btn-success btn-remove" ><i class="far fa-clock"></i></a>`;
-                        // },
-                        "render" : function(data, type, row) {
-                            var hayNombres = `${row.nombre}`;
-                            var hora_salida = `${row.hora_salida}`;
-                                if( hayNombres != "null" && hora_salida == "null" ){
-                                     var a = `<a title="Capturar hora de salida" onclick=modalCapturaHoraSalida('${row.venta}') class="btn btn-success btn-remove" ><i class="far fa-clock"></i></a>`;
-                                } else if (hora_salida == "null" && hayNombres == "null") {
-                                       var a = '-------';
-                                }else {
-                                var a = '<div class="p-3 mb-2 bg-green text-white">'+hora_salida+'</div>';
-                              }
-                                return a;
-                          },
-                    },
-                    {
-                        orderable: false,
-                        searchable: false,
-                        "className": "text-center",
-                        "render" : function(data, type, row) {
-                          var hayHoraSalida = `${row.hora_salida}`;
-                          var hora_entrega = `${row.hora_entrega}`;
-                              if( hayHoraSalida != "null"  && hora_entrega == "null"){
-                                  var a = `<a title="Capturar hora de entrega" onclick=modalCapturaHoraEntrega('${row.venta}') class="btn btn-primary btn-remove"><i class="far fa-clock"></i></a>`;
-                                } else if (hora_entrega != "null" ) {
-                                       var a = '<div class="p-3 mb-2 bg-green text-white">'+hora_entrega+'</div>';
-                                }else {
-                                  var a = 'No hay horario de salida';
-                                }
-                                  return a;
-                        },
-                    },
+
                 ],
                 "language": language_espaniol,
             });
@@ -190,8 +145,8 @@ function llenarTablaRutasParaMobiliario() {
     		$("#modal_Add_HoraSalida").modal("show");
         $("#addHoraSalida")[0].reset();
     		$("#id_x").val(venta);
-            // $("#tbl_RutasEntregaMobil").DataTable().destroy();
-        		// llenarTablaRutasParaMobiliario();
+            // $("#tbl_platillosParaEntrega").DataTable().destroy();
+        		// llenarTablaPlatillosEntregaVenta();
       }
 
 
@@ -201,8 +156,8 @@ function llenarTablaRutasParaMobiliario() {
     		$("#modal_Add_HoraEntrega").modal("show");
         $("#addHoraEntrega")[0].reset();
     		$("#id_horaEntrega").val(venta);
-            // $("#tbl_RutasEntregaMobil").DataTable().destroy();
-        		// llenarTablaRutasParaMobiliario();
+            // $("#tbl_platillosParaEntrega").DataTable().destroy();
+        		// llenarTablaPlatillosEntregaVenta();
       }
 
 

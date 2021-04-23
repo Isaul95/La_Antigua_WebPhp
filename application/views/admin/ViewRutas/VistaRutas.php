@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-12 mt-5">
       <h3 class="text-center">
-      <strong><font color="#D34787">Agenda de rutas (Transportar Mobiliario)</font></strong>
+      <strong><font color="#D34787">Agenda de rutas(Mobiliario para entrega)</font></strong>
     </h3>
       <hr style="background-color: black; color: black; height: 1px;">
     </div>
@@ -25,13 +25,18 @@
     <div class="col-md-12 mx-auto">
 
 
-      <table id="tbl_Platillos" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important">
+      <table id="tbl_RutasEntregaMobil" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important">
         <thead class="text-center bg-primary">
           <tr>
-            <th width="3%" type="hidden">#</th>
+            <th width="3%" type="hidden">id</th>
+            <th width="3%" type="hidden">mobiliario</th>
+            <th width="3%" type="hidden">venta</th>
             <th>Nombre cliente</th>
             <th class="text-center" width="10%">Fecha y Hora entrega</th>
             <th>Lugar</th>
+            <th class="text-center" width="10%">Mobiliario</th>
+            <th class="text-center" width="10%">Precio</th>
+            <th class="text-center" width="10%">Piezas</th>
             <th class="text-center" width="7%">Hora Salida</th>
             <th class="text-center" width="7%">Hora Entrega</th>
           </tr>
@@ -90,7 +95,7 @@
             </div>
             <div class="modal-body">
               <input type="hidden" id="username" name="username" value="<?php echo $username;?>" >
-              <input type="hidden" id="id_x" name="id_x" >
+              <input type="hidden" id="id_horaEntrega" name="id_horaEntrega" >
 
                 <form id="addHoraEntrega">
 

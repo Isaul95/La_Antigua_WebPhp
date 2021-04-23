@@ -431,6 +431,19 @@ function llenartablaSalonEnVenta() {
                                  `;
                         },
                     },
+
+                    {
+                        orderable: false,
+                        searchable: false,
+                        "className": "text-center",
+                        render : function(data, type, row) {            //   generaReportePDFSalonDetails/${row.salon}/${row.venta}" target
+                            var a = `
+<a title="Generar Reporte PDF" href="Contratos/generaReportePDFSalonDetails/${row.venta}" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
+                            `;
+                             return a;
+                        },
+                    },
+
                 ],
                 "language": language_espaniol,
             });
@@ -546,6 +559,17 @@ function llenartablaMobiliarioEnVenta() {
                                  `;
                         },
                     },
+                    {
+                        orderable: false,
+                        searchable: false,
+                        "className": "text-center",
+                        render : function(data, type, row) {            //   generaReportePDFSalonDetails/${row.salon}/${row.venta}" target
+                            var a = `
+<a title="Generar Reporte de mobiliario" href="Contratos/generaReportePDFMobiliarioDetails/${row.venta}" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
+                            `;
+                             return a;
+                        },
+                    },
                 ],
                 "language": language_espaniol,
             });
@@ -659,6 +683,17 @@ function llenarTablaPlatillosEnVenta() {
                             return `
 <a title="Eliminar Platillos de la venta" onclick=eliminarPlatillosDeLaVenta('${row.id}','${row.platillo}','${row.venta}') class="btn btn-danger btn-remove" ><i class="fas fa-trash-alt"></i></a>
                                  `;
+                        },
+                    },
+                    {
+                        orderable: false,
+                        searchable: false,
+                        "className": "text-center",
+                        render : function(data, type, row) {            //   generaReportePDFSalonDetails/${row.salon}/${row.venta}" target
+                            var a = `
+<a title="Generar Reporte de platillos" href="Contratos/generaReportePDFPlatillosDetails/${row.venta}" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
+                            `;
+                             return a;
                         },
                     },
                 ],

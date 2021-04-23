@@ -174,7 +174,7 @@
               <div id="PlatillosElegido">
                 <div class="text-center">
                   <h4><strong>Ya se eligier&oacute;n los platillos</strong></h4>
-                    <i class="fas fa-utensils fa-9x"></i> 
+                    <i class="fas fa-utensils fa-9x"></i>
                 </div>
               </div>
 
@@ -208,6 +208,7 @@
                   <th width="7%">P.Unitario</th>
                   <th width="10%">Importe</th>
                   <th class="text-center" width="7%">Acciones</th>
+                  <th class="text-center" width="7%">Reporte PDF</th>
                 </tr>
               </thead>
             </table>
@@ -245,6 +246,7 @@
                   <th width="7%">P.Unitario</th>
                   <th width="10%">Importe</th>
                   <th class="text-center" width="7%">Acciones</th>
+                  <th class="text-center" width="7%">Reporte PDF</th>
                 </tr>
               </thead>
             </table>
@@ -281,6 +283,7 @@
                   <th width="7%">P.Unitario</th>
                   <th width="10%">Importe</th>
                   <th class="text-center" width="7%">Acciones</th>
+                  <th class="text-center" width="7%">Reporte PDF</th>
                 </tr>
               </thead>
             </table>

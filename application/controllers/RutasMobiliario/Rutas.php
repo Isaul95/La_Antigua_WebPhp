@@ -25,8 +25,8 @@ class Rutas extends CI_Controller {
 	}
 
 
-		public function verPlatillos(){
-			$posts = $this->Modelo_Rutas->get_listaPlatillos();
+		public function listarMobiliarioParaEntrega(){
+			$posts = $this->Modelo_Rutas->obtenerMobiliarioParaEntregar();
 			echo json_encode($posts);
 		}
 

@@ -133,9 +133,12 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
 
   public function obtenerSalonKEstaEnVenta($venta){
     // $this->db->distinct();
-    $this->db->select(" dv.id, dv.salon, sal.nombre_salon, dv.cantidad_salon, dv.importe, dv.venta ");
+    $this->db->select(" dv.id, dv.salon, sal.nombre_salon, dv.cantidad_salon, dv.importe, dv.venta, sal.direccion, sal.capacidad, sal.descripcion, cli.nombre as name_cliente, cli.direccion as direccionCliente, eve.start ");
     $this->db->from(" descripcion_de_venta dv ");
     $this->db->join(" salones sal","dv.salon = sal.id_salon");
+    $this->db->join(" venta ven "," dv.venta = ven.id_venta ");
+    $this->db->join(" clientes cli "," ven.cliente = cli.id_cliente ");
+    $this->db->join(" eventos eve "," ven.evento = eve.id_evento ");
     $this->db->where('dv.venta', $venta);
     // $this->db->where('m.especialidad', $especialidad);
 
@@ -145,12 +148,13 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
 
 
 
-
-
   public function obtenerMobiliarioKEstaEnVenta($venta){
-    $this->db->select(" dv.id, dv.mobiliario, mob.nombre, mob.precio, dv.cantidad_piezas_mobiliario, dv.precio_total_mob, dv.venta ");
+    $this->db->select(" dv.id, dv.mobiliario, mob.nombre, mob.precio, dv.cantidad_piezas_mobiliario, dv.precio_total_mob, dv.venta, cli.nombre as name_cliente, cli.direccion as direccionCliente, eve.start ");
     $this->db->from(" descripcion_de_venta dv ");
     $this->db->join(" mobiliario mob","dv.mobiliario = mob.clave");
+    $this->db->join(" venta ven "," dv.venta = ven.id_venta ");
+    $this->db->join(" clientes cli "," ven.cliente = cli.id_cliente ");
+    $this->db->join(" eventos eve "," ven.evento = eve.id_evento ");
     $this->db->where('dv.venta', $venta);
 
     $resultados = $this->db->get();
@@ -161,9 +165,12 @@ class Modelo_Eventos extends CI_Model { // INICIO DEL MODELO
 
 
   public function obtenerPlatillosKEstaEnVenta($venta){
-    $this->db->select(" dv.id, dv.platillo, pla.nombre_platillo, pla.costo, dv.cantidad_personas_platillo, dv.precio_total_platillo, dv.venta ");
+    $this->db->select(" dv.id, dv.platillo, pla.nombre_platillo, pla.costo, dv.cantidad_personas_platillo, dv.precio_total_platillo, dv.venta , cli.nombre as name_cliente, cli.direccion as direccionCliente, eve.start");
     $this->db->from(" descripcion_de_venta dv ");
     $this->db->join(" platillos pla","dv.platillo = pla.id_platillo");
+    $this->db->join(" venta ven "," dv.venta = ven.id_venta ");
+    $this->db->join(" clientes cli "," ven.cliente = cli.id_cliente ");
+    $this->db->join(" eventos eve "," ven.evento = eve.id_evento ");
     $this->db->where('dv.venta', $venta);
 
     $resultados = $this->db->get();
