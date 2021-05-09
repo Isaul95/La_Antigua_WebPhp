@@ -36,6 +36,7 @@
             <th width="9%">Restante</th>
             <th width="10%">Fecha</th>
             <th width="7%">Realizar Pago</th>
+            <th width="7%">Historial Pagos</th>
           </tr>
         </thead>
       </table>
@@ -118,6 +119,52 @@
           </div>
         </div>
       </div>
+
+
+      <!-- MODAL HISTORIAL DE PAGOS X parcialidades -->
+      <!-- Modal Consultar Historico de pagos x parcialidades X Alumnos -->
+<div class="modal fade" id="modalHistorialDeParcialidadesXCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-center">
+        <strong class="modal-title" id="exampleModalLabel">Historial pagos por parcialidad</strong>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+            <input type="hidden" id="id_ventaHistorialPagos" name="id_ventaHistorialPagos">
+            <input type="hidden" id="userAlta" name="userAlta" value="<?php echo $username;?>" >
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row my-4">
+              <div class="col-md-12 mx-auto">
+                <table id="tbl_listaHistPagosParcialidad" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important" width="100%">
+                  <thead class="text-center bg-primary">
+                    <tr>
+
+                      <th>id_pago</th>
+                      <th>Nombre</th>
+                      <th class="text-center">Monto $</th>
+                      <th class="text-center">fecha</th>
+
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

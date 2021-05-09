@@ -16,21 +16,10 @@ class Modelo_VentaCredito extends CI_Model { // INICIO DEL MODELO
       }
 
 
-  //
-  // public function agregarHorarioSalidaMob($data){
-  //       return $this->db->update('venta', $data, array('id_venta' => $data['id_venta']));
-  //   }
-
-// update venta set pago = pago + 50 where id_venta = 18
-   //  public function agregarPagoMonto($id_venta, $pago){
-   //    return $this->db->query('update venta set pago = pago  + ?',$pago,' where id_venta  =?',$id_venta);
-   // }
 
 // Se agrega el pago/abono actual de la venta conforme agregan pagos los pagos se suman al pago actual=50 + pagoNew=10 = actual$60.00
    public function agregarPagoMonto($pago, $id_venta){
-
      $query = $this->db->query("update venta set pago = pago  + ? where id_venta=? ", array($id_venta, $pago));
-
      return $query;
     }
 
@@ -39,18 +28,11 @@ class Modelo_VentaCredito extends CI_Model { // INICIO DEL MODELO
 // Se resta el cambio/restante actual de la venta conforme agregan pagos,
 // los pagos le restan al cambio actual=50 - pagoNew=10 = restante x pagar => $40.00
    public function restarPagoRestante($cambio, $id_venta){
-
      $query = $this->db->query("update venta set cambio = cambio  - ? where id_venta=? ", array($id_venta, $cambio));
-
      return $query;
     }
 
 
-  //
-  //
-  // public function agregarHorarioEntregaMob($data){
-  //       return $this->db->update('venta', $data, array('id_venta' => $data['id_venta']));
-  //   }
 
 // La sumatoria total de todos los pagos realizados
   public function sumatoriaTotalPagos($id_venta){
@@ -64,15 +46,19 @@ class Modelo_VentaCredito extends CI_Model { // INICIO DEL MODELO
 
 // LA VEBTA EN ESTADO = venta a credito PASA a = Realizada de acuerdo alas sumas de los apgos realizados
   public function ventaPagadaCompletaAvRealizada($id_venta,$sum){
-
-$query = $this->db->query("update venta set estado_venta='Realizada' where id_venta=? and total=? ", array($id_venta, $sum));
-
-
-// $query = $this->db->query("update venta set estado_venta='Realizada' where id_venta=? and total=? and pago=? and cambio=0 ", array($sum,$sum,$id_venta));
-
+    $query = $this->db->query("update venta set estado_venta='Realizada' where id_venta=? and total=? ", array($id_venta, $sum));
     return $query;
    }
 
+
+   public function obtenerListaDePagosxParcialidades($id_venta){
+       $this->db->select("id_pago, nombre, monto, CONCAT(fecha,' || ',hora) As fechaCompleta ");
+        $this->db->from("pagos");
+        $this->db->where("id_venta",$id_venta);
+        // $this->db->group_by('nombre_completo');
+         $resultados = $this->db->get();
+         return $resultados->result();
+     }
 
 
   } // FIN / CIERRE DEL MODELO

@@ -52,8 +52,6 @@ class VentaCredito extends CI_Controller {
 
 					$sum = $this->Modelo_VentaCredito->sumatoriaTotalPagos($id_venta);
 
-					// echo $sum;
-
 					$this->Modelo_VentaCredito->ventaPagadaCompletaAvRealizada($id_venta,$sum->sumaPagos);
 
 				$data = array('responce' => 'success', 'message' => 'Pago agregado correctamente...!');
@@ -63,17 +61,13 @@ class VentaCredito extends CI_Controller {
 			echo json_encode($data);
 		}
 
-	//
-	//
-	// public function insertHoraEntrega(){
-	// 		$ajax_data = $this->input->post();
-	// 		if ($this->Modelo_Rutas->agregarHorarioEntregaMob($ajax_data)) {
-	// 			$data = array('responce' => 'success', 'message' => 'Hora de entrega agregado...!');
-	// 		} else {
-	// 			$data = array('responce' => 'error', 'message' => 'Fallo al agregar hora de entrega...!');
-	// 		}
-	// 		echo json_encode($data);
-	// 	}
+
+
+//  Listar las ventas de las parcialidades x cliente id_venta
+	public function verListaParcialidades($id_venta){
+		$posts = $this->Modelo_VentaCredito->obtenerListaDePagosxParcialidades($id_venta);
+		echo json_encode($posts);
+	}
 
 
 }  // Fin del controller

@@ -26,8 +26,6 @@ $(document).ready(function () {
                   }
           horaPago = ho + ":" + min + ":" + seg;
 
-
-
 });
 
 
@@ -36,13 +34,6 @@ $(document).ready(function () {
 //  =================  LISTA GRAL DE ALL VENTAS A CREDITOS PENDIENTES  ================
 
   function llenarTablaGralVentasAcreditos() {
-    //
-    // var datos = {
-    //     venta : $("#id_ventaDesdeVenta").val(),
-    //     usuario : $("#username_cliente").val(),
-    //     cliente : $("#id_clienteAdd").val(),
-    //     evento  : $("#id_evento_Agregado").val(),
-    //   }
 
       $.ajax({
           type: "get",
@@ -93,11 +84,19 @@ $(document).ready(function () {
                               // debugger;
                               // var nombreCliente = `${row.nombre}`;
                               // $('#name_clientePagos').val(nombreCliente);
-
                                 var a = `<a title="Capturar hora de salida" onclick=modalCapturaPagoCredito('${row.id_venta}') class="btn btn-success btn-remove" ><i class="fas fa-cash-register"></i></a>`;
                                   return a;
                             },
                       },
+                      {
+                                orderable: false,
+                                searchable: false,
+                                  "className": "text-center",
+                                "render" : function(data, type, row) {
+                                  var a = `<a title="Historial de parcialidades" onclick=modalHistorialParcialidades('${row.id_venta}')><i class="fas fa-history iconbig azul fa-2x"></i></a>`
+                                  return a;
+                                },
+                            },
                   ],
                   "language": language_espaniol,
               });
@@ -107,6 +106,61 @@ $(document).ready(function () {
 
 
 
+
+// Historial de pagos x parcialidad
+  function modalHistorialParcialidades(id_venta){
+
+		$("#modalHistorialDeParcialidadesXCliente").modal("show");
+		$("#id_ventaHistorialPagos").val(id_venta);
+        $("#tbl_listaHistPagosParcialidad").DataTable().destroy();
+    		litaHistorialParcialidadXCliente();
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*         llenarTabla Historial de pagos x parcialidades                     */
+/* -------------------------------------------------------------------------- */
+function litaHistorialParcialidadXCliente() {
+
+      var datos = {
+          id_venta : $("#id_ventaHistorialPagos").val(),
+          }
+
+var url = base_url+'VentasCreditos/VentaCredito/verListaParcialidades/'+datos.id_venta;
+
+    $.ajax({
+        type: "post",
+        url: url,
+        dataType: "json",
+        data : (datos),
+        success: function(response) {
+            $("#tbl_listaHistPagosParcialidad").DataTable({
+                data: response,
+                responsive: true,
+                columns: [
+                    {
+                        data: "id_pago",
+                        "visible": false, // ocultar la columna
+                    },
+                    {
+                      data: "nombre",
+                    },
+                    {
+                      data: "monto",
+                      "className": "text-center",
+                    },
+                    {
+                      data: "fechaCompleta",
+                      "className": "text-center",
+                    },
+
+                ],
+                  "language" : language_espaniol,
+            });
+        },
+    });
+}
 
 
 /* -----------------------   AGREGAR HORA DE SALIDA DEL MOBILIARIO  -------------------------- */
@@ -191,12 +245,9 @@ $(document).ready(function () {
 
 
   function modalCapturaPagoCredito(venta){
-
     		$("#modal_Add_PagoCredito").modal("show");
         $("#addPagos")[0].reset();
     		$("#id_ventaPagos").val(venta);
-            // $("#tbl_RutasEntregaMobil").DataTable().destroy();
-        		// llenarTablaGralVentasAcreditos();
       }
 
 
