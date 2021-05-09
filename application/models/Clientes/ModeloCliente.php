@@ -79,5 +79,34 @@ public function extraer_InDescripcionVenta($venta){
       }
 
 
+// Registrar como un gastos la venta a credito realizada
+  public function insert_InEgresoVentaCredito($data_egreso){
+     return $this->db->insert('egreso', $data_egreso);
+    }
+
+
+
+// Registrar como un pago en la tabla de pagos una venta credito
+  public function insert_InPagosVentaCredito($data_pagos){
+     return $this->db->insert('pagos', $data_pagos);
+    }
+
+
+
+
+/* =========  Se consulta el tipo de venta Estado= (Realizada/Credito) con el user, el cliente y el evento  ========== */
+  public function extraer_verTipoVentaActual_EstadoVenta($usuario, $cliente, $evento){
+      $this->db->select('*');
+      $this->db->from('venta');
+      $this->db->where('usuario', $usuario);
+      $this->db->where('cliente', $cliente);
+      $this->db->where('evento', $evento);
+          $query = $this->db->get();
+          if (count($query->result()) > 0) {
+              return $query->row();
+          }
+  }
+
+
 
 } // FIN / CIERRE DEL MODELO

@@ -1,6 +1,7 @@
   $(document).ready(function () {
 
-$("#addPago").prop('disabled', true);
+$("#addPago").prop('disabled', true);  // btn venta
+$("#addCredito").prop('disabled', true);  // btn venta a credito
 
 // SE EXTRAE LA FECHA DEL DIA ACTUAL
       var f = new Date();
@@ -82,7 +83,7 @@ $(document).on("click", "#btnAddClienteXContrato", function (e) {
         fd.append("user_session", user_session);
         fd.append("id_evento", id_evento);
         fd.append("nombre_ine", name);
-        d
+
         //fd.append("tipoImagen", tipoImagen);
         $.ajax({
             type: "post",
@@ -187,6 +188,13 @@ llenarTablaPlatillosEnVenta();
 verSiYaExisteSalonEnVenta();
 verSiYaExisteMobiliarioEnVenta();
 verSiYaExistePlatillosEnVenta();
+
+// Consultar si existe venta a credito o venta normal
+// Si es venta a CREDITO => en la pestaña de cobro semuestra el div con la tabla d elospagos realizados
+// Si es venta NORMAL se muestra el div de venta realizad ya venta pagada
+
+verificarTipoDeVentaCreditoNormal();
+// llenarTablaVentaCreditoActual();
 
                       }else{
                         // toastr["error"](data.message);
@@ -970,18 +978,211 @@ debugger;
                   if( pago == ""){
 
                     $('#cambioNumero').val("");
-
+                    $("#addCredito").prop('disabled', true);
                   }
                   else if(pago<total){
                       // $('#cambioNumero').val(cambio);
                       // $("#addPago").prop('disabled', false);
 
-                      $('#cambioNumero').val("¡La cantidad a pagar debe ser mayor o igual al total!");
+                      // $('#cambioNumero').val("¡La cantidad a pagar debe ser mayor o igual al total!");
+                      $('#cambioNumero').val("¡Venta a credito!");
                       $("#addPago").prop('disabled', true);
+                      $("#addCredito").prop('disabled', false); // Sera una venta a credito
                   }else{  // (pago == " ")
                     // $('#cambioNumero').val(" ");
                     $('#cambioNumero').val(cambio);
-                    $("#addPago").prop('disabled', false);
+                    $("#addPago").prop('disabled', false);   // Sera una venta normal
+                    $("#addCredito").prop('disabled', true);
                   }
 
             });
+
+
+
+
+
+
+  /* -----------------   Realizar el cobro de la venta A CREDITO   ----------------- */
+
+  // 1.- se inserta en table venta con el estado de credito_pendiente
+  // 2.- se inserta en table descripcion_de_venta en el campo de nombre_credito con el nombre de la persona que hace el credito
+  // 3.- Previo a eso se inserta en la table de egresos se marca como un gasto
+  // 4.- Hya una tabla de historico que se llevan los registros de las ventas a creditos
+
+  function  btnAddPagoCredito(){
+
+  var totalNumero = document.getElementById("cobroTotal").innerHTML; // De esta forma obtienee el valor de un label
+  var pago = $("#pagoNumero").val();
+  var nombreCliente = $("#nombreCliente").val();  // ORIGINAL INPUT NAME CIENTE
+
+  var cambioOfaltante =   parseInt(totalNumero)-parseInt(pago);  // cambio ==> faltante x pagar
+
+      var datos = {
+          id_venta      : $("#id_ventaDesdeVenta").val(),
+          total         : totalNumero,
+          pago          : pago,
+          cambio        : cambioOfaltante,
+          subtotal      : totalNumero,
+          estado_venta  : "Credito_pendiente",
+          fecha_reporte : fecha,
+          hora          : hora,
+          cantidad      : 0,
+          tipo          : "CDO_"+nombreCliente,       // tipo table Egresos concatenan CDO => CREDITO +  => nombre del cliente
+          nombre        : "PAGO "+nombreCliente,       // nombre to table pagos concatenan  PAGO => Pago + => nombre del cliente
+          usuario       : $("#username_cliente").val(),
+        }
+
+        if (datos.pago > datos.total ) {
+            alert("El pago deber ser menor al total para una venta a credito...!");
+        } else {
+            $.ajax({
+                type: "post",
+                url: base_url + 'Clientes/Clientes/createRealizarCobroTerminar',
+                data: (datos),
+                dataType: "json",
+                success: function(data) {
+                    if (data.responce == "success") {
+                        toastr["success"](data.message);
+                          $('#addPagoCobroForm')[0].reset();
+                          verificarTipoDeVentaCreditoNormal();
+                    } else {
+                        toastr["error"](data.message);
+                    }
+                },
+            });
+        }
+    }
+
+
+
+
+
+
+// Consultar si ya existe una venta actual SI ES CREDITO O NORMAL EN ESTADO DE VENTA
+  function verificarTipoDeVentaCreditoNormal(){
+      debugger;
+        		var datos = {
+                  venta : $("#id_ventaDesdeVenta").val(),
+                  usuario : $("#username_cliente").val(),
+                  cliente : $("#id_clienteAdd").val(),
+                  evento  : $("#id_evento_Agregado").val(),
+        		    }
+
+        		$.ajax({
+              url: base_url+'Clientes/Clientes/verTipoVentaActualInEstadoVenta',
+              type: "post",
+              dataType: "json",
+        			data : (datos),
+        			success : function(data){
+                if (data.responce == "success") {
+                  debugger;
+                    toastr["success"](data.message);
+                              $('#estado_ventaActual').val(data.post.estado_venta)
+                            var estado_ventaActual = $("#estado_ventaActual").val();
+
+                  //   msjVentaEnCaptura     msjVentaCredito      msjVentaRealizada
+
+                            if (estado_ventaActual == "En_captura") {
+
+                              document.getElementById("msjVentaEnCaptura").style.display = "block";
+                              document.getElementById("msjVentaCredito").style.display = "none";
+                              document.getElementById("msjVentaRealizada").style.display = "none";
+
+                            } else if (estado_ventaActual == "Credito_pendiente") {
+                      alert(estado_ventaActual);
+                              document.getElementById("msjVentaEnCaptura").style.display = "none";
+                              // $('#msjVentaEnCaptura').prop('hide', true);
+                              // $('#msjVentaCredito').prop('hide', true);
+                              // $('#msjVentaRealizada').prop('hide', true);
+                              document.getElementById("msjVentaCredito").style.display = "block";
+                              document.getElementById("msjVentaRealizada").style.display = "none";
+                              llenarTablaVentaCreditoActual();
+                            } else  {  // Realizada
+
+                              document.getElementById("msjVentaEnCaptura").style.display = "none";
+                              document.getElementById("msjVentaCredito").style.display = "none";
+                              document.getElementById("msjVentaRealizada").style.display = "block";
+
+                            }
+
+                      }else{
+
+                      }
+        			    }
+        		});
+        }
+
+
+
+
+
+
+  //  ===================== Lista la venta a creditos EN PROCESO DE VENTA ================
+
+  function llenarTablaVentaCreditoActual() {
+
+    var datos = {
+        venta : $("#id_ventaDesdeVenta").val(),
+        usuario : $("#username_cliente").val(),
+        cliente : $("#id_clienteAdd").val(),
+        evento  : $("#id_evento_Agregado").val(),
+      }
+
+      $.ajax({
+          type: "post",
+          url: base_url + 'Eventos/Contratos/verVentasCreditosActual',
+          data: (datos),
+          dataType: "json",
+          success: function (response) {
+              // var i = "1";
+              $("#tbl_VentaCredito").DataTable({
+                  data: response,
+                  responsive: true,
+                  columns: [
+                      {
+                          data: "id_venta",
+                          // "visible": false,
+                          // "searchable": false
+                      },
+                      {
+                          data: "nombre",
+                          // "visible": false,
+                          // "searchable": false
+                      },
+                      {
+                          data: "subtotal",
+                      },
+                      {
+                          data: "total",
+                          "className": "text-center",
+                      },
+                      {
+                          data: "pago",
+                          "className": "text-center",
+                      },
+                      {
+                          data: "cambio",
+                          "className": "text-center",
+                      },
+                      {
+                          data: "fecha_reporte",
+                          "className": "text-center",
+                      },
+
+  //                     {
+  //                         orderable: false,
+  //                         searchable: false,
+  //                         "className": "text-center",
+  //                         render : function(data, type, row) {            //   generaReportePDFSalonDetails/${row.salon}/${row.venta}" target
+  //                             var a = `
+  // <a title="Generar Reporte de platillos" href="Contratos/generaReportePDFPlatillosDetails/${row.venta}" target="_blank"><i class="far fa-file-pdf fa-2x"></i></a>
+  //                             `;
+  //                              return a;
+  //                         },
+  //                     },
+                  ],
+                  "language": language_espaniol,
+              });
+          },
+      });
+  }

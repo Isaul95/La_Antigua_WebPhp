@@ -216,4 +216,23 @@ public function extraer_SumTotalVentaActual($venta){
 
 
 
+
+//  Consulta si l aventa esta a credito, los creditos pendientes del cliente
+    public function obtenerVentasCreditos($venta){
+      $this->db->distinct();
+      $this->db->select(" venta.id_venta, clientes.nombre,venta.subtotal , venta.total, venta.pago, venta.cambio,venta.fecha_reporte ");
+      $this->db->from(" venta ");
+      $this->db->join(" clientes "," venta.cliente = clientes.id_cliente ");
+      $this->db->where("venta.id_venta",$venta);
+      $this->db->where_in('venta.estado_venta', ['Credito_pendiente']);
+
+      $resultados = $this->db->get();
+      return $resultados->result();
+      }
+
+
+
+
+
+
   } // FIN / CIERRE DEL MODELO

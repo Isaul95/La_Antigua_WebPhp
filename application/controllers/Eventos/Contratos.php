@@ -250,6 +250,19 @@ class Contratos extends CI_Controller {
 
 
 
+	//  Consulta el Platilo que esta en venta ACTUALMENTE
+		public function verVentasCreditosActual(){
+
+			$venta = $this->input->post('venta');
+		    $posts = $this->Modelo_Eventos->obtenerVentasCreditos($venta);
+		    echo json_encode($posts);
+
+		}
+
+
+
+
+
 
 
 //  Generar reporte PDF datelles generales del salon

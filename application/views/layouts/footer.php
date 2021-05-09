@@ -122,8 +122,7 @@ $('#btn_RegistroPago').DataTable( {
 <!-- =============  utensilios  ISAUL ============== -->
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Eventos/contratos.js"></script>
 
-
-
+<script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/VentasCredito/VentaCredito.js"></script>
 
 
 <script src="<?php echo base_url();?>assets/template/dist/js/js_antigua/Salones/Salones.js"></script>

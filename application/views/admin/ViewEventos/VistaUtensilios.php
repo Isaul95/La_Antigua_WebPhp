@@ -20,6 +20,7 @@
 
 <!-- Aki se almacena el idVenta una cvez k inserta en venta cuando ya exista evento, y cliene -->
 <input type="hidden" id="id_ventaDesdeVenta" class="id_ventaDesdeVenta" >
+<input type="hidden" id="estado_ventaActual" class="estado_ventaActual" >
 
 
   <div class="row">
@@ -320,10 +321,10 @@
         <div class="panel-heading text-center">	<h4><strong>Realizar cobro total $</strong></h4></div>
           <div class="panel-body">
 
-            <div class="myForm" id="myForm">
+            <div class="myForm" id="myForm" >
 
               <form class="" id="addPagoCobroForm">
-
+<div class="msjVentaEnCaptura" id="msjVentaEnCaptura">
                 <div class="row">
                   <div class="form-group col-md-3">
                   <h3> <strong>  <label>Total a pagar: $</label>  </strong> </h3>
@@ -366,16 +367,64 @@
                          <i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;<label><h4>Cobrar Venta</h4></label>&nbsp;&nbsp;
                       </button>
 
-                      <button type="button" class="btn btn-danger btn-float" id="addPago" onclick="btnAddPagoCobroTotal()">
+                      <button type="button" class="btn btn-danger btn-float" id="addCredito" onclick="btnAddPagoCredito()">
                          <i class="fas fa-file-invoice-dollar fa-2x"></i>&nbsp;&nbsp;<label><h4>Venta a credito</h4></label>&nbsp;&nbsp;
                       </button>
                   </div>
 
 
                 </div>
+                </div>
 
               </form>
             </div>
+
+
+            <!--  -->
+
+            <br><br>
+
+<div class="msjVentaCredito" id="msjVentaCredito">
+   <div class="text-center">
+<h4><strong>VENTA A CREDITO</strong></h4>
+</div>
+
+<div class="row my-4">
+  <div class="col-md-12 mx-auto">
+
+    <table id="tbl_VentaCredito" class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed" cellspacing="0" style="background:white!important" width="100%">
+      <thead class="text-center bg-primary">
+        <tr>
+          <th width="10%">Venta</th>
+          <th width="10%">Cliente</th>
+          <th width="10%">Subtotal</th>
+          <!-- <th width="7%">Cantidad</th> -->
+          <th width="10%">Total</th>
+          <th width="10%">Pago/abono</th>
+          <th width="10%">Restante</th>
+          <th width="10%">Fecha</th>
+          <!-- <th class="text-center" width="7%">Acciones</th>
+          <th class="text-center" width="7%">Reporte PDF</th> -->
+        </tr>
+      </thead>
+    </table>
+
+  </div>
+</div>
+
+  </div>
+
+<br><br>
+
+
+
+  <div class="msjVentaCredito" id="msjVentaRealizada">
+    <div class="text-center">
+  <h4><strong>venta normal bb => Realizada</strong></h4>
+  </div>
+    </div>
+
+            <!--  -->
 
         </div>
     </div>

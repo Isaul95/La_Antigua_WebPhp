@@ -187,6 +187,36 @@
 <?php endif;?>
 
 
+
+
+
+
+<!-- INICIO  Listado de ventas a creditos/pagos/seguimiento de las ventas a creditos -->
+
+
+<?php if($user==1):?>
+
+      <li class="treeview">
+          <a href="#">
+              <i class="fas fa-balance-scale"></i> <span>Ventas A credito</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="<?php echo base_url();?>VentasCreditos/VentaCredito">
+                 <i class="far fa-dot-circle"></i>  Lista de creditos</a>
+              </li>
+
+          </ul>
+      </li>
+
+
+<?php endif;?>
+
+<!-- FIN VENTAS A CREDITOS -->
+
+
 <!-- ROLE PROFE ===================== Empieza rol PROFE to vistas ===================== -->
 <?php if($user==3):?>
       <li class="treeview">

@@ -178,14 +178,67 @@ class Clientes extends CI_Controller {
 
 
 	public function createRealizarCobroTerminar(){
+				// $ajax_data = $this->input->post();
 
-				$ajax_data = $this->input->post();
-				if ($this->ModeloCliente->insert_InVentaRealizarCobroTotal($ajax_data)) {
+// 				DATOS PARA INSERT INTO TABLE VENTA
+					$data_venta['id_venta'] 		 = $this->input->post('id_venta');
+					$data_venta['subtotal']      = $this->input->post('subtotal');
+					$data_venta['total'] 				 = $this->input->post('total');
+					$data_venta['pago'] 				 = $this->input->post('pago');
+					$data_venta['cambio'] 		   = $this->input->post('cambio');
+					$data_venta['estado_venta']  = $this->input->post('estado_venta');
+					$data_venta['fecha_reporte'] 				 = $this->input->post('fecha_reporte');
+					$data_venta['hora'] 				 = $this->input->post('hora');
+
+
+// 				DATOS PARA INSERT INTO TABLE EGRESos
+					$data_egreso['cantidad'] 	= $this->input->post('cantidad');
+					$data_egreso['tipo']      = $this->input->post('tipo');
+					$data_egreso['fecha'] 		= $this->input->post('fecha_reporte');
+					$data_egreso['total'] 		= $this->input->post('cambio');
+					$data_egreso['usuario'] 	= $this->input->post('usuario');
+					$data_egreso['id_venta'] 	= $this->input->post('id_venta');
+
+
+// 				DATOS PARA INSERT INTO TABLE PAGOS los pagos k se hacen de la venta acredito
+					$data_pagos['nombre'] 	 = $this->input->post('nombre');
+					$data_pagos['monto']  = $this->input->post('pago');
+					$data_pagos['id_venta']  = $this->input->post('id_venta');
+					$data_pagos['fecha'] 		 = $this->input->post('fecha_reporte');
+					$data_pagos['hora'] 		 = $this->input->post('hora');
+
+
+				if ($this->ModeloCliente->insert_InVentaRealizarCobroTotal($data_venta)) {
+						$this->ModeloCliente->insert_InEgresoVentaCredito($data_egreso);
+						$this->ModeloCliente->insert_InPagosVentaCredito($data_pagos);
 					$data = array('responce' => 'success', 'message' => 'Se agrego la venta correctamente...!');
 				} else {
 					$data = array('responce' => 'error', 'message' => 'Fallo al agregar la venta Final...!');
 				}
 			echo json_encode($data);
+	}
+
+
+
+
+	/* =========  verificar en que estado de venta se quedo venta realiza o venta a credito por pagar  ========== */
+	public function verTipoVentaActualInEstadoVenta(){
+		if ($this->input->is_ajax_request()) {
+
+			$usuario = $this->input->post('usuario');
+			$cliente = $this->input->post('cliente');
+			$evento = $this->input->post('evento');
+
+			if ($post = $this->ModeloCliente->extraer_verTipoVentaActual_EstadoVenta($usuario, $cliente, $evento)) {
+				 // $data = array('responce' => 'success', 'message' => 'Ya existe venta...!');
+				 $data = array('responce' => "success", "post" => $post, 'message' => 'Ya existe venta CREDITO...!');
+			}else{
+				 $data = array('responce' => 'error', 'message' => 'Aun no existe venta...!');
+			}
+			echo json_encode($data);
+		}else {
+			echo "No se permite este acceso directo...!!!";
+		}
 	}
 
 
